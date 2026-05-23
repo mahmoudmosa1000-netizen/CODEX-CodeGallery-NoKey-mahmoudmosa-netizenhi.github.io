@@ -35,6 +35,7 @@ body{background:var(--bg1);color:var(--txt);font-family:var(--fi);min-height:100
 .btn-green:hover{background:rgba(74,222,128,.14);border-color:rgba(74,222,128,.48)}
 .btn-sm{padding:.19rem .5rem;font-size:.67rem}
 .btn-ico{padding:.27rem .35rem}
+/* FIX #1: removed duplicate position:relative that was overriding position:sticky */
 nav{position:sticky;top:0;z-index:200;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;background:rgba(3,7,26,.88);backdrop-filter:blur(24px) saturate(160%);border-bottom:1px solid var(--bdr)}
 nav::after{content:'';position:absolute;bottom:0;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent,rgba(59,130,246,.4),rgba(168,85,247,.4),transparent)}
 .logo{font-family:var(--fd);font-size:1.45rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;user-select:none;background:linear-gradient(135deg,#fff,#93c5fd,#c4b5fd,#fff);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:logoShimmer 6s ease infinite;display:flex;align-items:center;gap:.55rem;z-index:1;position:relative}
@@ -410,8 +411,8 @@ pre{margin:0;padding:1.25rem 1.25rem 3rem;font-family:var(--fc);font-size:.76rem
     <div class="dwh"><span class="dwt" id="drwtitle">New Project</span><button class="btn btn-ico btn-ghost" onclick="closeDrw()">✕</button></div>
     <div id="drw-steps" style="display:flex;align-items:center;border-bottom:1px solid var(--bdr);flex-shrink:0">
       <div id="step1-tab" onclick="goDrwStep(1)" style="flex:1;text-align:center;padding:.55rem .5rem;font-size:.7rem;cursor:pointer;border-bottom:2px solid var(--blue);color:var(--txt);transition:all .2s"><span style="font-size:.9rem">①</span> Code eingeben</div>
-      <div id="step2-tab" style="display:none"></div>
-      <div id="step3-tab" style="flex:1;text-align:center;padding:.55rem .5rem;font-size:.7rem;cursor:default;border-bottom:2px solid transparent;color:var(--mut);transition:all .2s"><span style="font-size:.9rem">②</span> Preview &amp; Publish</div>
+      <div id="step2-tab" style="flex:1;text-align:center;padding:.55rem .5rem;font-size:.7rem;cursor:default;border-bottom:2px solid transparent;color:var(--mut);transition:all .2s"><span style="font-size:.9rem">②</span> KI-Prüfung</div>
+      <div id="step3-tab" style="flex:1;text-align:center;padding:.55rem .5rem;font-size:.7rem;cursor:default;border-bottom:2px solid transparent;color:var(--mut);transition:all .2s"><span style="font-size:.9rem">③</span> Preview &amp; Publish</div>
     </div>
     <div id="drw-step1" class="dwb" style="flex:1;overflow-y:auto">
       <div class="field"><label>Project Name *</label><input id="fn" placeholder="e.g. Sierpinski Triangle"></div>
@@ -428,6 +429,7 @@ pre{margin:0;padding:1.25rem 1.25rem 3rem;font-family:var(--fc);font-size:.76rem
       <div id="preview-type-hint" style="display:none;padding:.55rem .75rem;border-radius:8px;border:1px solid;font-size:.73rem;margin-top:-.2rem"></div>
     </div>
     <div id="drw-step2" style="display:none;flex:1;overflow-y:auto;padding:1.1rem 1.4rem;flex-direction:column;gap:.9rem">
+      <div style="display:inline-flex;align-items:center;gap:.4rem;font-size:.62rem;color:#4ade80;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.22);border-radius:99px;padding:.18rem .62rem;margin-bottom:.5rem" id="local-analysis-badge">⚡ Instant local analysis — no API needed</div>
       <div id="ai-score-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem">
         <div class="ai-score-card"><div class="asc-icon">✦</div><div class="asc-val" id="sc-q-val">–</div><div class="asc-lbl">Quality</div></div>
         <div class="ai-score-card"><div class="asc-icon">⬟</div><div class="asc-val" id="sc-cx-val">–</div><div class="asc-lbl">Complexity</div></div>
@@ -439,7 +441,7 @@ pre{margin:0;padding:1.25rem 1.25rem 3rem;font-family:var(--fc);font-size:.76rem
         <div id="verdict-text" style="font-size:.76rem;color:var(--txt2);line-height:1.6"></div>
       </div>
       <div id="ai-review-body" style="background:rgba(255,255,255,.02);border:1px solid var(--bdr);border-radius:8px;padding:1rem;font-size:.78rem;line-height:1.72;color:var(--txt2);min-height:120px">
-        <div id="ai-review-loading" style="display:flex;align-items:center;gap:.6rem;justify-content:center;padding:1.5rem 0"><div style="width:22px;height:22px;border:2px solid rgba(168,85,247,.2);border-top-color:var(--purple);border-radius:50%;animation:spin .8s linear infinite"></div><span style="font-size:.74rem;color:var(--mut);font-family:var(--fc)">Claude is analyzing your code…</span></div>
+        <div id="ai-review-loading" style="display:flex;align-items:center;gap:.6rem;justify-content:center;padding:1.5rem 0"><div style="width:22px;height:22px;border:2px solid rgba(168,85,247,.2);border-top-color:var(--purple);border-radius:50%;animation:spin .8s linear infinite"></div><span style="font-size:.74rem;color:var(--mut);font-family:var(--fc)">Analyzing your code locally…</span></div>
         <div id="ai-review-content" style="display:none"></div>
       </div>
       <div id="ai-autofill-preview" style="display:none;background:rgba(59,130,246,.05);border:1px solid rgba(59,130,246,.2);border-radius:8px;padding:.8rem 1rem">
@@ -807,6 +809,7 @@ async function runAI(){
   document.getElementById('ai-meta').style.display='none';toast('AI analyzing…','ai');
   try{
     const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:apiHeaders(),body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:'You are an expert software developer. Respond in English, using structured Markdown.',messages:[{role:'user',content:userPrompt+'\n\n```'+curP.language.toLowerCase()+'\n'+curP.code+'\n```'}]})});
+    // ── Safe response parsing ──
     let data;try{data=await resp.json()}catch(e){throw new Error('HTTP '+resp.status+': response is not JSON — check your API key')}
     if(!resp.ok||data.error){throw new Error((data.error&&(data.error.message||JSON.stringify(data.error)))||('HTTP '+resp.status))}
     const txt=(data.content||[]).map(c=>c.text||'').join('')||'No response.';aiCache[key]=txt;showAIR(txt,false);
@@ -825,41 +828,166 @@ function goDrwStep(n){
   document.getElementById('drw-step1').style.display=n===1?'flex':'none';document.getElementById('drw-step2').style.display=n===2?'flex':'none';document.getElementById('drw-step3').style.display=n===3?'flex':'none';
   renderDrwFooter(n);if(n===2)runAIReview();if(n===3)buildDrwPreview();
 }
-function renderDrwFooter(step){const btns=document.getElementById('drw-footer-btns');if(!btns)return;if(step===1)btns.innerHTML='<button class="btn btn-primary" onclick="drwNext1()">Next → Preview →</button>';else if(step===3)btns.innerHTML='<button class="btn btn-ghost" onclick="goDrwStep(1)">← Back</button><button class="btn btn-primary" onclick="saveP()" style="background:linear-gradient(135deg,rgba(74,222,128,.18),rgba(59,130,246,.18));border-color:rgba(74,222,128,.38)">🚀 Publish to Gallery</button>'}
-function drwNext1(){const name=document.getElementById('fn').value.trim(),code=document.getElementById('fc').value.trim();if(!name){document.getElementById('fn').focus();toast('Name required','err');return}if(code.length<10){document.getElementById('fc').focus();toast('Code is too short','err');return}autoDetectLang(code);goDrwStep(3)}
+function renderDrwFooter(step){const btns=document.getElementById('drw-footer-btns');if(!btns)return;if(step===1)btns.innerHTML='<button class="btn btn-primary" onclick="drwNext1()">Next → AI Review ✦</button>';else if(step===2)btns.innerHTML='<button class="btn btn-ghost" onclick="goDrwStep(1)">← Back</button><button class="btn btn-primary" id="drw-pub-btn" onclick="goDrwStep(3)">Preview & Veröffentlichen →</button>';else btns.innerHTML='<button class="btn btn-ghost" onclick="goDrwStep(2)">← AI Results</button><button class="btn btn-primary" onclick="saveP()" style="background:linear-gradient(135deg,rgba(74,222,128,.18),rgba(59,130,246,.18));border-color:rgba(74,222,128,.38)">🚀 Publish to Gallery</button>'}
+function drwNext1(){const name=document.getElementById('fn').value.trim(),code=document.getElementById('fc').value.trim();if(!name){document.getElementById('fn').focus();toast('Name required','err');return}if(code.length<10){document.getElementById('fc').focus();toast('Code is too short','err');return}autoDetectLang(code);goDrwStep(2)}
 function autoDetectLang(code){const hints=[{lang:'Python',s:()=>(code.match(/\bdef \w+\s*\(|\bimport \w|\bprint\s*\(|\bself\b/g)||[]).length},{lang:'TypeScript',s:()=>(code.match(/:\s*(string|number|boolean|void|any)\b|interface |<T>/g)||[]).length*2},{lang:'JavaScript',s:()=>(code.match(/\bconst\b|\blet\b|\bconsole\b|\bfunction\b/g)||[]).length},{lang:'Rust',s:()=>(code.match(/\bfn \w+|\blet mut\b|\bimpl\b/g)||[]).length},{lang:'Go',s:()=>(code.match(/\bfunc \w+|\bpackage\b|\bfmt\./g)||[]).length},{lang:'CSS',s:()=>(code.match(/\{[\s\S]*?:\s*[\w#]|\bmargin:\b/g)||[]).length},{lang:'HTML',s:()=>(code.match(/<html|<div|<body|<!DOCTYPE/gi)||[]).length},{lang:'SQL',s:()=>(code.match(/\bSELECT\b|\bFROM\b|\bWHERE\b/gi)||[]).length}];const best=hints.sort((a,b)=>b.s()-a.s())[0];if(best&&best.s()>0){const sel=document.getElementById('fl');for(let i=0;i<sel.options.length;i++){if(sel.options[i].text===best.lang){sel.selectedIndex=i;document.getElementById('lang-auto-hint').textContent='(auto-detected)';break}}}updatePreviewHint()}
 function onCodeInput(){const code=document.getElementById('fc').value;const hint=document.getElementById('code-lines-hint');if(hint)hint.textContent=code.split('\n').length>1?'('+code.split('\n').length+' lines)':'';updatePreviewHint()}
 function updatePreviewHint(){const code=document.getElementById('fc').value,lang=document.getElementById('fl').value,hint=document.getElementById('preview-type-hint');if(!hint)return;const p={language:lang,code};if(isLivable(p)){hint.style.cssText='display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;border-radius:8px;border:1px solid rgba(74,222,128,.3);background:rgba(74,222,128,.06);color:#4ade80;font-size:.73rem';hint.innerHTML='<span>▶</span><span><strong>Live-Preview</strong> — dieser Code läuft animiert in der Galerie</span>'}else if(lang&&lang!=='Other'){hint.style.cssText='display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;border-radius:8px;border:1px solid rgba(59,130,246,.2);background:rgba(59,130,246,.04);color:#93c5fd;font-size:.73rem';hint.innerHTML='<span>◈</span><span><strong>Pixelated Art</strong> — structural code visualization</span>'}else hint.style.display='none'}
-async function runAIReview(){
-  const code=document.getElementById('fc').value.trim(),lang=document.getElementById('fl').value;aiReviewData=null;
+function runAIReview(){
+  const code=document.getElementById('fc').value.trim();
+  const lang=document.getElementById('fl').value;
+  aiReviewData=null;
   const ld=document.getElementById('ai-review-loading'),ct=document.getElementById('ai-review-content'),vd=document.getElementById('ai-verdict'),af=document.getElementById('ai-autofill-preview');
   if(ld)ld.style.display='flex';if(ct){ct.style.display='none';ct.innerHTML=''}if(vd)vd.style.display='none';if(af)af.style.display='none';
   ['sc-q-val','sc-cx-val','sc-bug-val','sc-st-val'].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent='–';el.style.color=''}});
-  const cxs=cx(code),cxc=cxC(cxs);const cxEl=document.getElementById('sc-cx-val');if(cxEl){cxEl.textContent=cxs;cxEl.style.color=cxc.c}
-  try{
-    const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:apiHeaders(),body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:800,system:'You are a code review expert. Reply ONLY with valid JSON, no markdown blocks.',messages:[{role:'user',content:'Analyze this '+lang+' code. Reply as JSON:\n{"quality":"A/B/C/D/F","bugs":"none/minor/medium/critical","style":"A/B/C/D/F","verdict":"publish/review/fix","verdict_text":"Recommendation (1 sentence)","suggested_description":"What the code does (1-2 sentences)","suggested_tags":["tag1","tag2","tag3"],"strengths":["strength1","strength2"],"issues":["issue1"],"improvements":["improvement1"]}\n\nCode:\n'+code.slice(0,3000)}]})});
-    let data;try{data=await resp.json()}catch(e){throw new Error('HTTP '+resp.status+': response is not JSON — check your API key')}
-    if(!resp.ok||data.error){throw new Error((data.error&&(data.error.message||JSON.stringify(data.error)))||('HTTP '+resp.status))}
-    const raw=(data.content||[]).map(c=>c.text||'').join('').trim();
-    if(!raw){throw new Error('API returned empty content')}
-    const jsonStart=raw.indexOf('{'),jsonEnd=raw.lastIndexOf('}');
-    if(jsonStart===-1||jsonEnd===-1){throw new Error('No JSON found in response: '+raw.slice(0,120))}
-    const result=JSON.parse(raw.slice(jsonStart,jsonEnd+1));
-    aiReviewData=result;showReviewResult(result);
-  }catch(err){
-    if(ld)ld.style.display='none';
-    if(ct){
-      ct.style.display='block';
-      const isKey=err.message.includes('401')||err.message.includes('authentication')||err.message.includes('api key')||err.message.includes('API key');
-      const hint=isKey
-        ?'→ Your API key looks wrong. Click 🔑 in the nav to update it.'
-        :'→ Check your internet connection and API key (🔑).  You can still publish.';
-      ct.innerHTML='<div style="color:var(--rose);font-weight:600;margin-bottom:.4rem">AI Review failed</div>'
-        +'<div style="font-family:var(--fc);font-size:.7rem;color:#f87171;background:rgba(251,113,133,.08);border:1px solid rgba(251,113,133,.2);border-radius:6px;padding:.5rem .7rem;margin-bottom:.4rem">'+esc(err.message)+'</div>'
-        +'<div style="font-size:.72rem;color:var(--mut)">'+hint+'</div>';
+
+  // ── LOCAL ANALYSIS ENGINE ── runs instantly, no API needed ──
+  setTimeout(()=>{
+    try{
+      const s=cst(code), a=ana(code,lang), cxs=cx(code);
+
+      // ── 1. COMPLEXITY score (already computed) ──
+      const cxc=cxC(cxs);
+      const cxEl=document.getElementById('sc-cx-val');
+      if(cxEl){cxEl.textContent=cxs;cxEl.style.color=cxc.c}
+
+      // ── 2. QUALITY grade ──
+      let q=100;
+      const commentRatio=s.tot>0?s.cm/s.tot:0;
+      if(commentRatio<0.05&&s.tot>10)q-=12;   // very few comments
+      if(s.al>120)q-=10;                        // very long lines
+      if(cxs>80)q-=25;                          // very high complexity
+      else if(cxs>60)q-=12;
+      if(s.uw/Math.max(s.wc,1)<0.3)q-=8;       // low vocabulary diversity
+      if(a.fn.length===0&&s.tot>15)q-=10;       // no functions detected
+      if(s.ne/Math.max(s.tot,1)<0.5)q-=5;       // lots of empty lines
+      const quality=q>=90?'A':q>=75?'B':q>=60?'C':q>=45?'D':'F';
+      const qEl=document.getElementById('sc-q-val');
+      if(qEl){qEl.textContent=quality;qEl.style.color={A:'#4ade80',B:'#86efac',C:'#fbbf24',D:'#fb923c',F:'#f87171'}[quality]}
+
+      // ── 3. BUG detection ──
+      const bugIssues=[];
+      if(lang==='JavaScript'||lang==='TypeScript'){
+        if(/[^=!<>]={1}(?!=)/.test(code)&&!/=>/g.test(code)||/==[^=]/.test(code))
+          bugIssues.push('Possible loose equality (== instead of ===)');
+        if(/var\s+/.test(code))bugIssues.push('var used — prefer const/let');
+        if(/console\.log/.test(code))bugIssues.push('Debug console.log statements found');
+        if(/\/\/\s*(TODO|FIXME|HACK|BUG)/i.test(code))bugIssues.push('TODO/FIXME markers in code');
+        if(/catch\s*\([^)]*\)\s*\{\s*\}/.test(code))bugIssues.push('Empty catch block detected');
+        if(/==[^=]/.test(code))bugIssues.push('Loose equality == found (use ===)');
+      }
+      if(lang==='Python'){
+        if(/except\s*:/.test(code))bugIssues.push('Bare except clause — too broad');
+        if(/print\s*\(/.test(code))bugIssues.push('Debug print() statements found');
+        if(/[^=!<>]=[^=]/.test(code)&&/	/.test(code))bugIssues.push('Mixed tabs/spaces possible');
+      }
+      if(s.tot>5&&s.cm===0)bugIssues.push('No comments — consider documenting');
+      const bugLevel=bugIssues.length===0?'none':bugIssues.length<=1?'minor':bugIssues.length<=3?'medium':'critical';
+      const bm={none:'✓',minor:'!',medium:'!!',critical:'✗'},bc={none:'#4ade80',minor:'#fbbf24',medium:'#fb923c',critical:'#f87171'};
+      const bugEl=document.getElementById('sc-bug-val');
+      if(bugEl){bugEl.textContent=bm[bugLevel];bugEl.style.color=bc[bugLevel]}
+
+      // ── 4. STYLE grade ──
+      let st=100;
+      if(s.al>80)st-=15;
+      if(s.ml>200)st-=10;
+      const hasConsistentIndent=/^(    |	)/m.test(code)||/^  /m.test(code);
+      if(!hasConsistentIndent&&s.tot>5)st-=10;
+      if(/[a-z][A-Z]/.test(code)||/[a-z]_[a-z]/.test(code))st+=5; // naming convention present
+      const style=st>=90?'A':st>=75?'B':st>=60?'C':st>=45?'D':'F';
+      const stEl=document.getElementById('sc-st-val');
+      if(stEl){stEl.textContent=style;stEl.style.color={A:'#4ade80',B:'#86efac',C:'#fbbf24',D:'#fb923c',F:'#f87171'}[style]}
+
+      // ── 5. VERDICT ──
+      const issues=bugIssues.length,grade=[quality,style];
+      let verdict='publish';
+      if(issues>=3||grade.includes('F'))verdict='fix';
+      else if(issues>=1||grade.includes('D')||cxs>75)verdict='review';
+
+      const verdictText=verdict==='publish'
+        ?'Code looks solid — ready to publish to your gallery.'
+        :verdict==='review'
+        ?'A few minor issues worth addressing before publishing.'
+        :'Several issues detected — consider fixing them first.';
+
+      // ── 6. STRENGTHS & IMPROVEMENTS ──
+      const strengths=[];
+      if(quality==='A'||quality==='B')strengths.push('Clean, well-structured code');
+      if(commentRatio>0.15)strengths.push('Good code documentation');
+      if(a.fn.length>0)strengths.push(`${a.fn.length} function${a.fn.length>1?'s':''} properly defined`);
+      if(a.cl.length>0)strengths.push(`${a.cl.length} class${a.cl.length>1?'es':''} detected`);
+      if(cxs<30)strengths.push('Low complexity — easy to understand');
+      if(bugIssues.length===0)strengths.push('No obvious bugs detected');
+      if(strengths.length===0)strengths.push('Code is functional');
+
+      const improvements=[];
+      if(commentRatio<0.05&&s.tot>8)improvements.push('Add comments to explain key logic');
+      if(cxs>60)improvements.push('Consider breaking down complex functions');
+      if(s.al>80)improvements.push('Shorten long lines (aim for < 80 chars)');
+      if(a.fn.length===0&&s.tot>15)improvements.push('Extract repeated logic into named functions');
+      improvements.push(...bugIssues.slice(0,2));
+      if(improvements.length===0)improvements.push('Good overall — minor style tweaks possible');
+
+      // ── 7. AUTO-FILL description & tags ──
+      const kwMap={
+        fibonacci:'recursive algorithm computing the Fibonacci sequence',
+        sort:'sorting algorithm for ordering data',
+        search:'search algorithm for finding elements',
+        hash:'hash map / dictionary data structure',
+        tree:'tree data structure implementation',
+        graph:'graph traversal algorithm',
+        neural:'neural network layer implementation',
+        canvas:'interactive canvas animation',
+        fetch:'data fetching and HTTP requests',
+        class:'object-oriented class implementation',
+        async:'asynchronous operations with async/await',
+        react:'React component',
+        css:'CSS styles and visual design',
+        html:'HTML page structure',
+      };
+      let autoDesc='';
+      const codeLow=code.toLowerCase();
+      for(const[kw,desc]of Object.entries(kwMap)){if(codeLow.includes(kw)){autoDesc=`A ${lang} implementation of a ${desc}.`;break}}
+      if(!autoDesc){
+        if(a.cl.length>0)autoDesc=`A ${lang} ${a.cl[0].n} class with ${a.fn.length} method${a.fn.length!==1?'s':''}.`;
+        else if(a.fn.length>0)autoDesc=`A ${lang} module with ${a.fn.length} function${a.fn.length!==1?'s':''} (${a.fn.slice(0,2).map(f=>f.n).join(', ')}${a.fn.length>2?'…':''}).`;
+        else autoDesc=`A ${lang} code snippet (${s.tot} lines, complexity ${cxs}).`;
+      }
+
+      const autoTags=[];
+      if(/(sort|quicksort|mergesort|heapsort)/i.test(code))autoTags.push('sorting');
+      if(/(recursion|recursive|fibonacci)/i.test(code))autoTags.push('recursion');
+      if(/(canvas|animation|requestAnimationFrame)/i.test(code))autoTags.push('animation');
+      if(/(class|extends|prototype)/i.test(code))autoTags.push('oop');
+      if(/(async|await|promise|fetch)/i.test(code))autoTags.push('async');
+      if(/(map|filter|reduce)/i.test(code))autoTags.push('functional');
+      if(/(neural|layer|backprop|gradient)/i.test(code))autoTags.push('ml');
+      if(/(graph|node|edge|tree)/i.test(code))autoTags.push('data-structures');
+      autoTags.push(lang.toLowerCase());
+      const uniqueTags=[...new Set(autoTags)].slice(0,4);
+
+      // ── Build result object (same shape as API response) ──
+      const result={
+        quality,bugs:bugLevel,style,verdict,verdict_text:verdictText,
+        suggested_description:autoDesc,
+        suggested_tags:uniqueTags,
+        strengths:strengths.slice(0,3),
+        issues:bugIssues.slice(0,3),
+        improvements:improvements.slice(0,3),
+        _local:true
+      };
+      aiReviewData=result;
+      showReviewResult(result);
+      toast('Analysis complete ✦','ok');
+    }catch(err){
+      if(ld)ld.style.display='none';
+  // Show local badge if not from API
+  const localBadge=document.getElementById('local-analysis-badge');
+  if(localBadge)localBadge.style.display=r._local?'inline-flex':'none';
+      if(ct){ct.style.display='block';ct.innerHTML='<div style="color:var(--rose)">Analysis error: '+esc(err.message)+'</div>'}
+      toast('Analysis failed','err');
     }
-    toast('AI failed: '+err.message.slice(0,50),'err');
-  }
+  }, 600); // small delay so the loading spinner shows
 }
 function showReviewResult(r){
   const ld=document.getElementById('ai-review-loading'),ct=document.getElementById('ai-review-content'),vd=document.getElementById('ai-verdict'),af=document.getElementById('ai-autofill-preview');if(ld)ld.style.display='none';
@@ -923,6 +1051,7 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Enter'&&focusIdx>=0){const list=getFilteredList();if(list[focusIdx])openP(list[focusIdx].id)}
 });
 load();updCollSel();render();
+
 </script>
 </body>
 </html>
