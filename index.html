@@ -498,6 +498,8 @@ const LocalAI = {
       return this.refactor(code, lang, s, a);
     if (p.includes('improve') || p.includes('better') || p.includes('optim') || p.includes('performance'))
       return this.improve(code, lang, s, a, cxs);
+    if (p.includes('format') || p.includes('indent') || p.includes('align') || p.includes('linear') || p.includes('readable'))
+      return this.format(code, lang, s);
     return this.explain(code, lang, s, a, cxs);
   },
 
@@ -1052,6 +1054,44 @@ const LocalAI = {
     }
 
     return out;
+  },
+
+  // ── CODE FORMATTING ────────────────────────────────────────
+  format(code, lang, s) {
+    const rawLines = code.split('\n');
+    let out = `## Code Formatting — ${lang}\n\n`;
+    out += `**${rawLines.length} lines** · left-aligned · linear order\n\n`;
+
+    // Detect minimum indentation (ignoring blank lines)
+    const nonEmpty = rawLines.filter(l => l.trim().length > 0);
+    const minIndent = nonEmpty.length > 0
+      ? nonEmpty.reduce((min, l) => Math.min(min, (l.match(/^(\s*)/)[1] || '').length), Infinity)
+      : 0;
+    const safeMin = minIndent === Infinity ? 0 : minIndent;
+
+    // Normalize: strip common leading indent, keep relative structure
+    const normalized = rawLines.map(l => l.length > 0 ? l.slice(safeMin) : l);
+
+    // Add line numbers, pad to align
+    const pad = String(normalized.length).length;
+    const numbered = normalized.map((l, i) =>
+      String(i + 1).padStart(pad, ' ') + '  ' + l
+    );
+
+    out += '```' + lang.toLowerCase() + '\n';
+    out += numbered.join('\n');
+    out += '\n```\n\n';
+
+    // Summary
+    const blankLines = rawLines.filter(l => !l.trim()).length;
+    const codeLines = rawLines.length - blankLines;
+    out += `### Summary\n\n`;
+    out += `- **${codeLines}** code lines, **${blankLines}** blank lines\n`;
+    out += `- **Left-aligned** — common indent of ${safeMin} space${safeMin !== 1 ? 's' : ''} removed\n`;
+    out += `- **Linear order** — line 1 → ${rawLines.length}, no reordering\n`;
+    if (s && s.al) out += `- **Average line length:** ${s.al} characters\n`;
+    if (s && s.ml) out += `- **Longest line:** ${s.ml} characters\n`;
+    return out;
   }
 };
 
@@ -1066,6 +1106,7 @@ const AI_P=[
   {l:'🧪 Tests',p:'Write unit tests using the appropriate testing library.'},
   {l:'📖 Docs',p:'Generate API documentation: parameters, return values, examples.'},
   {l:'♻ Refactor',p:'Refactor this code: structure, naming, modularity.'},
+  {l:'⌥ Format',p:'Format this code: show left-aligned, linear, line-by-line in readable order.'},
 ];
 let P=[],C=[],curP=null,flt='All',vw='grid',dashOn=false,selC=ACC[0],pDel=null,curtab='prev',favOnly=false,curColl=null,aiCache={},editMode=false,selCollC=ACC[0],ntTimer=null,recentIds=[],focusIdx=-1,dragSrcId=null,galleryObserver=null;
 let mouse={x:0,y:0};
@@ -1518,7 +1559,7 @@ function showAIR(txt,fromCache){
     .replace(/^# (.+)$/gm,'<h4 style="color:#fff;font-size:1rem;font-weight:800;margin:.5rem 0 .4rem">$1</h4>')
     .replace(/\*\*(.+?)\*\*/g,'<strong style="color:var(--txt);font-weight:600">$1</strong>')
     .replace(/\*(.+?)\*/g,'<em>$1</em>')
-    .replace(/```[a-z]*\n([\s\S]*?)```/g,'<pre style="background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:.5rem .7rem;font-size:.68rem;overflow-x:auto;margin:.3rem 0;white-space:pre-wrap">$1</pre>')
+    .replace(/```[a-z]*\n([\s\S]*?)```/g,'<pre style="background:rgba(0,0,0,.38);border:1px solid rgba(255,255,255,.09);border-radius:6px;padding:.55rem .8rem;font-size:.68rem;overflow-x:auto;margin:.35rem 0;white-space:pre;text-align:left;line-height:1.65;font-family:var(--fc);word-break:normal;tab-size:2">$1</pre>')
     .replace(/`([^`]+)`/g,'<code style="font-family:var(--fc);font-size:.71rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);padding:.07rem .28rem;border-radius:3px;color:#7dd3fc">$1</code>')
     .replace(/^[-*] ✅(.+)$/gm,'<li style="color:#4ade80;list-style:none;padding-left:.3rem">✅$1</li>')
     .replace(/^[-*] ❌(.+)$/gm,'<li style="color:#f87171;list-style:none;padding-left:.3rem">❌$1</li>')
