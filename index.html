@@ -551,7 +551,9 @@ pre{margin:0;padding:1.25rem 1.25rem 3rem;font-family:var(--fc);font-size:.76rem
       <div class="dsb" id="dsb"></div>
       <div class="panel on" id="pprev"><div class="pvp"><div class="pvbar"><span class="pvbar-l" id="pvlbl">Preview</span><div style="flex:1"></div><button class="btn btn-sm btn-ghost" onclick="buildPrev(curP)">↺</button></div><div class="pvc" id="pvc"><button class="fs-btn" onclick="openFs()">⛶ Vollbild</button></div></div></div>
       <div class="panel" id="pcode">
-        <div class="cbar"><div class="cdots"><div class="cdot2" style="background:#ff5f57"></div><div class="cdot2" style="background:#ffbd2e"></div><div class="cdot2" style="background:#28c840"></div></div><span class="cfn" id="dfn"></span><div class="cacts2"><button class="btn btn-sm btn-ghost" id="editbtn" onclick="toggleEdit()">✎ Edit</button><button class="btn btn-sm btn-ghost" id="cpybtn" onclick="copyCode()">⎘</button><button class="btn btn-sm btn-ghost" onclick="dlCode()">↓</button></div></div>
+        <div class="cbar"><div class="cdots"><div class="cdot2" style="background:#ff5f57"></div><div class="cdot2" style="background:#ffbd2e"></div><div class="cdot2" style="background:#28c840"></div></div><span class="cfn" id="dfn"></span><div class="cacts2"><button class="btn btn-sm btn-ghost" id="editbtn" onclick="toggleEdit()">✎ Edit</button><button class="btn btn-sm btn-ghost" id="cpybtn" onclick="copyCode()">⎘</button><button class="btn btn-sm btn-ghost" onclick="dlCode()">↓</button><button class="btn btn-sm btn-ghost" id="dl-all-btn" onclick="dlAllFiles()" style="display:none;color:#67e8f9;border-color:rgba(103,232,249,.25)">⊟ Alle ↓</button></div></div>
+        <!-- Multi-file tabs (shown only when project has files[]) -->
+        <div id="ov-file-tabs" style="display:none;flex-wrap:wrap;gap:.22rem;padding:.35rem .7rem;background:rgba(0,0,0,.25);border-bottom:1px solid var(--bdr)"></div>
         <div class="code-wrap"><div class="code-scroll" id="code-scroll"><pre id="dcode"></pre><textarea class="editor-ta" id="editor-ta" spellcheck="false" oninput="editorLive()" style="display:none;position:absolute;inset:0;height:100%"></textarea></div><div class="minimap" id="minimap" onclick="minimapClick(event)"><canvas id="mm-cv"></canvas><div class="mm-vp" id="mm-vp"></div></div></div>
       </div>
       <div class="panel" id="prun"><div class="run-panel"><div class="run-bar"><span style="font-size:.67rem;color:var(--mut2)" id="run-label">JS Run</span><div style="flex:1"></div><button class="btn btn-sm btn-ghost" onclick="clearCons()">✕ Clear</button><button class="btn btn-sm btn-green" onclick="runCode()" id="run-btn">▷ Run</button></div><div class="run-body"><div class="run-code"><pre id="run-pre"></pre></div><div class="run-out"><div class="run-out-head"><span class="run-out-label">Console</span><span style="font-size:.59rem;color:var(--mut)" id="ccount">0</span></div><div class="run-cons" id="run-cons"></div></div></div><div class="run-hint" id="run-hint"></div></div></div>
@@ -2394,18 +2396,63 @@ function filterTag(t){document.getElementById('search').value=t;focusIdx=-1;rend
 function setFlt(l){flt=l;focusIdx=-1;render();window.scrollTo({top:0,behavior:'smooth'})}
 function setView(v){vw=v;document.getElementById('vg').classList.toggle('on',v==='grid');document.getElementById('vl').classList.toggle('on',v==='list');focusIdx=-1;render()}
 function toggleFavFilter(){favOnly=!favOnly;focusIdx=-1;render();window.scrollTo({top:0,behavior:'smooth'})}
+let ovFileIdx=0;
 function openP(id){
-  const p=P.find(x=>x.id===id);if(!p)return;curP=p;editMode=false;clearCons();
+  const p=P.find(x=>x.id===id);if(!p)return;curP=p;editMode=false;clearCons();ovFileIdx=0;
   document.getElementById('ov').style.display='block';document.body.style.overflow='hidden';addRecent(id);
   const lc=LC[p.language]||'#888',cxs=cx(p.code),cc=cxC(cxs);
   document.getElementById('dac').style.background=p.accentColor;document.getElementById('dlb').textContent=p.language;document.getElementById('dlb').style.cssText='color:'+lc+';border-color:'+lc+'28;background:'+lc+'0F';
   document.getElementById('dcx').textContent='CX '+cxs+' · '+cc.l;document.getElementById('dcx').style.cssText='color:'+cc.c+';border-color:'+cc.b;
-  document.getElementById('dlines').textContent=p.code.split('\n').length+' Zeilen';document.getElementById('dname').textContent=p.name;document.getElementById('ddesc').textContent=p.description;
-  document.getElementById('dfn').textContent=EXT[p.language]||'code.txt';document.getElementById('run-label').textContent=p.language+' Run';
+
+  // Multi-file stats label
+  const fileLabel = p.files&&p.files.length>1 ? `${p.files.length} Dateien · `:'';
+  const totalFileLines = p.files&&p.files.length>1
+    ? p.files.reduce((s,f)=>s+f.code.split('\n').length,0)
+    : p.code.split('\n').length;
+  document.getElementById('dlines').textContent=fileLabel+totalFileLines+' Zeilen';
+  document.getElementById('dname').textContent=p.name;document.getElementById('ddesc').textContent=p.description;
+  document.getElementById('dfn').textContent=p.files&&p.files.length>1?p.files[0].name+'.'+langExt(p.files[0].lang):EXT[p.language]||'code.txt';
+  document.getElementById('run-label').textContent=p.language+' Run';
   const canRun=['JavaScript','TypeScript'].includes(p.language);document.getElementById('run-btn').disabled=!canRun;
   document.getElementById('run-hint').textContent=canRun?'Code runs in the browser. console.log() output appears on the right.':p.language+' cannot be executed directly.';
+
+  // ── Render multi-file tabs ──────────────────────────────
+  renderOvFileTabs(p);
+  // Show/hide "Download All" button
+  const dlAllBtn=document.getElementById('dl-all-btn');
+  if(dlAllBtn)dlAllBtn.style.display=p.files&&p.files.length>1?'':'none';
+
   updateFavBtn(p);renderCode(p);buildSidebar(p);buildStats(p);resetAI();document.getElementById('notes-ta').value=p.note||'';setTab('prev');
 }
+
+function renderOvFileTabs(p){
+  const bar=document.getElementById('ov-file-tabs');
+  if(!bar)return;
+  if(!p.files||p.files.length<=1){bar.style.display='none';return}
+  bar.style.display='flex';
+  bar.innerHTML=p.files.map((f,i)=>{
+    const lc=LC[f.lang]||'#888';
+    const lines=f.code.split('\n').length;
+    const active=i===ovFileIdx;
+    return `<button onclick="switchOvFile(${i})" style="display:inline-flex;align-items:center;gap:.28rem;padding:.18rem .55rem;border-radius:6px;border:1px solid ${active?lc+'50':'var(--bdr)'};background:${active?lc+'12':'transparent'};color:${active?lc:'var(--mut2)'};font-size:.64rem;cursor:pointer;font-family:var(--fc);transition:all .15s"><span style="color:${lc}">●</span> ${esc(f.name)}.${langExt(f.lang)} <span style="opacity:.45;font-size:.56rem">${lines}Z</span></button>`;
+  }).join('');
+}
+
+function switchOvFile(idx){
+  if(!curP||!curP.files)return;
+  ovFileIdx=idx;
+  const f=curP.files[idx];
+  // Temporarily show this file's code
+  const fakeP={...curP, code:f.code, language:f.lang};
+  document.getElementById('dfn').textContent=f.name+'.'+langExt(f.lang);
+  const lc=LC[f.lang]||'#888';
+  document.getElementById('dlb').textContent=f.lang;
+  document.getElementById('dlb').style.cssText='color:'+lc+';border-color:'+lc+'28;background:'+lc+'0F';
+  renderCode(fakeP);
+  renderOvFileTabs(curP);
+  buildMinimap(f.code);
+}
+
 function renderCode(p){
   const raw=p.code;
   // Table layout: each line = one <tr>, no span ever crosses a row
@@ -2458,7 +2505,22 @@ function delCur(){if(curP)confirmDel(curP.id)}
 function toggleFav(id){const p=P.find(x=>x.id===id);if(!p)return;p.starred=!p.starred;save();render();if(curP?.id===id)updateFavBtn(p);toast(p.starred?'★ Favorit':'Aus Favorites entfernt','info')}
 function updateFavBtn(p){const b=document.getElementById('dfav-btn');if(!b)return;b.textContent=p.starred?'★':'☆';b.style.color=p.starred?'var(--amber)':'';b.style.borderColor=p.starred?'rgba(251,191,36,.28)':'';b.style.background=p.starred?'rgba(251,191,36,.08)':''}
 async function copyCode(){const code=editMode?document.getElementById('editor-ta').value:curP?.code;if(!code)return;try{await navigator.clipboard.writeText(code);const b=document.getElementById('cpybtn');b.textContent='✓';b.style.color='var(--green)';setTimeout(()=>{b.textContent='⎘';b.style.color=''},1800);toast('Code copied','ok')}catch{toast('Copy failed','err')}}
-function dlCode(){if(!curP)return;const blob=new Blob([curP.code],{type:'text/plain'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=EXT[curP.language]||'code.txt';a.click();URL.revokeObjectURL(url);toast('Download started','info')}
+function dlCode(){
+  if(!curP)return;
+  // Download active file if multi-file
+  const f=curP.files&&curP.files.length>1?curP.files[ovFileIdx]:null;
+  const code=f?f.code:curP.code;
+  const fname=f?f.name+'.'+langExt(f.lang):EXT[curP.language]||'code.txt';
+  const blob=new Blob([code],{type:'text/plain'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=fname;a.click();URL.revokeObjectURL(url);toast('Download: '+fname,'info');
+}
+function dlAllFiles(){
+  if(!curP||!curP.files||curP.files.length<=1){dlCode();return}
+  // Download each file separately with a short delay between
+  curP.files.forEach((f,i)=>setTimeout(()=>{
+    const blob=new Blob([f.code],{type:'text/plain'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=f.name+'.'+langExt(f.lang);a.click();URL.revokeObjectURL(url);
+  },i*300));
+  toast(`⊟ ${curP.files.length} Dateien werden heruntergeladen…`,'ok');
+}
 function exportAll(){const blob=new Blob([JSON.stringify({P,C},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='codex-'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(url);toast(P.length+' projects exported','ok')}
 
 function importFromHTML(htmlContent){
@@ -2599,21 +2661,128 @@ function goDrwStep(n){
 function renderDrwFooter(step){const btns=document.getElementById('drw-footer-btns');if(!btns)return;if(step===1)btns.innerHTML='<button class="btn btn-primary" onclick="drwNext1()">Next → AI Review ✦</button>';else if(step===2)btns.innerHTML='<button class="btn btn-ghost" onclick="goDrwStep(1)">← Back</button><button class="btn btn-primary" id="drw-pub-btn" onclick="goDrwStep(3)">Preview &amp; Publish →</button>';else btns.innerHTML='<button class="btn btn-ghost" onclick="goDrwStep(2)">← AI Results</button><button class="btn btn-primary" onclick="saveP()" style="background:linear-gradient(135deg,rgba(74,222,128,.18),rgba(59,130,246,.18));border-color:rgba(74,222,128,.38)">🚀 Publish to Gallery</button>'}
 function drwNext1(){const name=document.getElementById('fn').value.trim(),code=document.getElementById('fc').value.trim();if(!name){document.getElementById('fn').focus();toast('Name required','err');return}if(code.length<10){document.getElementById('fc').focus();toast('Code is too short','err');return}autoDetectLang(code);goDrwStep(2)}
 function autoDetectLang(code){const hints=[{lang:'Python',s:()=>(code.match(/\bdef \w+\s*\(|\bimport \w|\bprint\s*\(|\bself\b/g)||[]).length},{lang:'TypeScript',s:()=>(code.match(/:\s*(string|number|boolean|void|any)\b|interface |<T>/g)||[]).length*2},{lang:'JavaScript',s:()=>(code.match(/\bconst\b|\blet\b|\bconsole\b|\bfunction\b/g)||[]).length},{lang:'Rust',s:()=>(code.match(/\bfn \w+|\blet mut\b|\bimpl\b/g)||[]).length},{lang:'Go',s:()=>(code.match(/\bfunc \w+|\bpackage\b|\bfmt\./g)||[]).length},{lang:'CSS',s:()=>(code.match(/\{[\s\S]*?:\s*[\w#]|\bmargin:\b/g)||[]).length},{lang:'HTML',s:()=>(code.match(/<html|<div|<body|<!DOCTYPE/gi)||[]).length},{lang:'SQL',s:()=>(code.match(/\bSELECT\b|\bFROM\b|\bWHERE\b/gi)||[]).length}];const best=hints.sort((a,b)=>b.s()-a.s())[0];if(best&&best.s()>0){const sel=document.getElementById('fl');for(let i=0;i<sel.options.length;i++){if(sel.options[i].text===best.lang){sel.selectedIndex=i;document.getElementById('lang-auto-hint').textContent='(auto-detected)';break}}}updatePreviewHint()}
+let _aiSplitTimer=null;
 function onCodeInput(){
   // sync current file
   if(mfFiles[mfActive]) mfFiles[mfActive].code = document.getElementById('fc').value;
   if(mfFiles[mfActive]) mfFiles[mfActive].lang = document.getElementById('fl').value;
   const code=document.getElementById('fc').value;
   const hint=document.getElementById('code-lines-hint');
-  if(hint)hint.textContent=code.split('\n').length>1?'('+code.split('\n').length+' lines)':'';
-  // detect multi-file HTML only if single-file mode
-  const splitHint=document.getElementById('mf-split-hint');
-  if(splitHint){
-    const isMulti = mfFiles.length===1 && detectMultiFile(code);
-    splitHint.style.display = isMulti ? 'flex' : 'none';
-  }
+  if(hint)hint.textContent=code.split('\n').length>1?'('+code.split('\n').length+' Zeilen)':'';
   updatePreviewHint();
+
+  // ── Auto-split: trigger after 600ms debounce ──────────────
+  clearTimeout(_aiSplitTimer);
+  if(code.length > 30 && mfFiles.length===1){
+    _aiSplitTimer = setTimeout(()=>aiAutoSplit(code), 600);
+  }
 }
+
+// ── AI Auto-Split & Sort ───────────────────────────────────
+function aiAutoSplit(code){
+  const lang = document.getElementById('fl').value;
+
+  // ① HTML mit eingebettetem CSS / JS → DOMParser-Split
+  if(detectMultiFile(code)){
+    doSplitMultiFile();
+    showSplitBadge(['HTML','CSS','JavaScript']);
+    return;
+  }
+
+  // ② Mehrere Sprach-Blöcke per Muster erkennen
+  const blocks = detectCodeBlocks(code);
+  if(blocks.length > 1){
+    mfFiles = blocks;
+    mfActive = 0;
+    document.getElementById('fc').value = mfFiles[0].code;
+    document.getElementById('fl').value  = mfFiles[0].lang;
+    renderMfTabs();
+    showSplitBadge(blocks.map(b=>b.lang));
+    updatePreviewHint();
+    return;
+  }
+
+  // ③ Single-file: Auto-Sprach-Erkennung
+  const detected = detectLang(code);
+  if(detected && detected !== lang){
+    document.getElementById('fl').value = detected;
+    if(mfFiles[mfActive]) mfFiles[mfActive].lang = detected;
+    const lah = document.getElementById('lang-auto-hint');
+    if(lah) lah.textContent='(auto: '+detected+')';
+    renderMfTabs();
+    updatePreviewHint();
+  }
+}
+
+// ── Detect embedded multi-language blocks ─────────────────
+function detectCodeBlocks(code){
+  const blocks=[];
+
+  // Markdown-style fenced blocks (```lang ... ```)
+  const fenced = [...code.matchAll(/```(\w+)?\s*\n([\s\S]*?)```/g)];
+  if(fenced.length>=2){
+    fenced.forEach(m=>{
+      const rawLang=(m[1]||'').toLowerCase();
+      const langMap={js:'JavaScript',javascript:'JavaScript',ts:'TypeScript',typescript:'TypeScript',
+                     py:'Python',python:'Python',css:'CSS',html:'HTML',sql:'SQL',
+                     rs:'Rust',rust:'Rust',go:'Go',sh:'Shell',bash:'Shell',cpp:'C++','c++':'C++'};
+      const l=langMap[rawLang]||capitalize(rawLang)||'Other';
+      const c=m[2].trim();
+      if(c) blocks.push({name:langExt(l).replace(/\.\w+$/,'')+'_'+blocks.length, lang:l, code:c});
+    });
+    if(blocks.length>=2) return blocks;
+  }
+
+  // CSS block inside JS/TS (template literal css` ` or createGlobalStyle)
+  if(/const\s+\w+\s*=\s*css`[\s\S]+?`/.test(code)||/createGlobalStyle`[\s\S]+?`/.test(code)){
+    const cssMatch=code.match(/(?:css|createGlobalStyle)`([\s\S]+?)`/);
+    if(cssMatch){
+      const cssCode=cssMatch[1].trim();
+      const jsCode=code.replace(cssMatch[0],'/* styles extracted */').trim();
+      return[{name:'styles',lang:'CSS',code:cssCode},{name:'component',lang:'JavaScript',code:jsCode}];
+    }
+  }
+
+  return []; // no multi-block detected
+}
+
+function capitalize(s){return s?s[0].toUpperCase()+s.slice(1):''}
+
+// ── Sprache erkennen (lokal, kein API) ────────────────────
+function detectLang(code){
+  const tests=[
+    {lang:'HTML',    re:/<!DOCTYPE\s+html|<html[\s>]|<head[\s>]|<body[\s>]/i,       score:5},
+    {lang:'HTML',    re:/<(div|span|section|article|nav|header|main|footer)\b/i,     score:3},
+    {lang:'CSS',     re:/^\s*[\w#.:*\[,>~+]+\s*\{[\s\S]*?:\s*[^;{]+;/m,            score:4},
+    {lang:'CSS',     re:/@(media|keyframes|import|font-face)\b/i,                    score:4},
+    {lang:'Python',  re:/^\s*def\s+\w+\s*\(|^\s*class\s+\w+[\s:(]/m,               score:5},
+    {lang:'Python',  re:/\bimport\s+\w+|\bfrom\s+\w+\s+import\b/,                   score:3},
+    {lang:'Python',  re:/\bself\b|\bNone\b|\bTrue\b|\bFalse\b/,                      score:2},
+    {lang:'TypeScript',re:/:\s*(string|number|boolean|void|any|never)\b|interface\s+\w+|<T\b/,score:5},
+    {lang:'JavaScript',re:/\bconst\b|\blet\b|\barrow\b|=>/,                           score:2},
+    {lang:'JavaScript',re:/\bconsole\.(log|warn|error)\b|\bdocument\.\w/,             score:3},
+    {lang:'Rust',    re:/\bfn\s+\w+\s*\(|let\s+mut\b|\bimpl\b|\bstruct\s+\w+/,      score:5},
+    {lang:'Go',      re:/\bfunc\s+\w+\s*\(|:=|\bpackage\s+\w+|\bfmt\.\w/,           score:5},
+    {lang:'SQL',     re:/\bSELECT\b|\bFROM\b|\bWHERE\b|\bINSERT\s+INTO\b/i,         score:5},
+    {lang:'Java',    re:/public\s+(static\s+)?class\s+\w+|System\.out\.print/,       score:5},
+    {lang:'C++',     re:/#include\s*<\w+>|std::\w+|\bcout\s*<</,                     score:5},
+    {lang:'Shell',   re:/^#!\/bin\/(bash|sh)|^\s*\w+="\$\{/m,                        score:4},
+  ];
+  const scores={};
+  tests.forEach(({lang,re,score})=>{if(re.test(code))scores[lang]=(scores[lang]||0)+score});
+  const best=Object.entries(scores).sort((a,b)=>b[1]-a[1])[0];
+  return best&&best[1]>=3?best[0]:null;
+}
+
+// ── Visual badge after auto-split ─────────────────────────
+function showSplitBadge(langs){
+  const unique=[...new Set(langs)];
+  toast(`⊟ Auto-getrennt: ${unique.join(' · ')}`, 'ok');
+  // update lang-auto-hint
+  const lah=document.getElementById('lang-auto-hint');
+  if(lah) lah.textContent = unique.length>1 ? `(${unique.length} Dateien erkannt)` : `(auto: ${unique[0]})`;
+}
+
 function updatePreviewHint(){const code=document.getElementById('fc').value,lang=document.getElementById('fl').value,hint=document.getElementById('preview-type-hint');if(!hint)return;const p={language:lang,code};if(isLivable(p)){hint.style.cssText='display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;border-radius:8px;border:1px solid rgba(74,222,128,.3);background:rgba(74,222,128,.06);color:#4ade80;font-size:.73rem';hint.innerHTML='<span>▶</span><span><strong>Live Preview</strong> — dieser Code runs animated in the gallery</span>'}else if(lang&&lang!=='Other'){hint.style.cssText='display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;border-radius:8px;border:1px solid rgba(59,130,246,.2);background:rgba(59,130,246,.04);color:#93c5fd;font-size:.73rem';hint.innerHTML='<span>◈</span><span><strong>Pixelated Art</strong> — structural code visualization</span>'}else hint.style.display='none'}
 function runAIReview(){
   const code=document.getElementById('fc').value.trim();
