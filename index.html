@@ -46,16 +46,99 @@ nav::after{content:'';position:absolute;bottom:0;left:15%;right:15%;height:1px;b
 .vtog{display:flex;border:1px solid var(--bdr);border-radius:8px;overflow:hidden;background:rgba(255,255,255,.03)}
 .vt{background:transparent;border:none;padding:.25rem .54rem;cursor:pointer;color:var(--mut2);font-size:.84rem;transition:all .15s}
 .vt.on{background:rgba(59,130,246,.14);color:var(--blue)}
-.dash{padding:.82rem 2rem;border-bottom:1px solid var(--bdr);background:rgba(3,7,26,.7);display:none;gap:.8rem;position:relative;z-index:70}
+.dash{padding:.9rem 2rem;border-bottom:1px solid var(--bdr);background:rgba(3,7,26,.75);display:none;flex-direction:column;gap:.7rem;position:relative;z-index:70}
 .dash.on{display:flex}
-.dc{flex:1;background:rgba(255,255,255,.02);border:1px solid var(--bdr);border-radius:8px;padding:.68rem .9rem;transition:all .2s;cursor:default}
-.dc:hover{border-color:rgba(59,130,246,.2);background:rgba(59,130,246,.03)}
-.dcl{font-size:.56rem;text-transform:uppercase;letter-spacing:.16em;color:var(--mut);margin-bottom:.22rem}
-.dcv{font-family:var(--fd);font-size:1.42rem;font-weight:700;line-height:1}
-.dcs{font-size:.6rem;color:var(--mut);margin-top:.1rem}
-.dash-chart{height:34px;margin-top:.38rem;position:relative}
-.dash-chart canvas{width:100%;height:100%;display:block}
-.coll-bar{display:flex;align-items:center;gap:.38rem;padding:.48rem 2rem;border-bottom:1px solid var(--bdr);background:rgba(3,7,26,.5);backdrop-filter:blur(8px);overflow-x:auto;position:relative;z-index:90;-ms-overflow-style:none;scrollbar-width:none}
+/* ── TOP ROW: summary stat cards ── */
+.dash-row1{display:flex;gap:.62rem;flex-wrap:nowrap;overflow-x:auto}
+.dash-row1::-webkit-scrollbar{display:none}
+/* ── BOTTOM ROW: chart panels ── */
+.dash-row2{display:grid;grid-template-columns:2fr 2fr 1.4fr 1.6fr;gap:.62rem}
+@media(max-width:960px){.dash-row2{grid-template-columns:1fr 1fr}}
+.dc{flex:1;min-width:120px;background:rgba(255,255,255,.02);border:1px solid var(--bdr);border-radius:9px;padding:.62rem .85rem;transition:all .2s;cursor:default;flex-shrink:0}
+.dc:hover{border-color:rgba(59,130,246,.22);background:rgba(59,130,246,.03)}
+.dcp{background:rgba(255,255,255,.02);border:1px solid var(--bdr);border-radius:9px;padding:.62rem .9rem;transition:all .2s}
+.dcp:hover{border-color:rgba(59,130,246,.18)}
+.dcl{font-size:.55rem;text-transform:uppercase;letter-spacing:.16em;color:var(--mut);margin-bottom:.22rem;display:flex;align-items:center;justify-content:space-between}
+.dcv{font-family:var(--fd);font-size:1.38rem;font-weight:700;line-height:1;letter-spacing:-.02em}
+.dcs{font-size:.58rem;color:var(--mut);margin-top:.1rem;line-height:1.4}
+.dcp-title{font-size:.55rem;text-transform:uppercase;letter-spacing:.16em;color:var(--mut);margin-bottom:.48rem}
+/* ── DASHBOARD ENHANCED ───────────────────────────────────── */
+.dash-lang-table{display:flex;flex-direction:column;gap:.17rem}
+.dash-lang-row{display:flex;align-items:center;gap:.42rem;font-size:.6rem}
+.dash-lang-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dash-lang-name{color:var(--txt2);min-width:68px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dash-lang-bar-bg{flex:1;height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+.dash-lang-bar{height:100%;border-radius:2px}
+.dash-lang-pct{font-family:var(--fc);color:var(--txt);min-width:30px;text-align:right;font-size:.59rem}
+.dash-lang-cnt{color:var(--mut);min-width:16px;text-align:right;font-size:.57rem}
+/* ── Top projects list ── */
+.dash-proj-row{display:flex;align-items:center;gap:.4rem;padding:.28rem 0;border-bottom:1px solid rgba(255,255,255,.03);cursor:pointer;transition:background .15s}
+.dash-proj-row:last-child{border-bottom:none}
+.dash-proj-row:hover .dash-proj-name{color:var(--txt)}
+.dash-proj-rank{font-family:var(--fc);font-size:.57rem;color:var(--mut);min-width:14px;text-align:right}
+.dash-proj-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.dash-proj-name{font-size:.67rem;color:var(--txt2);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .15s}
+.dash-proj-val{font-family:var(--fc);font-size:.58rem;color:var(--mut2);white-space:nowrap}
+/* ── Quality grade badges ── */
+.dash-grade-row{display:flex;align-items:center;gap:.38rem;margin-bottom:.2rem}
+.dash-grade-badge{font-family:var(--fd);font-size:.88rem;font-weight:700;min-width:20px;text-align:center}
+.dash-grade-bar-bg{flex:1;height:5px;border-radius:3px;background:rgba(255,255,255,.06);overflow:hidden}
+.dash-grade-bar{height:100%;border-radius:3px;transition:width 1s ease}
+.dash-grade-cnt{font-family:var(--fc);font-size:.6rem;min-width:20px;text-align:right;color:var(--mut2)}
+/* ── Tag cloud ── */
+.dash-tag{display:inline-block;padding:.12rem .38rem;border-radius:4px;border:1px solid;font-size:.58rem;margin:.1rem;cursor:pointer;transition:all .15s;white-space:nowrap}
+.dash-tag:hover{transform:scale(1.06)}
+/* ── Complexity histogram ── */
+.dash-cx-bucket{display:flex;align-items:center;gap:.38rem;margin-bottom:.25rem;font-size:.6rem}
+.dash-cx-label{color:var(--mut2);min-width:50px;font-family:var(--fc)}
+.dash-cx-bar-bg{flex:1;height:7px;border-radius:3px;background:rgba(255,255,255,.05);overflow:hidden}
+.dash-cx-bar{height:100%;border-radius:3px}
+.dash-cx-cnt{color:var(--mut);min-width:22px;text-align:right;font-family:var(--fc)}
+/* ── Row 3 & 4 grids ── */
+.dash-row3{display:grid;grid-template-columns:1.4fr 1.4fr 2fr 1.4fr;gap:.62rem}
+.dash-row4{display:grid;grid-template-columns:2fr 1.2fr 1.6fr;gap:.62rem}
+@media(max-width:960px){.dash-row3,.dash-row4{grid-template-columns:1fr 1fr}}
+/* ── Collection stats ── */
+.dash-coll-row{display:flex;align-items:center;gap:.38rem;padding:.2rem 0;cursor:pointer;transition:opacity .15s;border-bottom:1px solid rgba(255,255,255,.03)}
+.dash-coll-row:last-child{border-bottom:none}
+.dash-coll-row:hover{opacity:.8}
+.dash-coll-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dash-coll-name{font-size:.64rem;color:var(--txt2);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dash-coll-bar-bg{width:52px;height:4px;border-radius:3px;background:rgba(255,255,255,.06);overflow:hidden;flex-shrink:0}
+.dash-coll-bar{height:100%;border-radius:3px;transition:width .8s ease}
+.dash-coll-cnt{font-family:var(--fc);font-size:.57rem;color:var(--mut2);min-width:14px;text-align:right}
+/* ── Score rings ── */
+.score-rings{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.score-ring-wrap{display:flex;flex-direction:column;align-items:center;gap:.18rem}
+.score-ring-lbl{font-size:.54rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mut);text-align:center;line-height:1.3}
+.score-ring-val{font-family:var(--fd);font-size:.9rem;font-weight:700;text-align:center;line-height:1}
+/* ── Metric comparison ── */
+.dash-metric-row{display:flex;align-items:center;gap:.38rem;padding:.22rem 0;border-bottom:1px solid rgba(255,255,255,.03);font-size:.62rem}
+.dash-metric-row:last-child{border-bottom:none}
+.dash-metric-key{color:var(--mut2);flex:1}
+.dash-metric-val{font-family:var(--fc);color:var(--txt);font-size:.6rem;font-weight:600}
+.dash-metric-badge{font-size:.52rem;padding:.04rem .28rem;border-radius:4px;border:1px solid;margin-left:.2rem;font-family:var(--fc)}
+/* ── Mini KPI pills at top ── */
+.mini-kpi{display:inline-flex;flex-direction:column;align-items:center;gap:.06rem}
+.mini-kpi-val{font-family:var(--fd);font-size:.78rem;font-weight:700;line-height:1}
+.mini-kpi-lbl{font-size:.5rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mut)}
+/* ── Fade-in animation ── */
+@keyframes dashIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.dcp{animation:dashIn .28s ease both}
+.dash-row2 .dcp:nth-child(1){animation-delay:.04s}
+.dash-row2 .dcp:nth-child(2){animation-delay:.08s}
+.dash-row2 .dcp:nth-child(3){animation-delay:.12s}
+.dash-row2 .dcp:nth-child(4){animation-delay:.16s}
+.dash-row3 .dcp:nth-child(1){animation-delay:.2s}
+.dash-row3 .dcp:nth-child(2){animation-delay:.24s}
+.dash-row3 .dcp:nth-child(3){animation-delay:.28s}
+.dash-row3 .dcp:nth-child(4){animation-delay:.32s}
+.dash-row4 .dcp:nth-child(1){animation-delay:.36s}
+.dash-row4 .dcp:nth-child(2){animation-delay:.40s}
+.dash-row4 .dcp:nth-child(3){animation-delay:.44s}
+/* ── Heatmap cells ── */
+.hm-cell{display:inline-block;width:10px;height:10px;border-radius:2px;flex-shrink:0}
+display:flex;align-items:center;gap:.38rem;padding:.48rem 2rem;border-bottom:1px solid var(--bdr);background:rgba(3,7,26,.5);backdrop-filter:blur(8px);overflow-x:auto;position:relative;z-index:90;-ms-overflow-style:none;scrollbar-width:none}
 .coll-bar::-webkit-scrollbar{display:none}
 .ctab{display:inline-flex;align-items:center;gap:.3rem;padding:.19rem .68rem;border-radius:99px;border:1px solid var(--bdr);background:transparent;color:var(--mut2);font-size:.67rem;cursor:pointer;transition:all .15s;white-space:nowrap;font-family:var(--fi)}
 .ctab:hover{border-color:var(--bdr2);color:var(--txt);background:rgba(255,255,255,.04)}
@@ -2002,51 +2085,243 @@ function setCC(c){selCollC=c;document.querySelectorAll('#coll-swts .sw2').forEac
 function addColl(){const name=document.getElementById('coll-name').value.trim();if(!name){toast('Name required','err');return}C.push({id:uid(),name,color:selCollC});save();hideModal('coll-modal');document.getElementById('coll-name').value='';renderCollBar();render();updCollSel();toast('"'+name+'" erstellt','ok')}
 function updCollSel(){const s=document.getElementById('fcoll');if(!s)return;s.innerHTML='<option value="">– None –</option>'+C.map(c=>'<option value="'+c.id+'">'+esc(c.name)+'</option>').join('')}
 function drawQR(url){const cv=document.getElementById('qr-canvas');if(!cv)return;const ctx=cv.getContext('2d'),S=120;cv.width=S;cv.height=S;ctx.fillStyle='#fff';ctx.fillRect(0,0,S,S);function sq(x,y,w,f){ctx.fillStyle=f;ctx.fillRect(x,y,w,w)}sq(4,4,24,'#000');sq(8,8,16,'#fff');sq(10,10,12,'#000');sq(S-28,4,24,'#000');sq(S-24,8,16,'#fff');sq(S-22,10,12,'#000');sq(4,S-28,24,'#000');sq(8,S-24,16,'#fff');sq(10,S-22,12,'#000');let h=0;for(let i=0;i<url.length;i++)h=(h*31+url.charCodeAt(i))&0xFFFFFF;for(let r=0;r<8;r++)for(let col=0;col<8;col++){if((r<4&&col<4)||(r<4&&col>3)||(r>3&&col<4))continue;if((h>>(r*8+col))&1)sq(30+col*8,30+r*8,7,'#000')}ctx.fillStyle='#000';ctx.font='6px monospace';ctx.textAlign='center';ctx.fillText('CODEX',S/2,S-3)}
-function toggleDash(){dashOn=!dashOn;document.getElementById('dash').classList.toggle('on',dashOn);document.getElementById('dash-btn').style.color=dashOn?'var(--blue)':'';if(dashOn)renderDash()}
+function toggleDash(){dashOn=!dashOn;document.getElementById('dash').classList.toggle('on',dashOn);const btn=document.getElementById('dash-btn');btn.style.color=dashOn?'var(--blue)':'';btn.textContent=dashOn?'◈ Stats ▾':'◈ Stats';if(dashOn)renderDash()}
 function renderDash(){
   if(!dashOn)return;
-  const tot=P.length,totL=P.reduce((s,p)=>s+p.code.split('\n').length,0),totC=P.reduce((s,p)=>s+p.code.length,0),favs=P.filter(p=>p.starred).length,langs={};
-  P.forEach(p=>{langs[p.language]=(langs[p.language]||0)+1});
-  const sl=Object.entries(langs).sort((a,b)=>b[1]-a[1]),ml=sl[0]?.[1]||1;
-  const avgCx=P.length?Math.round(P.reduce((s,p)=>s+cx(p.code),0)/P.length):0,cc=cxC(avgCx);
+  const el=document.getElementById('dash');
+  const tot=P.length;
+  if(!tot){el.innerHTML='<div style="width:100%;text-align:center;padding:1.5rem;font-size:.75rem;color:var(--mut)">Noch keine Projekte — füge deins hinzu ＋</div>';return}
 
-  // language percentage table HTML
-  const langTableHTML = sl.slice(0,6).map(([l,c])=>{
-    const pct=tot?Math.round(c/tot*100):0;
-    const lc=LC[l]||'#888';
-    return `<div class="dash-lang-row"><span class="dash-lang-dot" style="background:${lc}"></span><span class="dash-lang-name">${esc(l)}</span><div class="dash-lang-bar-bg"><div class="dash-lang-bar" style="width:${pct}%;background:${lc}"></div></div><span class="dash-lang-pct">${pct}%</span><span class="dash-lang-cnt">(${c})</span></div>`;
-  }).join('');
+  // Base metrics
+  const totL=P.reduce((s,p)=>s+p.code.split('\n').length,0);
+  const totC=P.reduce((s,p)=>s+p.code.length,0);
+  const favs=P.filter(p=>p.starred).length;
+  const liveCount=P.filter(p=>isLivable(p)).length;
+  const multifileCount=P.filter(p=>p.files&&p.files.length>1).length;
+  const taggedCount=P.filter(p=>p.tags&&p.tags.length>0).length;
+  const describedCount=P.filter(p=>p.description&&p.description.length>20&&p.description!=='A code project.').length;
+  const avgLines=Math.round(totL/tot);
+  const avgCx=Math.round(P.reduce((s,p)=>s+cx(p.code),0)/tot);
+  const cc=cxC(avgCx);
 
-  document.getElementById('dash').innerHTML=
-    '<div class="dc"><div class="dcl">Projekte</div><div class="dcv" style="color:var(--blue)">'+tot+'</div><div class="dcs">'+favs+' ★ · '+C.length+' Sammlungen</div></div>'
-   +'<div class="dc"><div class="dcl">Lines of Code</div><div class="dcv" style="color:var(--cyan)">'+totL.toLocaleString('de')+'</div><div class="dcs">Ø '+Math.round(totL/Math.max(tot,1))+'/Projekt</div></div>'
-   +'<div class="dc"><div class="dcl">Characters</div><div class="dcv" style="color:var(--green)">'+(totC/1000).toFixed(1)+'k</div></div>'
-   +'<div class="dc"><div class="dcl">Ø Complexity</div><div class="dcv" style="color:'+cc.c+'">'+avgCx+'</div><div class="dcs">'+cc.l+'</div></div>'
-   +'<div class="dc" style="flex:2"><div class="dcl">Sprachen-Anteil</div>'
-   +'<div style="display:flex;align-items:center;gap:.9rem;margin-top:.35rem">'
-   +'<canvas id="lang-donut" width="68" height="68" style="flex-shrink:0"></canvas>'
-   +'<div class="dash-lang-table" style="flex:1">'+langTableHTML+'</div>'
-   +'</div></div>';
+  // Language stats
+  const langs={};P.forEach(p=>{langs[p.language]=(langs[p.language]||0)+1});
+  const sl=Object.entries(langs).sort((a,b)=>b[1]-a[1]);
+  const linesPerLang={};P.forEach(p=>{linesPerLang[p.language]=(linesPerLang[p.language]||0)+p.code.split('\n').length});
+  const slLines=Object.entries(linesPerLang).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  const maxLines=slLines[0]?.[1]||1;
+  const langLinesHTML=slLines.map(([l,n])=>{const pct=Math.round(n/maxLines*100);const lc=LC[l]||'#888';return`<div class="dash-lang-row"><span class="dash-lang-dot" style="background:${lc}"></span><span class="dash-lang-name">${esc(l)}</span><div class="dash-lang-bar-bg"><div class="dash-lang-bar" style="width:${pct}%;background:${lc}"></div></div><span class="dash-lang-pct">${n>=1000?(n/1000).toFixed(1)+'k':n}</span></div>`;}).join('');
 
-  // Draw donut chart
+  // Quality + Complexity
+  const grades={A:0,B:0,C:0,D:0,F:0};const cxVals=[];
+  P.forEach(p=>{const code=p.code,s=cst(code),cxs=cx(code),a=ana(code,p.language);cxVals.push(cxs);let q=100;const cr=s.tot>0?s.cm/s.tot:0;if(cr<0.05&&s.tot>10)q-=12;if(s.al>120)q-=10;if(cxs>80)q-=25;else if(cxs>60)q-=12;if(s.uw/Math.max(s.wc,1)<0.3)q-=8;if(a.fn.length===0&&s.tot>15)q-=10;if(s.ne/Math.max(s.tot,1)<0.5)q-=5;const g=q>=90?'A':q>=75?'B':q>=60?'C':q>=45?'D':'F';grades[g]++});
+  const gradeColors={A:'#4ade80',B:'#86efac',C:'#fbbf24',D:'#fb923c',F:'#f87171'};
+  const gradeHTML=Object.entries(grades).map(([g,n])=>{const pct=Math.round(n/tot*100);return`<div class="dash-grade-row"><span class="dash-grade-badge" style="color:${gradeColors[g]}">${g}</span><div class="dash-grade-bar-bg"><div class="dash-grade-bar" style="width:${pct}%;background:${gradeColors[g]}80"></div></div><span class="dash-grade-cnt">${n}</span></div>`;}).join('');
+  const cxBuckets=[{l:'0–25 Simpel',r:[0,25],c:'#4ade80'},{l:'26–50 Leicht',r:[26,50],c:'#86efac'},{l:'51–75 Mittel',r:[51,75],c:'#fbbf24'},{l:'76–100 Komplex',r:[76,100],c:'#f87171'}];
+  const cxCounts=cxBuckets.map(b=>P.filter(p=>{const v=cx(p.code);return v>=b.r[0]&&v<=b.r[1]}).length);
+  const maxCxB=Math.max(...cxCounts,1);
+  const cxHistHTML=cxBuckets.map((b,i)=>{const pct=Math.round(cxCounts[i]/maxCxB*100);return`<div class="dash-cx-bucket"><span class="dash-cx-label">${b.l}</span><div class="dash-cx-bar-bg"><div class="dash-cx-bar" style="width:${pct}%;background:${b.c}80"></div></div><span class="dash-cx-cnt">${cxCounts[i]}</span></div>`;}).join('');
+
+  // Top 5 lists
+  const top5Lines=P.slice().sort((a,b)=>b.code.split('\n').length-a.code.split('\n').length).slice(0,5);
+  const top5Cx=P.slice().sort((a,b)=>cx(b.code)-cx(a.code)).slice(0,5);
+  const topMax=top5Lines[0]?.code.split('\n').length||1;
+  const topCxMax=cx(top5Cx[0]?.code||'')||1;
+  const topHTML=top5Lines.map((p,i)=>{const lines=p.code.split('\n').length;const pct=Math.round(lines/topMax*100);const lc=LC[p.language]||'#888';return`<div class="dash-proj-row" onclick="openP('${p.id}')"><span class="dash-proj-rank">${i+1}</span><span class="dash-proj-dot" style="background:${lc}"></span><div style="flex:1;min-width:0"><div style="display:flex;align-items:center;justify-content:space-between;gap:.3rem"><span class="dash-proj-name">${esc(p.name)}</span><span class="dash-proj-val">${lines} Z</span></div><div style="height:3px;border-radius:2px;background:rgba(255,255,255,.05);overflow:hidden;margin-top:2px"><div style="height:100%;border-radius:2px;width:${pct}%;background:${lc}80"></div></div></div></div>`;}).join('');
+  const topCxHTML=top5Cx.map((p,i)=>{const cxs=cx(p.code);const cc2=cxC(cxs);const pct=Math.round(cxs/topCxMax*100);return`<div class="dash-proj-row" onclick="openP('${p.id}')"><span class="dash-proj-rank">${i+1}</span><span class="dash-proj-dot" style="background:${cc2.c}"></span><div style="flex:1;min-width:0"><div style="display:flex;align-items:center;justify-content:space-between;gap:.3rem"><span class="dash-proj-name">${esc(p.name)}</span><span class="dash-proj-val" style="color:${cc2.c}">CX ${cxs}</span></div><div style="height:3px;border-radius:2px;background:rgba(255,255,255,.05);overflow:hidden;margin-top:2px"><div style="height:100%;border-radius:2px;width:${pct}%;background:${cc2.c}80"></div></div></div></div>`;}).join('');
+
+  // Tag cloud
+  const tagMap={};P.forEach(p=>(p.tags||[]).forEach(t=>{if(t)tagMap[t]=(tagMap[t]||0)+1}));
+  const topTags=Object.entries(tagMap).sort((a,b)=>b[1]-a[1]).slice(0,22);
+  const maxTag=topTags[0]?.[1]||1;const lcVals=Object.values(LC);
+  const tagHTML=topTags.length?topTags.map(([t,n])=>{const op=(0.35+0.65*(n/maxTag)).toFixed(2);const sz=n>=3?'.72rem':n>=2?'.66rem':'.61rem';const lc=lcVals[Math.abs(t.split('').reduce((a,c)=>a+c.charCodeAt(0),0))%lcVals.length]||'#888';return`<span class="dash-tag" style="font-size:${sz};color:${lc};border-color:${lc}30;background:${lc}0d;opacity:${op}" onclick="filterTag('${esc(t)}')" title="${n}x">${esc(t)}</span>`;}).join(''):'<span style="font-size:.65rem;color:var(--mut)">Noch keine Tags</span>';
+  const allTags=new Set(P.flatMap(p=>p.tags||[]));
+
+  // Activity sparkline
+  const now=Date.now(),DAY=864e5;
+  const days30=Array.from({length:30},(_,i)=>({day:i,count:0}));
+  P.forEach(p=>{if(!p.dateAdded)return;const age=Math.floor((now-p.dateAdded)/DAY);if(age>=0&&age<30)days30[age].count++});
+  days30.reverse();
+  const maxDay=Math.max(...days30.map(d=>d.count),1);
+  const totalRecent=days30.reduce((a,d)=>a+d.count,0);
+  const peakDay=days30.reduce((a,b)=>b.count>a.count?b:a,days30[0]);
+  const peakIdx=days30.indexOf(peakDay);
+  const peakLabel=peakDay.count>0?`Spitze: ${peakDay.count}P vor ${29-peakIdx}T`:'Noch keine Aktivitaet';
+  const sparkBars=days30.map(d=>{const h=Math.max(Math.round((d.count/maxDay)*28),d.count>0?3:1);const op=(d.count>0?0.3+0.7*(d.count/maxDay):0.07).toFixed(2);return`<div style="flex:1;display:flex;align-items:flex-end;height:32px"><div title="${d.count} Projekt${d.count!==1?'e':''}" style="width:100%;height:${h}px;border-radius:2px 2px 0 0;background:var(--blue);opacity:${op}"></div></div>`;}).join('');
+
+  // Collections
+  const collStats=C.map(col=>{const ps=P.filter(p=>p.collId===col.id);return{...col,count:ps.length,cxAvg:ps.length?Math.round(ps.reduce((a,p)=>a+cx(p.code),0)/ps.length):0};}).sort((a,b)=>b.count-a.count);
+  const maxColl=collStats[0]?.count||1;
+  const noCollCount=P.filter(p=>!p.collId).length;
+  const collHTML=(collStats.length?collStats.map(col=>`<div class="dash-coll-row" onclick="setColl('${col.id}')"><span class="dash-coll-dot" style="background:${col.color}"></span><span class="dash-coll-name">${esc(col.name)}</span><div class="dash-coll-bar-bg"><div class="dash-coll-bar" style="width:${Math.round(col.count/maxColl*100)}%;background:${col.color}88"></div></div><span class="dash-coll-cnt">${col.count}</span></div>`).join(''):'')+(noCollCount?`<div class="dash-coll-row" style="cursor:default"><span class="dash-coll-dot" style="background:rgba(255,255,255,.15)"></span><span class="dash-coll-name" style="opacity:.5">Ohne Sammlung</span><div class="dash-coll-bar-bg"><div class="dash-coll-bar" style="width:${Math.round(noCollCount/Math.max(maxColl,noCollCount)*100)}%;background:rgba(255,255,255,.15)"></div></div><span class="dash-coll-cnt">${noCollCount}</span></div>`:'');
+
+  // Code metrics
+  const allStats=P.map(p=>cst(p.code));
+  const avgCommentRatio=allStats.length?Math.round(allStats.reduce((a,s)=>a+s.cm/Math.max(s.tot,1),0)/allStats.length*100):0;
+  const avgNonEmpty=allStats.length?Math.round(allStats.reduce((a,s)=>a+s.ne/Math.max(s.tot,1),0)/allStats.length*100):0;
+  const maxLineLen=Math.max(...allStats.map(s=>s.ml),0);
+  const avgLineLen=allStats.length?Math.round(allStats.reduce((a,s)=>a+s.al,0)/allStats.length):0;
+  const totalFunctions=P.reduce((a,p)=>a+ana(p.code,p.language).fn.length,0);
+  const totalClasses=P.reduce((a,p)=>a+ana(p.code,p.language).cl.length,0);
+
+  // Score values
+  const scoreDocumentation=Math.min(avgCommentRatio*3,100);
+  const scoreDensity=Math.min(avgNonEmpty,100);
+  const scoreTagging=Math.min(Math.round(taggedCount/tot*100),100);
+  const scoreDescribed=Math.min(Math.round(describedCount/tot*100),100);
+
+  // Language intensity bars
+  const hmLangs=sl.slice(0,6).map(([l])=>l);
+  const hmMaxLines=Math.max(...hmLangs.map(l=>linesPerLang[l]||0),1);
+  const hmHTML=hmLangs.map(l=>{const lc=LC[l]||'#888';const intensity=Math.min((linesPerLang[l]||0)/hmMaxLines,1);const h=Math.round(intensity*26)+4;return`<div style="display:flex;flex-direction:column;align-items:center;gap:.22rem"><div style="width:26px;height:${h}px;border-radius:3px;background:${lc};opacity:${(0.3+0.7*intensity).toFixed(2)};box-shadow:0 0 6px ${lc}50"></div><span style="font-size:.5rem;color:${lc}">${l.slice(0,5)}</span></div>`;}).join('');
+
+  el.innerHTML=`
+  <div class="dash-row1">
+    <div class="dc"><div class="dcl">Projekte</div><div class="dcv" style="color:var(--blue)">${tot}</div><div class="dcs">${favs} ★ · ${C.length} Sammlungen</div></div>
+    <div class="dc"><div class="dcl">Lines of Code</div><div class="dcv" style="color:var(--cyan)">${totL>=1000?(totL/1000).toFixed(1)+'k':totL}</div><div class="dcs">Ø ${avgLines}/Projekt</div></div>
+    <div class="dc"><div class="dcl">Zeichen</div><div class="dcv" style="color:var(--green)">${(totC/1000).toFixed(1)}k</div><div class="dcs">Ø ${Math.round(totC/tot)}/P</div></div>
+    <div class="dc"><div class="dcl">Ø Komplexitaet</div><div class="dcv" style="color:${cc.c}">${avgCx}</div><div class="dcs">${cc.l}</div></div>
+    <div class="dc"><div class="dcl">Sprachen</div><div class="dcv" style="color:var(--purple)">${sl.length}</div><div class="dcs">${sl.slice(0,2).map(([l])=>l).join(', ')}</div></div>
+    <div class="dc"><div class="dcl">Tags</div><div class="dcv" style="color:var(--amber)">${allTags.size}</div><div class="dcs">${taggedCount} Proj. getaggt</div></div>
+    <div class="dc"><div class="dcl">Live Preview</div><div class="dcv" style="color:var(--green)">${liveCount}</div><div class="dcs">${Math.round(liveCount/tot*100)}% lauffahig</div></div>
+    <div class="dc"><div class="dcl">Funktionen</div><div class="dcv" style="color:#a78bfa">${totalFunctions}</div><div class="dcs">${totalClasses} Klassen</div></div>
+    ${multifileCount>0?`<div class="dc"><div class="dcl">Multi-Datei</div><div class="dcv" style="color:#67e8f9">${multifileCount}</div><div class="dcs">aufgeteilt</div></div>`:''}
+  </div>
+  <div class="dcp" style="padding:.55rem .9rem">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.42rem">
+      <span class="dcp-title" style="margin:0">Aktivitaet — letzte 30 Tage</span>
+      <span style="font-size:.58rem;color:var(--mut)">${totalRecent} Projekte · ${peakLabel}</span>
+    </div>
+    <div style="display:flex;gap:2px;align-items:flex-end;height:34px;border-bottom:1px solid rgba(255,255,255,.05);padding-bottom:2px">${sparkBars}</div>
+    <div style="display:flex;justify-content:space-between;font-size:.52rem;color:var(--mut);margin-top:.22rem"><span>vor 30 Tagen</span><span>heute</span></div>
+  </div>
+  <div class="dash-row2">
+    <div class="dcp">
+      <div class="dcp-title">Sprachen-Anteil &nbsp;<span style="opacity:.4">(${tot} Projekte)</span></div>
+      <div style="display:flex;align-items:center;gap:.9rem">
+        <canvas id="lang-donut" width="76" height="76" style="flex-shrink:0"></canvas>
+        <div class="dash-lang-table" style="flex:1">${sl.slice(0,7).map(([l,c])=>{const pct=Math.round(c/tot*100);const lc=LC[l]||'#888';return`<div class="dash-lang-row"><span class="dash-lang-dot" style="background:${lc}"></span><span class="dash-lang-name">${esc(l)}</span><div class="dash-lang-bar-bg"><div class="dash-lang-bar" style="width:${pct}%;background:${lc}"></div></div><span class="dash-lang-pct">${pct}%</span><span class="dash-lang-cnt">(${c})</span></div>`;}).join('')}</div>
+      </div>
+    </div>
+    <div class="dcp">
+      <div class="dcp-title">Zeilen je Sprache</div>
+      <div class="dash-lang-table">${langLinesHTML}</div>
+      <div style="margin-top:.55rem;padding-top:.45rem;border-top:1px solid rgba(255,255,255,.04)">
+        <div class="dcp-title" style="margin-bottom:.4rem">Komplexitaets-Verteilung</div>
+        ${cxHistHTML}
+      </div>
+    </div>
+    <div class="dcp">
+      <div class="dcp-title">Code-Qualitaet</div>
+      ${gradeHTML}
+      <div style="margin-top:.5rem;padding-top:.45rem;border-top:1px solid rgba(255,255,255,.04);display:flex;justify-content:center">
+        <canvas id="quality-pie" width="80" height="80"></canvas>
+      </div>
+    </div>
+    <div class="dcp" style="display:flex;flex-direction:column;gap:.5rem">
+      <div><div class="dcp-title">Top 5 Projekte — Zeilen</div>${topHTML}</div>
+      <div style="padding-top:.42rem;border-top:1px solid rgba(255,255,255,.04)">
+        <div class="dcp-title" style="margin-bottom:.28rem">Tag-Wolke</div>
+        <div style="line-height:1.85">${tagHTML}</div>
+      </div>
+    </div>
+  </div>
+  <div class="dash-row3">
+    <div class="dcp">
+      <div class="dcp-title">Sammlungen &nbsp;<span style="opacity:.4">(${C.length})</span></div>
+      ${collHTML||'<div style="font-size:.65rem;color:var(--mut);padding:.3rem 0">Noch keine Sammlungen</div>'}
+      <div style="margin-top:.5rem;padding-top:.4rem;border-top:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:.5rem">
+        <canvas id="coll-donut" width="44" height="44" style="flex-shrink:0"></canvas>
+        <div style="font-size:.58rem;color:var(--mut2);line-height:1.6">${C.length} Sammlung${C.length!==1?'en':''}<br>${noCollCount} ohne Zuordnung</div>
+      </div>
+    </div>
+    <div class="dcp">
+      <div class="dcp-title">Top 5 — Komplexitaet</div>
+      ${topCxHTML}
+    </div>
+    <div class="dcp">
+      <div class="dcp-title">Code-Metriken im Detail</div>
+      <div class="dash-metric-row"><span class="dash-metric-key">Kommentar-Anteil</span><span class="dash-metric-val">${avgCommentRatio}%</span><span class="dash-metric-badge" style="color:${avgCommentRatio>15?'#4ade80':'#fbbf24'};border-color:${avgCommentRatio>15?'#4ade8030':'#fbbf2430'}">${avgCommentRatio>15?'gut':'gering'}</span></div>
+      <div class="dash-metric-row"><span class="dash-metric-key">Nicht-leere Zeilen</span><span class="dash-metric-val">${avgNonEmpty}%</span><span class="dash-metric-badge" style="color:${avgNonEmpty>70?'#4ade80':'#fbbf24'};border-color:${avgNonEmpty>70?'#4ade8030':'#fbbf2430'}">${avgNonEmpty>70?'dicht':'locker'}</span></div>
+      <div class="dash-metric-row"><span class="dash-metric-key">Max. Zeilenlaenge</span><span class="dash-metric-val">${maxLineLen} Z.</span><span class="dash-metric-badge" style="color:${maxLineLen<100?'#4ade80':'#f87171'};border-color:${maxLineLen<100?'#4ade8030':'#f8717130'}">${maxLineLen<100?'ok':'lang'}</span></div>
+      <div class="dash-metric-row"><span class="dash-metric-key">Ø Zeilenlaenge</span><span class="dash-metric-val">${avgLineLen} Z.</span><span class="dash-metric-badge" style="color:var(--mut2);border-color:var(--bdr)">neutral</span></div>
+      <div class="dash-metric-row"><span class="dash-metric-key">Beschrieben</span><span class="dash-metric-val">${describedCount}/${tot}</span><span class="dash-metric-badge" style="color:${scoreDescribed>60?'#4ade80':'#fbbf24'};border-color:${scoreDescribed>60?'#4ade8030':'#fbbf2430'}">${scoreDescribed}%</span></div>
+      <div class="dash-metric-row"><span class="dash-metric-key">Getaggte Projekte</span><span class="dash-metric-val">${taggedCount}/${tot}</span><span class="dash-metric-badge" style="color:${scoreTagging>60?'#4ade80':'#fbbf24'};border-color:${scoreTagging>60?'#4ade8030':'#fbbf2430'}">${scoreTagging}%</span></div>
+    </div>
+    <div class="dcp">
+      <div class="dcp-title">Sprachen-Intensitaet</div>
+      <div style="display:flex;align-items:flex-end;gap:.5rem;justify-content:center;padding:.5rem 0">${hmHTML}</div>
+      <div style="margin-top:.4rem;padding-top:.38rem;border-top:1px solid rgba(255,255,255,.04)">
+        <div class="dcp-title" style="margin-bottom:.38rem">Galerie-Gesundheit</div>
+        <div class="score-rings">
+          <div class="score-ring-wrap"><canvas id="sr-doc" width="46" height="46"></canvas><div class="score-ring-lbl">Kommentare</div><div class="score-ring-val" style="color:#22d3ee">${scoreDocumentation}%</div></div>
+          <div class="score-ring-wrap"><canvas id="sr-tag" width="46" height="46"></canvas><div class="score-ring-lbl">Tags</div><div class="score-ring-val" style="color:#a855f7">${scoreTagging}%</div></div>
+          <div class="score-ring-wrap"><canvas id="sr-desc" width="46" height="46"></canvas><div class="score-ring-lbl">Beschreibung</div><div class="score-ring-val" style="color:#fbbf24">${scoreDescribed}%</div></div>
+          <div class="score-ring-wrap"><canvas id="sr-live" width="46" height="46"></canvas><div class="score-ring-lbl">Live Preview</div><div class="score-ring-val" style="color:#4ade80">${Math.round(liveCount/tot*100)}%</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dash-row4">
+    <div class="dcp">
+      <div class="dcp-title">Groessen-Verteilung (Zeilen pro Projekt)</div>
+      <div id="size-dist-bars" style="display:flex;align-items:flex-end;gap:3px;height:52px;margin-top:.4rem;border-bottom:1px solid rgba(255,255,255,.05)"></div>
+      <div style="display:flex;justify-content:space-between;font-size:.52rem;color:var(--mut);margin-top:.22rem"><span>1</span><span>kleinste bis groesste</span><span>${Math.max(...P.map(p=>p.code.split('\n').length),0)} Z</span></div>
+      <div style="display:flex;gap:.7rem;flex-wrap:wrap;margin-top:.45rem;padding-top:.4rem;border-top:1px solid rgba(255,255,255,.04)">
+        ${[['> 200 Z','#f87171',p=>p.code.split('\n').length>200],['51–200 Z','#fbbf24',p=>{const l=p.code.split('\n').length;return l>50&&l<=200;}],['1–50 Z','#4ade80',p=>p.code.split('\n').length<=50]].map(([lbl,c,fn])=>{const n=P.filter(fn).length;return`<div class="mini-kpi"><span class="mini-kpi-val" style="color:${c}">${n}</span><span class="mini-kpi-lbl">${lbl}</span></div>`;}).join('')}
+      </div>
+    </div>
+    <div class="dcp">
+      <div class="dcp-title">Favoriten-Analyse</div>
+      <div style="display:flex;justify-content:center;margin:.4rem 0"><canvas id="fav-donut" width="72" height="72"></canvas></div>
+      <div class="dash-metric-row"><span class="dash-metric-key">Favoriten</span><span class="dash-metric-val" style="color:var(--amber)">${favs}</span></div>
+      <div class="dash-metric-row"><span class="dash-metric-key">Normal</span><span class="dash-metric-val">${tot-favs}</span></div>
+      <div class="dash-metric-row"><span class="dash-metric-key">Rate</span><span class="dash-metric-val">${Math.round(favs/tot*100)}%</span></div>
+    </div>
+    <div class="dcp">
+      <div class="dcp-title">Galerie-Score</div>
+      <div style="display:flex;align-items:center;gap:.7rem;margin-top:.35rem">
+        <canvas id="gallery-score-ring" width="72" height="72" style="flex-shrink:0"></canvas>
+        <div style="flex:1">
+          ${[['Qualitaet',Math.round((grades.A*100+grades.B*75+grades.C*50+grades.D*25)/tot||0),'#4ade80'],['Dokumentation',Math.min(scoreDocumentation,100),'#22d3ee'],['Tags',scoreTagging,'#a855f7'],['Beschreibung',scoreDescribed,'#fbbf24'],['Live-faehig',Math.round(liveCount/tot*100),'#fb7185']].map(([lbl,val,c])=>`<div style="display:flex;align-items:center;gap:.35rem;margin-bottom:.2rem"><span style="font-size:.58rem;color:var(--mut2);flex:1">${lbl}</span><div style="width:60px;height:3px;border-radius:2px;background:rgba(255,255,255,.06);overflow:hidden"><div style="width:${val}%;height:100%;background:${c};border-radius:2px"></div></div><span style="font-family:var(--fc);font-size:.57rem;color:${c};min-width:26px;text-align:right">${val}%</span></div>`).join('')}
+        </div>
+      </div>
+      <div style="margin-top:.5rem;padding-top:.4rem;border-top:1px solid rgba(255,255,255,.04);display:flex;gap:.6rem;flex-wrap:wrap">
+        <div class="mini-kpi"><span class="mini-kpi-val" style="color:var(--green)">${totalFunctions}</span><span class="mini-kpi-lbl">Funktionen</span></div>
+        <div class="mini-kpi"><span class="mini-kpi-val" style="color:#fbbf24">${totalClasses}</span><span class="mini-kpi-lbl">Klassen</span></div>
+        <div class="mini-kpi"><span class="mini-kpi-val" style="color:var(--purple)">${allTags.size}</span><span class="mini-kpi-lbl">uniq. Tags</span></div>
+        <div class="mini-kpi"><span class="mini-kpi-val" style="color:var(--cyan)">${avgCommentRatio}%</span><span class="mini-kpi-lbl">kommentiert</span></div>
+      </div>
+    </div>
+  </div>`;
+
   requestAnimationFrame(()=>{
-    const cv=document.getElementById('lang-donut');if(!cv)return;
-    const ctx=cv.getContext('2d'),W=cv.width,H=cv.height,R=30,r=16,cx2=W/2,cy2=H/2;
-    ctx.clearRect(0,0,W,H);
-    if(!sl.length){ctx.strokeStyle='rgba(255,255,255,.06)';ctx.lineWidth=R-r;ctx.beginPath();ctx.arc(cx2,cy2,R-((R-r)/2),0,Math.PI*2);ctx.stroke();return}
-    let startAngle=-Math.PI/2;
-    const total=sl.reduce((a,[,c])=>a+c,0);
-    sl.forEach(([l,c])=>{
-      const slice=c/total*Math.PI*2;
-      const lc=LC[l]||'#888';
-      ctx.beginPath();ctx.moveTo(cx2,cy2);ctx.arc(cx2,cy2,R,startAngle,startAngle+slice);ctx.closePath();
-      ctx.fillStyle=lc+'cc';ctx.shadowColor=lc;ctx.shadowBlur=4;ctx.fill();ctx.shadowBlur=0;
-      startAngle+=slice;
-    });
-    // inner hole
-    ctx.beginPath();ctx.arc(cx2,cy2,r,0,Math.PI*2);ctx.fillStyle='var(--bg2,#060d20)';ctx.fill();
-    // center text
-    ctx.fillStyle='rgba(255,255,255,.7)';ctx.font='bold 9px "JetBrains Mono",monospace';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(sl.length,cx2,cy2-4);ctx.font='6px sans-serif';ctx.fillStyle='rgba(255,255,255,.35)';ctx.fillText('langs',cx2,cy2+6);
+    function donut(id,data,colors,R,r,label){
+      const cv=document.getElementById(id);if(!cv)return;
+      const ctx=cv.getContext('2d'),W=cv.width,H=cv.height,cx2=W/2,cy2=H/2;
+      ctx.clearRect(0,0,W,H);const total=data.reduce((a,v)=>a+v,0)||1;let sa=-Math.PI/2;
+      data.forEach((v,i)=>{if(!v)return;const slice=v/total*Math.PI*2;const c=colors[i]||'#888';ctx.beginPath();ctx.moveTo(cx2,cy2);ctx.arc(cx2,cy2,R,sa,sa+slice);ctx.closePath();ctx.fillStyle=c+'bb';ctx.shadowColor=c;ctx.shadowBlur=3;ctx.fill();ctx.shadowBlur=0;sa+=slice});
+      ctx.beginPath();ctx.arc(cx2,cy2,r,0,Math.PI*2);ctx.fillStyle='#060d20';ctx.fill();
+      if(label){ctx.fillStyle='rgba(255,255,255,.8)';ctx.font=`bold ${r<14?8:11}px "JetBrains Mono",monospace`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(label,cx2,cy2)}
+    }
+    function ring(id,pct,color){
+      const cv=document.getElementById(id);if(!cv)return;
+      const ctx=cv.getContext('2d'),W=cv.width,H=cv.height,R=18,cx2=W/2,cy2=H/2;ctx.clearRect(0,0,W,H);
+      ctx.beginPath();ctx.arc(cx2,cy2,R,-Math.PI/2,Math.PI*3/2);ctx.strokeStyle='rgba(255,255,255,.07)';ctx.lineWidth=4;ctx.stroke();
+      const end=-Math.PI/2+Math.PI*2*(Math.min(pct,100)/100);ctx.beginPath();ctx.arc(cx2,cy2,R,-Math.PI/2,end);ctx.strokeStyle=color;ctx.lineWidth=4;ctx.lineCap='round';ctx.shadowColor=color;ctx.shadowBlur=5;ctx.stroke();ctx.shadowBlur=0;
+    }
+    donut('lang-donut',sl.map(([,c])=>c),sl.map(([l])=>LC[l]||'#888'),33,18,String(sl.length));
+    const qEntries=Object.entries(grades).filter(([,n])=>n>0);
+    donut('quality-pie',qEntries.map(([,n])=>n),qEntries.map(([g])=>gradeColors[g]),34,18);
+    const collData=[...collStats.map(c=>c.count),noCollCount].filter(Boolean);
+    donut('coll-donut',collData,[...collStats.map(c=>c.color),'rgba(255,255,255,.2)'],19,10,String(C.length));
+    donut('fav-donut',[favs,tot-favs],['#fbbf24','rgba(255,255,255,.1)'],31,18,favs+'*');
+    ring('sr-doc',scoreDocumentation,'#22d3ee');ring('sr-tag',scoreTagging,'#a855f7');ring('sr-desc',scoreDescribed,'#fbbf24');ring('sr-live',Math.round(liveCount/tot*100),'#4ade80');
+    const galScore=Math.round([[Math.round((grades.A*100+grades.B*75+grades.C*50+grades.D*25)/tot||0),scoreDocumentation,scoreTagging,scoreDescribed,Math.round(liveCount/tot*100)].reduce((a,v)=>a+v,0)/5]);
+    const cv2=document.getElementById('gallery-score-ring');
+    if(cv2){const ctx=cv2.getContext('2d'),W=cv2.width,H=cv2.height,R=30,cx2=W/2,cy2=H/2;ctx.clearRect(0,0,W,H);ctx.beginPath();ctx.arc(cx2,cy2,R,-Math.PI/2,Math.PI*3/2);ctx.strokeStyle='rgba(255,255,255,.07)';ctx.lineWidth=5;ctx.stroke();const sc=galScore<40?'#f87171':galScore<60?'#fbbf24':galScore<80?'#86efac':'#4ade80';ctx.beginPath();ctx.arc(cx2,cy2,R,-Math.PI/2,-Math.PI/2+Math.PI*2*(galScore/100));ctx.strokeStyle=sc;ctx.lineWidth=5;ctx.lineCap='round';ctx.shadowColor=sc;ctx.shadowBlur=8;ctx.stroke();ctx.shadowBlur=0;ctx.fillStyle=sc;ctx.font='bold 15px "Syne",sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(galScore,cx2,cy2-4);ctx.font='6px sans-serif';ctx.fillStyle='rgba(255,255,255,.35)';ctx.fillText('/100',cx2,cy2+9)}
+    const sizeBar=document.getElementById('size-dist-bars');
+    if(sizeBar){const sorted=[...P].sort((a,b)=>a.code.split('\n').length-b.code.split('\n').length);const maxS=sorted[sorted.length-1]?.code.split('\n').length||1;const bN=Math.min(sorted.length,40);const bw=Math.max(Math.floor(sorted.length/bN),1);const buckets=Array.from({length:bN},(_,i)=>{const sl2=sorted.slice(i*bw,(i+1)*bw);return sl2.length?Math.round(sl2.reduce((a,p)=>a+p.code.split('\n').length,0)/sl2.length):0;});sizeBar.innerHTML=buckets.map(v=>{const h=Math.max(Math.round((v/maxS)*48),2);const lc=v>200?'#f87171':v>50?'#fbbf24':'#4ade80';return`<div title="${v} Z" style="flex:1;height:${h}px;border-radius:1px 1px 0 0;background:${lc};opacity:${(0.4+0.6*(v/maxS)).toFixed(2)};min-width:2px;align-self:flex-end"></div>`;}).join('');}
   });
 }
 function getFilteredList(){return getSorted(getFiltered())}
@@ -2595,7 +2870,7 @@ function saveP(){
   // For main code use the first file (or the currently visible one)
   const mainCode = mfFiles.length>0 ? mfFiles[0].code : code;
   setCode(pid, mainCode);
-  const p={id:pid,name,description:desc||'A code project.',language:document.getElementById('fl').value,tags:tags.split(',').map(t=>t.trim()).filter(Boolean),accentColor:selC,collId:document.getElementById('fcoll').value||null,starred:drwEditId?P.find(x=>x.id===drwEditId)?.starred||false:false,note:drwEditId?P.find(x=>x.id===drwEditId)?.note||'':''};
+  const p={id:pid,name,description:desc||'A code project.',language:document.getElementById('fl').value,tags:tags.split(',').map(t=>t.trim()).filter(Boolean),accentColor:selC,collId:document.getElementById('fcoll').value||null,starred:drwEditId?P.find(x=>x.id===drwEditId)?.starred||false:false,note:drwEditId?P.find(x=>x.id===drwEditId)?.note||'':'',dateAdded:drwEditId?P.find(x=>x.id===drwEditId)?.dateAdded||Date.now():Date.now()};
   // Store multi-file data if more than one file
   if(mfFiles.length>1){
     p.files = mfFiles.map(f=>({name:f.name,lang:f.lang,code:f.code}));
@@ -2737,6 +3012,55 @@ function exportHTML(){
     '.ro-hstat-lbl{font-size:.62rem;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.4);margin-top:.3rem}',
     '.ro-hero-div{position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(59,130,246,.35),rgba(168,85,247,.35),transparent);z-index:3}',
     '@media(max-width:680px){.ro-nav,.ro-main{padding-left:1rem;padding-right:1rem}.ro-grid{grid-template-columns:1fr}.ro-sb{display:none}.ro-hero-stats{display:none}}',
+    /* ── Dashboard collapsible ── */
+    '.ro-dash{border-bottom:1px solid var(--bdr);background:rgba(3,7,26,.8);overflow:hidden;max-height:0;transition:max-height .45s cubic-bezier(.4,0,.2,1),padding .3s}',
+    '.ro-dash.open{max-height:2400px;padding:1.2rem 2rem 1.4rem}',
+    '.ro-dash-inner{display:flex;flex-direction:column;gap:.8rem}',
+    '.ro-dash-toggle{display:flex;align-items:center;justify-content:space-between;padding:.6rem 2rem;background:rgba(255,255,255,.015);border-bottom:1px solid var(--bdr);cursor:pointer;transition:background .18s;user-select:none}',
+    '.ro-dash-toggle:hover{background:rgba(59,130,246,.06)}',
+    '.ro-dash-toggle-left{display:flex;align-items:center;gap:.55rem;font-size:.67rem;color:#64748b;font-family:\'JetBrains Mono\',monospace;text-transform:uppercase;letter-spacing:.12em}',
+    '.ro-dash-toggle-dot{width:6px;height:6px;border-radius:50%;background:#3b82f6;box-shadow:0 0 6px #3b82f680;transition:transform .3s}',
+    '.ro-dash-toggle.open .ro-dash-toggle-dot{background:#4ade80;box-shadow:0 0 6px #4ade8080}',
+    '.ro-dash-toggle-arrow{font-size:.8rem;color:#475569;transition:transform .35s;display:inline-block}',
+    '.ro-dash-toggle.open .ro-dash-toggle-arrow{transform:rotate(180deg)}',
+    '.ro-dash-row1{display:flex;gap:.6rem;flex-wrap:wrap}',
+    '.ro-dc{flex:1;min-width:130px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-radius:9px;padding:.62rem .85rem}',
+    '.ro-dcl{font-size:.54rem;text-transform:uppercase;letter-spacing:.16em;color:#475569;margin-bottom:.2rem}',
+    '.ro-dcv{font-family:\'JetBrains Mono\',monospace;font-size:1.35rem;font-weight:700;line-height:1.1;letter-spacing:-.02em}',
+    '.ro-dcs{font-size:.57rem;color:#475569;margin-top:.08rem}',
+    '.ro-dash-row2{display:grid;grid-template-columns:2fr 2fr 1.4fr 1.6fr;gap:.65rem}',
+    '@media(max-width:900px){.ro-dash-row2{grid-template-columns:1fr 1fr}}',
+    '@media(max-width:600px){.ro-dash-row2{grid-template-columns:1fr}}',
+    '.ro-dcp{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:9px;padding:.65rem .9rem}',
+    '.ro-dcp-t{font-size:.54rem;text-transform:uppercase;letter-spacing:.16em;color:#475569;margin-bottom:.5rem}',
+    '.ro-dlr{display:flex;align-items:center;gap:.42rem;font-size:.6rem;margin-bottom:.16rem}',
+    '.ro-dld{width:7px;height:7px;border-radius:50%;flex-shrink:0}',
+    '.ro-dln{color:#94a3b8;min-width:70px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
+    '.ro-dlb{flex:1;height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}',
+    '.ro-dlf{height:100%;border-radius:2px}',
+    '.ro-dlp{font-family:\'JetBrains Mono\',monospace;color:#f1f5f9;min-width:30px;text-align:right;font-size:.58rem}',
+    '.ro-dlc{color:#475569;min-width:16px;text-align:right;font-size:.56rem}',
+    '.ro-gr{display:flex;align-items:center;gap:.38rem;margin-bottom:.22rem}',
+    '.ro-gb{font-family:\'Syne\',sans-serif;font-size:.85rem;font-weight:700;min-width:18px;text-align:center}',
+    '.ro-gbb{flex:1;height:5px;border-radius:3px;background:rgba(255,255,255,.06);overflow:hidden}',
+    '.ro-gbf{height:100%;border-radius:3px}',
+    '.ro-gcc{font-family:\'JetBrains Mono\',monospace;font-size:.58rem;min-width:20px;text-align:right;color:#64748b}',
+    '.ro-pr{display:flex;align-items:center;gap:.4rem;padding:.27rem 0;border-bottom:1px solid rgba(255,255,255,.03);cursor:pointer}',
+    '.ro-pr:last-child{border-bottom:none}',
+    '.ro-prk{font-family:\'JetBrains Mono\',monospace;font-size:.56rem;color:#475569;min-width:14px;text-align:right}',
+    '.ro-prd{width:6px;height:6px;border-radius:50%;flex-shrink:0}',
+    '.ro-prn{font-size:.67rem;color:#94a3b8;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .15s}',
+    '.ro-pr:hover .ro-prn{color:#f1f5f9}',
+    '.ro-prv{font-family:\'JetBrains Mono\',monospace;font-size:.57rem;color:#64748b;white-space:nowrap}',
+    '.ro-tag{font-size:.58rem;color:rgba(255,255,255,.6);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);padding:.04rem .28rem;border-radius:99px;font-family:\'JetBrains Mono\',monospace}',
+    '.ro-dtag{display:inline-block;padding:.1rem .36rem;border-radius:4px;border:1px solid;font-size:.58rem;margin:.1rem}',
+    '.ro-spark{display:flex;gap:2px;align-items:flex-end;height:32px;border-bottom:1px solid rgba(255,255,255,.05);padding-bottom:2px}',
+    '.ro-spark-bar{flex:1;border-radius:2px 2px 0 0;background:#3b82f6;min-height:1px}',
+    '.ro-cxb{display:flex;align-items:center;gap:.38rem;margin-bottom:.24rem;font-size:.6rem}',
+    '.ro-cxl{color:#94a3b8;min-width:52px;font-family:\'JetBrains Mono\',monospace;font-size:.57rem}',
+    '.ro-cxbb{flex:1;height:6px;background:rgba(255,255,255,.05);border-radius:3px;overflow:hidden}',
+    '.ro-cxbf{height:100%;border-radius:3px}',
+    '.ro-cxc{color:#475569;min-width:20px;text-align:right;font-family:\'JetBrains Mono\',monospace}',
     '</style>',
     '</head>',
     '<body>'
@@ -2745,6 +3069,9 @@ function exportHTML(){
   const htmlNav = [
     '<nav class="ro-nav">',
     '  <div style="display:flex;align-items:center;gap:.6rem"><span class="ro-logo">CODEX</span><span class="ro-badge">View Only</span></div>',
+    '  <div style="display:flex;align-items:center;gap:.5rem">',
+    '    <button class="ro-btn" onclick="toggleRODash()" id="ro-dash-btn">◈ Stats</button>',
+    '  </div>',
     '</nav>'
   ].join('\n');
 
@@ -2768,6 +3095,205 @@ function exportHTML(){
     '    <div><div class="ro-hstat-num">'+totalLangs+'</div><div class="ro-hstat-lbl">Languages</div></div>',
     '  </div>',
     '  <div class="ro-hero-div"></div>',
+    '</section>'
+  ].join('\n');
+
+  // ══ DASHBOARD STATS (pre-computed for export) ══════════════
+  const expTot = sorted.length;
+  const expTotL = sorted.reduce((s,p)=>s+(p.code||'').split('\n').length,0);
+  const expTotC = sorted.reduce((s,p)=>s+(p.code||'').length,0);
+  const expFavs = sorted.filter(p=>p.starred).length;
+  const expLive = sorted.filter(p=>isLivable(p)).length;
+  const expMf   = sorted.filter(p=>p.files&&p.files.length>1).length;
+  const expAvgL = Math.round(expTotL/Math.max(expTot,1));
+
+  // Language stats
+  const expLangs={};sorted.forEach(p=>{expLangs[p.language]=(expLangs[p.language]||0)+1});
+  const expSl=Object.entries(expLangs).sort((a,b)=>b[1]-a[1]);
+  const expLinesPerLang={};sorted.forEach(p=>{expLinesPerLang[p.language]=(expLinesPerLang[p.language]||0)+(p.code||'').split('\n').length});
+  const expSlLines=Object.entries(expLinesPerLang).sort((a,b)=>b[1]-a[1]).slice(0,6);
+
+  // Complexity & quality
+  const expAvgCx=expTot?Math.round(sorted.reduce((s,p)=>s+cx(p.code||''),0)/expTot):0;
+  const expCc=cxC(expAvgCx);
+  const expGrades={A:0,B:0,C:0,D:0,F:0};
+  sorted.forEach(p=>{const s2=cst(p.code||''),cxs=cx(p.code||'');let q=100;const cr=s2.tot>0?s2.cm/s2.tot:0;if(cr<0.05&&s2.tot>10)q-=12;if(cxs>80)q-=25;else if(cxs>60)q-=12;expGrades[q>=90?'A':q>=75?'B':q>=60?'C':q>=45?'D':'F']++});
+  const expGC={A:'#4ade80',B:'#86efac',C:'#fbbf24',D:'#fb923c',F:'#f87171'};
+
+  // Top 5 by lines
+  const expTop5=sorted.slice().sort((a,b)=>b.code.split('\n').length-a.code.split('\n').length).slice(0,5);
+  const expTopMax=expTop5[0]?.code.split('\n').length||1;
+
+  // Tags
+  const expTagMap={};sorted.forEach(p=>(p.tags||[]).forEach(t=>{if(t)expTagMap[t]=(expTagMap[t]||0)+1}));
+  const expTopTags=Object.entries(expTagMap).sort((a,b)=>b[1]-a[1]).slice(0,16);
+  const expMaxTag=expTopTags[0]?.[1]||1;
+  const expAllTags=new Set(sorted.flatMap(p=>p.tags||[]));
+
+  // Complexity histogram
+  const expCxBuckets=[{l:'0–25',r:[0,25],c:'#4ade80'},{l:'26–50',r:[26,50],c:'#86efac'},{l:'51–75',r:[51,75],c:'#fbbf24'},{l:'76–100',r:[76,100],c:'#f87171'}];
+  const expCxCounts=expCxBuckets.map(b=>sorted.filter(p=>{const v=cx(p.code||'');return v>=b.r[0]&&v<=b.r[1]}).length);
+  const expMaxCxB=Math.max(...expCxCounts,1);
+
+  // Activity sparkline (last 30 days)
+  const expNow=Date.now(),expDAY=864e5;
+  const expDays30=Array.from({length:30},(_,i)=>({day:i,count:0}));
+  sorted.forEach(p=>{if(!p.dateAdded)return;const age=Math.floor((expNow-p.dateAdded)/expDAY);if(age>=0&&age<30)expDays30[age].count++});
+  expDays30.reverse();
+  const expMaxDay=Math.max(...expDays30.map(d=>d.count),1);
+  const expTotalRecent=expDays30.reduce((a,d)=>a+d.count,0);
+
+  // SVG donut chart
+  const expDonutSVG=(()=>{
+    const W=80,H=80,R=34,ri=20,cx0=40,cy0=40;
+    if(!expSl.length) return '<svg width="'+W+'" height="'+H+'"><circle cx="'+cx0+'" cy="'+cy0+'" r="'+R+'" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="'+(R-ri)+'"/></svg>';
+    const total=expSl.reduce((a,[,c])=>a+c,0);
+    let paths='',sa=-Math.PI/2;
+    expSl.forEach(([l,c])=>{
+      const slice=c/total*Math.PI*2;
+      const ea=sa+slice;
+      const x1=cx0+R*Math.cos(sa),y1=cy0+R*Math.sin(sa);
+      const x2=cx0+R*Math.cos(ea),y2=cy0+R*Math.sin(ea);
+      const xi1=cx0+ri*Math.cos(sa),yi1=cy0+ri*Math.sin(sa);
+      const xi2=cx0+ri*Math.cos(ea),yi2=cy0+ri*Math.sin(ea);
+      const large=slice>Math.PI?1:0;
+      const lc2=LC[l]||'#888';
+      paths+=`<path d="M ${xi1} ${yi1} L ${x1} ${y1} A ${R} ${R} 0 ${large} 1 ${x2} ${y2} L ${xi2} ${yi2} A ${ri} ${ri} 0 ${large} 0 ${xi1} ${yi1} Z" fill="${lc2}bb"/>`;
+      sa=ea;
+    });
+    return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">${paths}<circle cx="${cx0}" cy="${cy0}" r="${ri}" fill="#060d20"/><text x="${cx0}" y="${cy0-4}" text-anchor="middle" font-size="11" font-weight="bold" font-family="JetBrains Mono,monospace" fill="rgba(255,255,255,.8)">${expSl.length}</text><text x="${cx0}" y="${cy0+8}" text-anchor="middle" font-size="6" font-family="sans-serif" fill="rgba(255,255,255,.35)">langs</text></svg>`;
+  })();
+
+  // SVG quality pie
+  const expQualSVG=(()=>{
+    const W=76,H=76,R=32,ri=17,cx0=38,cy0=38;
+    const entries=Object.entries(expGrades).filter(([,n])=>n>0);
+    const total=entries.reduce((a,[,n])=>a+n,0)||1;
+    if(!entries.length) return '<svg width="'+W+'" height="'+H+'"></svg>';
+    let paths='',sa=-Math.PI/2;
+    entries.forEach(([g,n])=>{
+      const slice=n/total*Math.PI*2,ea=sa+slice;
+      const x1=cx0+R*Math.cos(sa),y1=cy0+R*Math.sin(sa);
+      const x2=cx0+R*Math.cos(ea),y2=cy0+R*Math.sin(ea);
+      const xi1=cx0+ri*Math.cos(sa),yi1=cy0+ri*Math.sin(sa);
+      const xi2=cx0+ri*Math.cos(ea),yi2=cy0+ri*Math.sin(ea);
+      const large=slice>Math.PI?1:0;
+      const gc2=expGC[g];
+      paths+=`<path d="M ${xi1} ${yi1} L ${x1} ${y1} A ${R} ${R} 0 ${large} 1 ${x2} ${y2} L ${xi2} ${yi2} A ${ri} ${ri} 0 ${large} 0 ${xi1} ${yi1} Z" fill="${gc2}99"/>`;
+      sa=ea;
+    });
+    const bestG=Object.entries(expGrades).sort((a,b)=>b[1]-a[1])[0];
+    const bc=bestG?expGC[bestG[0]]:'#fff';
+    return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">${paths}<circle cx="${cx0}" cy="${cy0}" r="${ri}" fill="#060d20"/>${bestG?`<text x="${cx0}" y="${cy0-3}" text-anchor="middle" font-size="13" font-weight="bold" font-family="Syne,sans-serif" fill="${bc}">${bestG[0]}</text><text x="${cx0}" y="${cy0+8}" text-anchor="middle" font-size="6" font-family="sans-serif" fill="rgba(255,255,255,.35)">top</text>`:''}</svg>`;
+  })();
+
+  // Build HTML pieces for dashboard
+  const dashLangTable = expSl.slice(0,7).map(([l,c])=>{
+    const pct=Math.round(c/expTot*100);const lc2=LC[l]||'#888';
+    return `<div class="ro-dlr"><span class="ro-dld" style="background:${lc2}"></span><span class="ro-dln">${esc(l)}</span><div class="ro-dlb"><div class="ro-dlf" style="width:${pct}%;background:${lc2}"></div></div><span class="ro-dlp">${pct}%</span><span class="ro-dlc">(${c})</span></div>`;
+  }).join('');
+
+  const dashLinesTable = expSlLines.map(([l,n])=>{
+    const pct=Math.round(n/(expSlLines[0]?.[1]||1)*100);const lc2=LC[l]||'#888';
+    return `<div class="ro-dlr"><span class="ro-dld" style="background:${lc2}"></span><span class="ro-dln">${esc(l)}</span><div class="ro-dlb"><div class="ro-dlf" style="width:${pct}%;background:${lc2}"></div></div><span class="ro-dlp">${n>=1000?(n/1000).toFixed(1)+'k':n}</span></div>`;
+  }).join('');
+
+  const dashGrades = Object.entries(expGrades).map(([g,n])=>{
+    const pct=Math.round(n/expTot*100);
+    return `<div class="ro-gr"><span class="ro-gb" style="color:${expGC[g]}">${g}</span><div class="ro-gbb"><div class="ro-gbf" style="width:${pct}%;background:${expGC[g]}80"></div></div><span class="ro-gcc">${n}</span></div>`;
+  }).join('');
+
+  const dashCxHist = expCxBuckets.map((b,i)=>{
+    const pct=Math.round(expCxCounts[i]/expMaxCxB*100);
+    return `<div class="ro-cxb"><span class="ro-cxl">${b.l}</span><div class="ro-cxbb"><div class="ro-cxbf" style="width:${pct}%;background:${b.c}80"></div></div><span class="ro-cxc">${expCxCounts[i]}</span></div>`;
+  }).join('');
+
+  const dashTop5 = expTop5.map((p,i)=>{
+    const lines=(p.code||'').split('\n').length;
+    const pct=Math.round(lines/expTopMax*100);const lc2=LC[p.language]||'#888';
+    return `<div class="ro-pr" onclick="openDetail('${p.id}')"><span class="ro-prk">${i+1}</span><span class="ro-prd" style="background:${lc2}"></span><div style="flex:1;min-width:0"><div style="display:flex;align-items:center;justify-content:space-between;gap:.3rem"><span class="ro-prn">${esc(p.name)}</span><span class="ro-prv">${lines} Z</span></div><div style="height:3px;border-radius:2px;background:rgba(255,255,255,.05);margin-top:3px;overflow:hidden"><div style="height:100%;border-radius:2px;width:${pct}%;background:${lc2}80"></div></div></div></div>`;
+  }).join('');
+
+  const lcVals2=Object.values(LC);
+  const dashTags = expTopTags.map(([t,n])=>{
+    const op=(0.35+0.65*(n/expMaxTag)).toFixed(2);
+    const sz=n>=3?'.68rem':n>=2?'.63rem':'.6rem';
+    const lc2=lcVals2[Math.abs(t.split('').reduce((a,c2)=>a+c2.charCodeAt(0),0))%lcVals2.length]||'#888';
+    return `<span class="ro-dtag" style="font-size:${sz};color:${lc2};border-color:${lc2}30;background:${lc2}0d;opacity:${op}">${esc(t)}</span>`;
+  }).join('');
+
+  const dashSpark = expDays30.map(d=>{
+    const h=Math.max(Math.round((d.count/expMaxDay)*28),d.count>0?3:1);
+    const op=(d.count>0?0.3+0.7*(d.count/expMaxDay):0.07).toFixed(2);
+    return `<div class="ro-spark-bar" style="height:${h}px;opacity:${op}" title="${d.count} Projekt${d.count!==1?'e':''}"></div>`;
+  }).join('');
+
+  const htmlDash = [
+    '<!-- Toggle bar (always visible) -->',
+    '<div class="ro-dash-toggle" id="ro-dash-toggle" onclick="toggleRODash()">',
+    '  <div class="ro-dash-toggle-left">',
+    '    <span class="ro-dash-toggle-dot"></span>',
+    '    <span>◈ Code Statistics &amp; Charts</span>',
+    '    <span style="opacity:.45;font-size:.55rem">'+expTot+' Projekte · '+expSl.length+' Sprachen · '+expAllTags.size+' Tags</span>',
+    '  </div>',
+    '  <span class="ro-dash-toggle-arrow">▾</span>',
+    '</div>',
+    '<!-- Collapsible dashboard body -->',
+    '<section class="ro-dash" id="ro-dash">',
+    '  <div class="ro-dash-inner">',
+    '  <!-- ROW 1: Pills -->',
+    '  <div class="ro-dash-row1">',
+    '    <div class="ro-dc"><div class="ro-dcl">Projekte</div><div class="ro-dcv" style="color:#3b82f6">'+expTot+'</div><div class="ro-dcs">'+expFavs+' ★ · '+C.length+' Sammlungen</div></div>',
+    '    <div class="ro-dc"><div class="ro-dcl">Lines of Code</div><div class="ro-dcv" style="color:#22d3ee">'+(expTotL>=1000?(expTotL/1000).toFixed(1)+'k':expTotL)+'</div><div class="ro-dcs">Ø '+expAvgL+'/Projekt</div></div>',
+    '    <div class="ro-dc"><div class="ro-dcl">Zeichen</div><div class="ro-dcv" style="color:#4ade80">'+(expTotC/1000).toFixed(1)+'k</div><div class="ro-dcs">Ø '+Math.round(expTotC/Math.max(expTot,1))+'/P</div></div>',
+    '    <div class="ro-dc"><div class="ro-dcl">Ø Komplexität</div><div class="ro-dcv" style="color:'+expCc.c+'">'+expAvgCx+'</div><div class="ro-dcs">'+expCc.l+'</div></div>',
+    '    <div class="ro-dc"><div class="ro-dcl">Sprachen</div><div class="ro-dcv" style="color:#a855f7">'+expSl.length+'</div><div class="ro-dcs">'+expSl.slice(0,2).map(([l])=>l).join(', ')+'</div></div>',
+    '    <div class="ro-dc"><div class="ro-dcl">Tags</div><div class="ro-dcv" style="color:#fbbf24">'+expAllTags.size+'</div><div class="ro-dcs">'+expTopTags.length+' uniq.</div></div>',
+    '    <div class="ro-dc"><div class="ro-dcl">Live Preview</div><div class="ro-dcv" style="color:#4ade80">'+expLive+'</div><div class="ro-dcs">'+Math.round(expLive/Math.max(expTot,1)*100)+'% lauffähig</div></div>',
+    (expMf>0?'    <div class="ro-dc"><div class="ro-dcl">Multi-Datei</div><div class="ro-dcv" style="color:#67e8f9">'+expMf+'</div><div class="ro-dcs">⊟ aufgeteilt</div></div>':''),
+    '  </div>',
+    '  <!-- Sparkline -->',
+    '  <div class="ro-dcp" style="padding:.55rem .9rem">',
+    '    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem">',
+    '      <span class="ro-dcp-t" style="margin:0">Aktivität — letzte 30 Tage</span>',
+    '      <span style="font-size:.57rem;color:#475569">'+expTotalRecent+' Projekte hinzugefügt</span>',
+    '    </div>',
+    '    <div class="ro-spark">'+dashSpark+'</div>',
+    '    <div style="display:flex;justify-content:space-between;font-size:.52rem;color:#475569;margin-top:.2rem"><span>vor 30 Tagen</span><span>heute</span></div>',
+    '  </div>',
+    '  <!-- ROW 2: Chart panels -->',
+    '  <div class="ro-dash-row2">',
+    '    <div class="ro-dcp">',
+    '      <div class="ro-dcp-t">Sprachen-Anteil ('+expTot+' Projekte)</div>',
+    '      <div style="display:flex;align-items:center;gap:.9rem">',
+    '        <div style="flex-shrink:0">'+expDonutSVG+'</div>',
+    '        <div style="flex:1">'+dashLangTable+'</div>',
+    '      </div>',
+    '    </div>',
+    '    <div class="ro-dcp">',
+    '      <div class="ro-dcp-t">Zeilen je Sprache</div>',
+    '      '+dashLinesTable,
+    '      <div style="margin-top:.55rem;padding-top:.45rem;border-top:1px solid rgba(255,255,255,.04)">',
+    '        <div class="ro-dcp-t" style="margin-bottom:.38rem">Komplexitäts-Verteilung</div>',
+    '        '+dashCxHist,
+    '      </div>',
+    '    </div>',
+    '    <div class="ro-dcp">',
+    '      <div class="ro-dcp-t">Code-Qualität</div>',
+    '      '+dashGrades,
+    '      <div style="display:flex;justify-content:center;margin-top:.5rem;padding-top:.45rem;border-top:1px solid rgba(255,255,255,.04)">',
+    '        '+expQualSVG,
+    '      </div>',
+    '    </div>',
+    '    <div class="ro-dcp" style="display:flex;flex-direction:column;gap:.5rem">',
+    '      <div><div class="ro-dcp-t">Top 5 Projekte (Zeilen)</div>'+dashTop5+'</div>',
+    '      <div style="padding-top:.42rem;border-top:1px solid rgba(255,255,255,.04)">',
+    '        <div class="ro-dcp-t" style="margin-bottom:.25rem">Tag-Wolke</div>',
+    '        <div style="line-height:1.85">'+dashTags+'</div>',
+    '      </div>',
+    '    </div>',
+    '  </div>',
+    '  </div>',
     '</section>'
   ].join('\n');
 
@@ -2922,12 +3448,21 @@ function closeROFs(){document.getElementById('roFsOv').classList.remove('on')}
 async function copyROCode(){if(!curP)return;try{await navigator.clipboard.writeText(curP.code);toast2('Code copied \u2713')}catch{toast2('Copy failed')}}
 function dlROCode(){if(!curP)return;const blob=new Blob([curP.code],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=EXT[curP.language]||'code.txt';a.click()}
 function toast2(msg){const t=document.getElementById('roToast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDetail();closeROFs()}});
-<\/script>
+function toggleRODash(){
+  const dash=document.getElementById('ro-dash');
+  const toggle=document.getElementById('ro-dash-toggle');
+  const btn=document.getElementById('ro-dash-btn');
+  if(!dash||!toggle)return;
+  const isOpen=dash.classList.toggle('open');
+  toggle.classList.toggle('open',isOpen);
+  if(btn){btn.style.color=isOpen?'#3b82f6':'';btn.style.borderColor=isOpen?'rgba(59,130,246,.35)':'';}
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDetail();closeROFs()}if(e.key==='d'||e.key==='D'){if(!['INPUT','TEXTAREA'].includes(document.activeElement.tagName))toggleRODash()}});
+${'<'+'/script>'}
 </body>
 </html>`;
 
-  const html = htmlHead+'\n'+htmlNav+'\n'+htmlHero+'\n'+htmlGallery+'\n'+htmlOverlay+'\n'+htmlFsOv+'\n'+exportedJS;
+  const html = htmlHead+'\n'+htmlNav+'\n'+htmlHero+'\n'+htmlDash+'\n'+htmlGallery+'\n'+htmlOverlay+'\n'+htmlFsOv+'\n'+exportedJS;
 
   const blob=new Blob([html],{type:'text/html'});
   const url=URL.createObjectURL(blob);
