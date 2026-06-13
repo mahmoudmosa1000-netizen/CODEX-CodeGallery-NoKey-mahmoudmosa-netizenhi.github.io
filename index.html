@@ -85,7 +85,7 @@ nav::after{content:'';position:absolute;bottom:0;left:15%;right:15%;height:1px;b
 .dash-grade-bar-bg{flex:1;height:5px;border-radius:3px;background:rgba(255,255,255,.06);overflow:hidden}
 .dash-grade-bar{height:100%;border-radius:3px;transition:width 1s ease}
 .dash-grade-cnt{font-family:var(--fc);font-size:.6rem;min-width:20px;text-align:right;color:var(--mut2)}
-/* ── Tag cloud ── */
+/* ── day cloud ── */
 .dash-tag{display:inline-block;padding:.12rem .38rem;border-radius:4px;border:1px solid;font-size:.58rem;margin:.1rem;cursor:pointer;transition:all .15s;white-space:nowrap}
 .dash-tag:hover{transform:scale(1.06)}
 /* ── Complexity histogram ── */
@@ -510,16 +510,16 @@ pre{margin:0;padding:1.25rem 1.25rem 3rem;font-family:var(--fc);font-size:.76rem
 <div class="coll-bar" id="coll-bar"></div>
 <div class="toolbar">
   <div class="sw"><span class="si">⌕</span><input id="search" placeholder="Search… (⌘K)" oninput="focusIdx=-1;render()"></div>
-  <button class="pill" id="fav-pill" onclick="toggleFavFilter()" style="display:none">★ Favorites</button>
+  <button class="pill" id="fav-pill" onclick="toggleFavFilter()" style="display:none">★ Favoriteeseees</button>
   <div class="pills" id="pills"></div>
   <div class="tsep"></div>
   <select class="sortsel" id="sort" onchange="focusIdx=-1;render();window.scrollTo({top:0,behavior:'smooth'})">
-    <option value="new">Newest</option><option value="fav">Favorites ★</option><option value="az">A → Z</option><option value="lang">Language</option><option value="lines">Lines</option><option value="cx">Complexity</option>
+    <option value="new">Newest</option><option value="fav">Favoritees ★</option><option value="az">A → Z</option><option value="lang">Language</option><option value="lines">Lines</option><option value="cx">Complexity</option>
   </select>
 </div>
 <div class="recent-bar" id="recent-bar"><span class="recent-label">Zuletzt</span><div class="recent-chips" id="recent-chips"></div></div>
 <main>
-  <div class="sh"><span class="st" id="stitle">Alle Works</span><div class="sr"></div><span class="sc" id="scount"></span></div>
+  <div class="sh"><span class="st" id="stitle">All Works</span><div class="sr"></div><span class="sc" id="scount"></span></div>
   <div class="gallery" id="gallery"></div>
   <div class="empty" id="empty"><div class="empty-glyph">◈</div><h2>No projects yet</h2><p>Start your gallery with your first code project.</p><button class="btn btn-primary" onclick="openDrw(null)">＋ First Project</button></div>
 </main>
@@ -551,7 +551,7 @@ pre{margin:0;padding:1.25rem 1.25rem 3rem;font-family:var(--fc);font-size:.76rem
       <div class="dsb" id="dsb"></div>
       <div class="panel on" id="pprev"><div class="pvp"><div class="pvbar"><span class="pvbar-l" id="pvlbl">Preview</span><div style="flex:1"></div><button class="btn btn-sm btn-ghost" onclick="buildPrev(curP)">↺</button></div><div class="pvc" id="pvc"><button class="fs-btn" onclick="openFs()">⛶ Vollbild</button></div></div></div>
       <div class="panel" id="pcode">
-        <div class="cbar"><div class="cdots"><div class="cdot2" style="background:#ff5f57"></div><div class="cdot2" style="background:#ffbd2e"></div><div class="cdot2" style="background:#28c840"></div></div><span class="cfn" id="dfn"></span><div class="cacts2"><button class="btn btn-sm btn-ghost" id="editbtn" onclick="toggleEdit()">✎ Edit</button><button class="btn btn-sm btn-ghost" id="cpybtn" onclick="copyCode()">⎘</button><button class="btn btn-sm btn-ghost" onclick="dlCode()">↓</button><button class="btn btn-sm btn-ghost" id="dl-all-btn" onclick="dlAllFiles()" style="display:none;color:#67e8f9;border-color:rgba(103,232,249,.25)">⊟ Alle ↓</button></div></div>
+        <div class="cbar"><div class="cdots"><div class="cdot2" style="background:#ff5f57"></div><div class="cdot2" style="background:#ffbd2e"></div><div class="cdot2" style="background:#28c840"></div></div><span class="cfn" id="dfn"></span><div class="cacts2"><button class="btn btn-sm btn-ghost" id="editbtn" onclick="toggleEdit()">✎ Edit</button><button class="btn btn-sm btn-ghost" id="cpybtn" onclick="copyCode()">⎘</button><button class="btn btn-sm btn-ghost" onclick="dlCode()">↓</button><button class="btn btn-sm btn-ghost" id="dl-all-btn" onclick="dlAllFiles()" style="display:none;color:#67e8f9;border-color:rgba(103,232,249,.25)">⊟ All ↓</button></div></div>
         <!-- Multi-file tabs (shown only when project has files[]) -->
         <div id="ov-file-tabs" style="display:none;flex-wrap:wrap;gap:.22rem;padding:.35rem .7rem;background:rgba(0,0,0,.25);border-bottom:1px solid var(--bdr)"></div>
         <div class="code-wrap"><div class="code-scroll" id="code-scroll"><pre id="dcode"></pre><textarea class="editor-ta" id="editor-ta" spellcheck="false" oninput="editorLive()" style="display:none;position:absolute;inset:0;height:100%"></textarea></div><div class="minimap" id="minimap" onclick="minimapClick(event)"><canvas id="mm-cv"></canvas><div class="mm-vp" id="mm-vp"></div></div></div>
@@ -569,12 +569,12 @@ pre{margin:0;padding:1.25rem 1.25rem 3rem;font-family:var(--fc);font-size:.76rem
   <div class="drw" style="width:540px">
     <div class="dwh"><span class="dwt" id="drwtitle">New Project</span><button class="btn btn-ico btn-ghost" onclick="closeDrw()">✕</button></div>
     <div id="drw-steps" style="display:flex;align-items:center;border-bottom:1px solid var(--bdr);flex-shrink:0">
-      <div id="step1-tab" onclick="goDrwStep(1)" style="flex:1;text-align:center;padding:.55rem .5rem;font-size:.7rem;cursor:pointer;border-bottom:2px solid var(--blue);color:var(--txt);transition:all .2s"><span style="font-size:.9rem">①</span> Code eingeben</div>
+      <div id="step1-tab" onclick="goDrwStep(1)" style="flex:1;text-align:center;padding:.55rem .5rem;font-size:.7rem;cursor:pointer;border-bottom:2px solid var(--blue);color:var(--txt);transition:all .2s"><span style="font-size:.9rem">①</span> Enter Code</div>
       <div id="step2-tab" style="flex:1;text-align:center;padding:.55rem .5rem;font-size:.7rem;cursor:default;border-bottom:2px solid transparent;color:var(--mut);transition:all .2s"><span style="font-size:.9rem">②</span> KI-Prüfung</div>
       <div id="step3-tab" style="flex:1;text-align:center;padding:.55rem .5rem;font-size:.7rem;cursor:default;border-bottom:2px solid transparent;color:var(--mut);transition:all .2s"><span style="font-size:.9rem">③</span> Preview &amp; Publish</div>
     </div>
     <div id="drw-step1" class="dwb" style="flex:1;overflow-y:auto">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.7rem"><span style="font-size:.62rem;color:var(--mut);text-transform:uppercase;letter-spacing:.12em">Projekt-Details</span><button class="btn btn-ghost btn-sm" onclick="openTplModal()" title="Vorgefertigte Templates">⊡ Templates</button></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.7rem"><span style="font-size:.62rem;color:var(--mut);text-transform:uppercase;letter-spacing:.12em">Project Details</span><button class="btn btn-ghost btn-sm" onclick="openTplModal()" title="Vorgefertigte Templates">⊡ Templates</button></div>
       <div class="field"><label>Project Name *</label><input id="fn" placeholder="e.g. Sierpinski Triangle"></div>
       <div class="field"><label>Description <span style="color:var(--mut);font-size:.7em">(optional — AI fills it in)</span></label><input id="fd" placeholder="AI can fill this in automatically…"></div>
       <div class="frow">
@@ -582,7 +582,7 @@ pre{margin:0;padding:1.25rem 1.25rem 3rem;font-family:var(--fc);font-size:.76rem
         <div class="field"><label>Language <span style="color:var(--mut);font-size:.7em" id="lang-auto-hint"></span></label><select id="fl" onchange="if(mfFiles[mfActive])mfFiles[mfActive].lang=this.value;renderMfTabs();updatePreviewHint()"><option>JavaScript</option><option>TypeScript</option><option>Python</option><option>Rust</option><option>Go</option><option>CSS</option><option>HTML</option><option>C++</option><option>Java</option><option>SQL</option><option>Shell</option><option>Other</option></select></div>
       </div>
       <div class="frow">
-        <div class="field"><label>Tags <span style="color:var(--mut);font-size:.7em">(AI suggests)</span></label><input id="ft" placeholder="math, recursion"></div>
+        <div class="field"><label>days <span style="color:var(--mut);font-size:.7em">(AI suggests)</span></label><input id="ft" placeholder="math, recursion"></div>
         <div class="field"><label>Accent Color</label><div class="swts" id="swts"></div></div>
       </div>
       <!-- Multi-File Tabs -->
@@ -590,11 +590,11 @@ pre{margin:0;padding:1.25rem 1.25rem 3rem;font-family:var(--fc);font-size:.76rem
         <label>Code * <span style="color:var(--mut);font-size:.7em" id="code-lines-hint"></span></label>
         <div class="mf-bar" id="mf-bar" style="border-radius:6px 6px 0 0;border:1px solid var(--bdr);border-bottom:none;display:flex">
           <button class="mf-tab on" id="mf-tab-0" onclick="switchMfTab(0)">⊟ main</button>
-          <button class="mf-add" onclick="addMfFile()" title="Neue Datei hinzufügen">＋</button>
+          <button class="mf-add" onclick="addMfFile()" title="Add new file">＋</button>
         </div>
         <textarea id="fc" placeholder="Paste code here — AI will analyze it automatically…" oninput="onCodeInput()" style="min-height:220px;border-radius:0 0 6px 6px;margin-top:0"></textarea>
       </div>
-      <div id="mf-split-hint" class="mf-split-hint" style="display:none" onclick="doSplitMultiFile()">⊟ Multi-Datei erkannt — HTML, CSS &amp; JS automatisch trennen <span style="margin-left:auto;font-size:.65rem;opacity:.7">Klick zum Aufteilen →</span></div>
+      <div id="mf-split-hint" class="mf-split-hint" style="display:none" onclick="doSplitMultiFile()">⊟ Multi-File detected — HTML, CSS &amp; JS split automatically <span style="margin-left:auto;font-size:.65rem;opacity:.7">Click to split →</span></div>
       <div id="preview-type-hint" style="display:none;padding:.55rem .75rem;border-radius:8px;border:1px solid;font-size:.73rem;margin-top:-.2rem"></div>
     </div>
     <div id="drw-step2" style="display:none;flex:1;overflow-y:auto;padding:1.1rem 1.4rem;flex-direction:column;gap:.9rem">
@@ -620,30 +620,30 @@ pre{margin:0;padding:1.25rem 1.25rem 3rem;font-family:var(--fc);font-size:.76rem
     </div>
     <div id="drw-step3" style="display:none;flex:1;overflow-y:auto;padding:1.1rem 1.4rem;flex-direction:column;gap:.9rem">
       <div>
-        <div style="font-size:.62rem;text-transform:uppercase;letter-spacing:.14em;color:var(--mut);margin-bottom:.55rem">Preview — so erscheint es in der Galerie</div>
+        <div style="font-size:.62rem;text-transform:uppercase;letter-spacing:.14em;color:var(--mut);margin-bottom:.55rem">Preview — how it appears in the gallery</div>
         <div id="drw-preview-wrap" style="border-radius:12px;overflow:hidden;border:1px solid var(--bdr);aspect-ratio:4/3;background:#000;position:relative"><div id="drw-preview-inner" style="position:absolute;inset:0"></div><div id="drw-preview-label" style="position:absolute;bottom:0;left:0;right:0;padding:.6rem .8rem;background:linear-gradient(to top,rgba(0,0,0,.95),transparent)"><div style="font-family:var(--fd);font-size:1rem;font-weight:700;color:#fff" id="drw-pname"></div><div style="font-size:.62rem;color:rgba(255,255,255,.5);margin-top:.1rem" id="drw-plang"></div></div></div>
       </div>
       <!-- Multi-file breakdown shown in preview step -->
       <div id="drw-mf-breakdown" style="display:none;background:rgba(34,211,238,.04);border:1px solid rgba(34,211,238,.18);border-radius:8px;padding:.7rem .9rem">
-        <div style="font-size:.6rem;text-transform:uppercase;letter-spacing:.14em;color:#67e8f9;margin-bottom:.45rem">⊟ Multi-Datei Projekt</div>
+        <div style="font-size:.6rem;text-transform:uppercase;letter-spacing:.14em;color:#67e8f9;margin-bottom:.45rem">⊟ Multi-File Project</div>
         <div id="drw-mf-files" style="display:flex;flex-direction:column;gap:.28rem"></div>
       </div>
       <div style="display:flex;flex-direction:column;gap:.7rem">
         <div class="field"><label>Name (final)</label><input id="fn2" style="font-weight:600" oninput="document.getElementById('drw-pname').textContent=this.value"></div>
         <div class="field"><label>Description (final)</label><input id="fd2"></div>
-        <div class="field"><label>Tags (comma-separated)</label><input id="ft2"></div>
+        <div class="field"><label>days (comma-separated)</label><input id="ft2"></div>
       </div>
     </div>
     <div class="dwf" id="drw-footer"><button class="btn btn-ghost" onclick="closeDrw()">Cancel</button><div style="display:flex;gap:.45rem" id="drw-footer-btns"></div></div>
   </div>
 </div>
-<div class="modal-bg" id="confirm-modal"><div class="modal"><div class="modal-head"><h3>Delete?</h3></div><div class="modal-body"><p id="cfmsg"></p></div><div class="modal-foot"><button class="btn btn-ghost" onclick="hideModal('confirm-modal')">Cancel</button><button class="btn btn-danger" id="cfok">Löschen</button></div></div></div>
-<div class="modal-bg" id="sc-modal" onclick="if(event.target===this)hideModal('sc-modal')"><div class="modal" style="max-width:500px"><div class="modal-head" style="display:flex;align-items:center;justify-content:space-between"><h3>Keyboard Shortcuts</h3><button class="btn btn-ico btn-ghost" onclick="hideModal('sc-modal')">✕</button></div><div class="modal-body"><div class="sc-grid"><div class="sc-row"><span class="sc-label">New Project</span><div class="sc-keys"><span class="kbd">⌘</span><span class="kbd">N</span></div></div><div class="sc-row"><span class="sc-label">Search</span><div class="sc-keys"><span class="kbd">⌘</span><span class="kbd">K</span></div></div><div class="sc-row"><span class="sc-label">Close</span><div class="sc-keys"><span class="kbd">Esc</span></div></div><div class="sc-row"><span class="sc-label">Grid / List</span><div class="sc-keys"><span class="kbd">G</span><span class="kbd">L</span></div></div><div class="sc-row"><span class="sc-label">Navigate</span><div class="sc-keys"><span class="kbd">←→↑↓</span></div></div><div class="sc-row"><span class="sc-label">Open</span><div class="sc-keys"><span class="kbd">↵</span></div></div><div class="sc-row"><span class="sc-label">Stats</span><div class="sc-keys"><span class="kbd">D</span></div></div><div class="sc-row"><span class="sc-label">Copy Code</span><div class="sc-keys"><span class="kbd">⌘C</span></div></div><div class="sc-row"><span class="sc-label">Run JS</span><div class="sc-keys"><span class="kbd">⌘↵</span></div></div><div class="sc-row"><span class="sc-label">Fullscreen</span><div class="sc-keys"><span class="kbd">⌘⇧F</span></div></div><div class="sc-row"><span class="sc-label">Favorites</span><div class="sc-keys"><span class="kbd">F</span></div></div><div class="sc-row"><span class="sc-label">Export</span><div class="sc-keys"><span class="kbd">⌘E</span></div></div></div></div></div></div>
+<div class="modal-bg" id="confirm-modal"><div class="modal"><div class="modal-head"><h3>Delete?</h3></div><div class="modal-body"><p id="cfmsg"></p></div><div class="modal-foot"><button class="btn btn-ghost" onclick="hideModal('confirm-modal')">Cancel</button><button class="btn btn-danger" id="cfok">Delete</button></div></div></div>
+<div class="modal-bg" id="sc-modal" onclick="if(event.target===this)hideModal('sc-modal')"><div class="modal" style="max-width:500px"><div class="modal-head" style="display:flex;align-items:center;justify-content:space-between"><h3>Keyboard Shortcuts</h3><button class="btn btn-ico btn-ghost" onclick="hideModal('sc-modal')">✕</button></div><div class="modal-body"><div class="sc-grid"><div class="sc-row"><span class="sc-label">New Project</span><div class="sc-keys"><span class="kbd">⌘</span><span class="kbd">N</span></div></div><div class="sc-row"><span class="sc-label">Search</span><div class="sc-keys"><span class="kbd">⌘</span><span class="kbd">K</span></div></div><div class="sc-row"><span class="sc-label">Close</span><div class="sc-keys"><span class="kbd">Esc</span></div></div><div class="sc-row"><span class="sc-label">Grid / List</span><div class="sc-keys"><span class="kbd">G</span><span class="kbd">L</span></div></div><div class="sc-row"><span class="sc-label">Navigate</span><div class="sc-keys"><span class="kbd">←→↑↓</span></div></div><div class="sc-row"><span class="sc-label">Open</span><div class="sc-keys"><span class="kbd">↵</span></div></div><div class="sc-row"><span class="sc-label">Stats</span><div class="sc-keys"><span class="kbd">D</span></div></div><div class="sc-row"><span class="sc-label">Copy Code</span><div class="sc-keys"><span class="kbd">⌘C</span></div></div><div class="sc-row"><span class="sc-label">Run JS</span><div class="sc-keys"><span class="kbd">⌘↵</span></div></div><div class="sc-row"><span class="sc-label">Fullscreen</span><div class="sc-keys"><span class="kbd">⌘⇧F</span></div></div><div class="sc-row"><span class="sc-label">Favoriteeees</span><div class="sc-keys"><span class="kbd">F</span></div></div><div class="sc-row"><span class="sc-label">Export</span><div class="sc-keys"><span class="kbd">⌘E</span></div></div></div></div></div></div>
 <div class="modal-bg" id="import-modal" onclick="if(event.target===this)hideModal('import-modal')"><div class="modal"><div class="modal-head" style="display:flex;align-items:center;justify-content:space-between"><h3>Import</h3><button class="btn btn-ico btn-ghost" onclick="hideModal('import-modal')">✕</button></div><div class="modal-body"><p>Import a <strong>JSON</strong> or an exported <strong>HTML gallery</strong> file — both work.</p><label class="drop-zone" id="drop-zone" ondragover="dragOver(event)" ondragleave="dragLeave()" ondrop="dropFile(event)" onclick="document.getElementById('file-input').click()"><div style="font-size:1.1rem">⬇</div><div style="margin-top:.2rem;font-size:.75rem">Drop file or click</div><div style="font-size:.65rem;margin-top:.12rem;color:var(--mut)">Accepts .json or .html export</div><input type="file" id="file-input" accept=".json,.html" onchange="importFile(event)"></label><div style="margin-top:.62rem" class="field"><label>Paste JSON</label><textarea id="import-json" style="min-height:70px;font-size:.7rem" placeholder='[{"name":"...","code":"..."}]'></textarea></div></div><div class="modal-foot"><button class="btn btn-ghost" onclick="hideModal('import-modal')">Cancel</button><button class="btn btn-primary" onclick="importJSON()">Import</button></div></div></div>
 <div class="modal-bg" id="share-modal" onclick="if(event.target===this)hideModal('share-modal')"><div class="modal"><div class="modal-head" style="display:flex;align-items:center;justify-content:space-between"><h3>Share</h3><button class="btn btn-ico btn-ghost" onclick="hideModal('share-modal')">✕</button></div><div class="modal-body"><p>The URL contains the complete project.</p><div class="qr-wrap"><canvas id="qr-canvas" width="120" height="120"></canvas></div><div class="share-url" id="share-url-text"></div></div><div class="modal-foot"><button class="btn btn-ghost" onclick="hideModal('share-modal')">Close</button><button class="btn btn-primary" onclick="copyShareUrl()">⎘ Copy URL</button></div></div></div>
 <div class="modal-bg" id="coll-modal" onclick="if(event.target===this)hideModal('coll-modal')"><div class="modal"><div class="modal-head" style="display:flex;align-items:center;justify-content:space-between"><h3>New Collection</h3><button class="btn btn-ico btn-ghost" onclick="hideModal('coll-modal')">✕</button></div><div class="modal-body"><div style="display:flex;flex-direction:column;gap:.78rem"><div class="field"><label>Name *</label><input id="coll-name" placeholder="e.g. Algorithms"></div><div class="field"><label>Color</label><div class="swts" id="coll-swts"></div></div></div></div><div class="modal-foot"><button class="btn btn-ghost" onclick="hideModal('coll-modal')">Cancel</button><button class="btn btn-primary" onclick="addColl()">Create</button></div></div></div>
 
-<div class="modal-bg" id="tpl-modal" onclick="if(event.target===this)hideModal('tpl-modal')"><div class="modal" style="max-width:640px"><div class="modal-head" style="display:flex;align-items:center;justify-content:space-between"><div><h3>Templates</h3><p style="font-size:.68rem;color:var(--mut);margin:0">Wähle ein Template — Code &amp; Felder werden automatisch ausgefüllt</p></div><button class="btn btn-ico btn-ghost" onclick="hideModal('tpl-modal')">✕</button></div><div class="modal-body"><div style="display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.7rem" id="tpl-cats"></div><div class="tpl-grid" id="tpl-grid"></div></div></div></div>
+<div class="modal-bg" id="tpl-modal" onclick="if(event.target===this)hideModal('tpl-modal')"><div class="modal" style="max-width:640px"><div class="modal-head" style="display:flex;align-items:center;justify-content:space-between"><div><h3>Templates</h3><p style="font-size:.68rem;color:var(--mut);margin:0">Choose a template — Code &amp; fields will be auto-filled</p></div><button class="btn btn-ico btn-ghost" onclick="hideModal('tpl-modal')">✕</button></div><div class="modal-body"><div style="display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.7rem" id="tpl-cats"></div><div class="tpl-grid" id="tpl-grid"></div></div></div></div>
 <div id="toasts"></div>
 <script>
 const SK='codex_v9';
@@ -653,7 +653,7 @@ const SK='codex_v9';
 // ══════════════════════════════════════════
 const TEMPLATES = [
   // ── Web ───────────────────────────────
-  {cat:'Web',lang:'HTML',accent:'#f97316',name:'Landing Page',desc:'Hero + CTA in modernem Dark-Design',tags:'html,layout,hero',
+  {cat:'Web',lang:'HTML',accent:'#f97316',name:'Landing Page',desc:'Hero + CTA in modern dark design',tags:'html,layout,hero',
    code:`<!DOCTYPE html>
 <html lang="de">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -666,11 +666,11 @@ const TEMPLATES = [
   .btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(249,115,22,.4)}
 </style></head><body>
 <div class="hero">
-  <h1>Willkommen 👋</h1>
-  <p>Deine Landing Page. Ändere diesen Text und passe das Design an deine Bedürfnisse an.</p>
-  <a class="btn" href="#">Jetzt starten</a>
+  <h1>Welcome 👋</h1>
+  <p>Your landing page. Change this text und passe das Design an deine Bedürfnisse an.</p>
+  <a class="btn" href="#">Get started</a>
 </div></body></html>`},
-  {cat:'Web',lang:'HTML',accent:'#3b82f6',name:'Card Grid',desc:'Responsives 3-Spalten-Karten-Layout',tags:'html,css,grid,cards',
+  {cat:'Web',lang:'HTML',accent:'#3b82f6',name:'Card Grid',desc:'Responsive 3-column card layout',tags:'html,css,grid,cards',
    code:`<!DOCTYPE html>
 <html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cards</title>
 <style>
@@ -686,10 +686,10 @@ const TEMPLATES = [
 <div class="grid">
   <div class="card"><div class="card-icon">⚡</div><div class="card-title">Schnell</div><div class="card-desc">Optimiert für Performance.</div></div>
   <div class="card"><div class="card-icon">🎨</div><div class="card-title">Schön</div><div class="card-desc">Modernes Dark-Design.</div></div>
-  <div class="card"><div class="card-icon">📱</div><div class="card-title">Responsiv</div><div class="card-desc">Funktioniert auf allen Geräten.</div></div>
+  <div class="card"><div class="card-icon">📱</div><div class="card-title">Responsiv</div><div class="card-desc">Functioniert auf allen Geräten.</div></div>
   <div class="card"><div class="card-icon">🔒</div><div class="card-title">Sicher</div><div class="card-desc">Best Practices implementiert.</div></div>
 </div></body></html>`},
-  {cat:'Web',lang:'CSS',accent:'#a855f7',name:'Glass Morphism',desc:'Glassmorphism-Karte mit Blur-Effekt',tags:'css,glassmorphism,design',
+  {cat:'Web',lang:'CSS',accent:'#a855f7',name:'Glass Morphism',desc:'Glassmorphism card with blur effect',tags:'css,glassmorphism,design',
    code:`/* ── Glass Morphism Card ── */
 .glass {
   background: rgba(255, 255, 255, 0.07);
@@ -708,7 +708,7 @@ const TEMPLATES = [
 .glass h2 { color: #fff; margin-bottom: .5rem; }
 .glass p  { color: rgba(255,255,255,.65); line-height: 1.6; }`},
   // ── JavaScript ────────────────────────
-  {cat:'JavaScript',lang:'JavaScript',accent:'#fbbf24',name:'Event Emitter',desc:'Leichtgewichtiges Pub/Sub-System',tags:'javascript,patterns,events',
+  {cat:'JavaScript',lang:'JavaScript',accent:'#fbbf24',name:'Event Emitter',desc:'Lightweight Pub/Sub system',tags:'javascript,patterns,events',
    code:`class EventEmitter {
   #listeners = new Map();
 
@@ -735,7 +735,7 @@ const unsub = emitter.on('data', (val) => console.log('received:', val));
 emitter.emit('data', 42);   // → received: 42
 unsub();                     // unsubscribe
 emitter.emit('data', 99);   // → (nothing)`},
-  {cat:'JavaScript',lang:'JavaScript',accent:'#fbbf24',name:'Debounce / Throttle',desc:'Klassische Performance-Utilities',tags:'javascript,performance,utility',
+  {cat:'JavaScript',lang:'JavaScript',accent:'#fbbf24',name:'Debounce / Throttle',desc:'Classic performance utilities',tags:'javascript,performance,utility',
    code:`/** Debounce — führt fn erst aus, nachdem delay ms vergangen sind */
 function debounce(fn, delay = 300) {
   let timer;
@@ -762,7 +762,7 @@ const onResize = debounce(() => console.log('resized!'), 250);
 const onScroll = throttle(() => console.log('scrolling…'), 100);
 window.addEventListener('resize', onResize);
 window.addEventListener('scroll', onScroll);`},
-  {cat:'JavaScript',lang:'JavaScript',accent:'#4ade80',name:'Deep Clone',desc:'Tiefen Klon ohne structuredClone',tags:'javascript,utility,objects',
+  {cat:'JavaScript',lang:'JavaScript',accent:'#4ade80',name:'Deep Clone',desc:'Deep clone without structuredClone',tags:'javascript,utility,objects',
    code:`function deepClone(obj, seen = new WeakMap()) {
   if (obj === null || typeof obj !== 'object') return obj;
   if (seen.has(obj)) return seen.get(obj);        // circular ref guard
@@ -788,7 +788,7 @@ const clone = deepClone(original);
 clone.b.c.push(99);
 console.log(original.b.c); // [1, 2, 3] – unberührt`},
   // ── TypeScript ────────────────────────
-  {cat:'TypeScript',lang:'TypeScript',accent:'#3b82f6',name:'Generic Result<T,E>',desc:'Typsicheres Error-Handling wie in Rust',tags:'typescript,patterns,error-handling',
+  {cat:'TypeScript',lang:'TypeScript',accent:'#3b82f6',name:'Generic Result<T,E>',desc:'Type-safe error handling like Rust',tags:'typescript,patterns,error-handling',
    code:`type Ok<T>  = { readonly ok: true;  value: T };
 type Err<E> = { readonly ok: false; error: E };
 type Result<T, E = Error> = Ok<T> | Err<E>;
@@ -814,7 +814,7 @@ if (result.ok) {
   console.error(result.error);
 }`},
   // ── Python ────────────────────────────
-  {cat:'Python',lang:'Python',accent:'#22d3ee',name:'Dataclass + Validator',desc:'Typisiertes Dataclass mit Validierung',tags:'python,dataclass,validation',
+  {cat:'Python',lang:'Python',accent:'#22d3ee',name:'Dataclass + Validator',desc:'Typed dataclass with validation',tags:'python,dataclass,validation',
    code:`from dataclasses import dataclass, field
 from typing import ClassVar
 
@@ -830,7 +830,7 @@ class User:
 
     def __post_init__(self):
         if not self.name.strip():
-            raise ValueError("Name darf nicht leer sein")
+            raise ValueError("Name darf nicht empty sein")
         if not (self.MIN_AGE <= self.age <= self.MAX_AGE):
             raise ValueError(f"Alter muss zwischen {self.MIN_AGE} und {self.MAX_AGE} liegen")
         if "@" not in self.email:
@@ -844,7 +844,7 @@ class User:
 # Test
 user = User(name=" max mustermann ", age=30, email="MAX@EXAMPLE.COM", tags=["admin"])
 print(user)  # User(name='Max Mustermann', age=30, email='max@example.com')`},
-  {cat:'Python',lang:'Python',accent:'#4ade80',name:'Context Manager',desc:'Eigener Context Manager mit __enter__/__exit__',tags:'python,context-manager,patterns',
+  {cat:'Python',lang:'Python',accent:'#4ade80',name:'Context Manager',desc:'Custom context manager with __enter__/__exit__',tags:'python,context-manager,patterns',
    code:`import time
 from contextlib import contextmanager
 
@@ -867,19 +867,19 @@ def managed_file(path: str, mode: str = "r"):
         f = open(path, mode)
         yield f
     except IOError as e:
-        print(f"Fehler beim Öffnen: {e}")
+        print(f"Error beim Open: {e}")
         raise
     finally:
         if f:
             f.close()
-            print("Datei geschlossen ✓")
+            print("File closed ✓")
 
 # Verwendung
 with Timer() as t:
     total = sum(range(1_000_000))
 print(f"Summe: {total}")`},
   // ── Algorithmen ───────────────────────
-  {cat:'Algorithmen',lang:'JavaScript',accent:'#f87171',name:'Binary Search',desc:'O(log n) Suche mit Erklärung',tags:'algorithm,search,binary,O(log n)',
+  {cat:'Algorithmen',lang:'JavaScript',accent:'#f87171',name:'Binary Search',desc:'O(log n) search with explanation',tags:'algorithm,search,binary,O(log n)',
    code:`/**
  * Binary Search — O(log n)
  * @param {number[]} arr  — sortiertes Array
@@ -910,7 +910,7 @@ function binarySearchR(arr, target, lo = 0, hi = arr.length - 1) {
 const sorted = [2, 5, 8, 12, 16, 23, 38, 42, 72, 91];
 console.log(binarySearch(sorted, 23)); // 5
 console.log(binarySearch(sorted, 99)); // -1`},
-  {cat:'Algorithmen',lang:'JavaScript',accent:'#f87171',name:'Merge Sort',desc:'Stabiles O(n log n) Sortierverfahren',tags:'algorithm,sort,mergesort,divide-and-conquer',
+  {cat:'Algorithmen',lang:'JavaScript',accent:'#f87171',name:'Merge Sort',desc:'Stable O(n log n) sorting algorithm',tags:'algorithm,sort,mergesort,divide-and-conquer',
    code:`/**
  * Merge Sort — O(n log n), stabil
  */
@@ -939,9 +939,9 @@ console.log(mergeSort(arr)); // [3, 9, 10, 27, 38, 43, 82]
 const big = Array.from({length: 10_000}, () => Math.random() * 10_000 | 0);
 console.time('mergeSort'); mergeSort(big); console.timeEnd('mergeSort');`},
   // ── SQL ───────────────────────────────
-  {cat:'SQL',lang:'SQL',accent:'#fb923c',name:'Window Functions',desc:'Ranking, Running Total, LAG/LEAD',tags:'sql,window-functions,analytics',
+  {cat:'SQL',lang:'SQL',accent:'#fb923c',name:'Window Functions',desc:'Ranking, running total, LAG/LEAD',tags:'sql,window-functions,analytics',
    code:`-- ── Window Functions Demo ─────────────────────────────────
--- Vorbereitung (SQLite / PostgreSQL)
+-- Setup (SQLite / PostgreSQL)
 CREATE TABLE sales (
   id     INTEGER PRIMARY KEY,
   rep    TEXT NOT NULL,
@@ -958,15 +958,15 @@ SELECT
   RANK()       OVER (PARTITION BY region ORDER BY amount DESC) AS rnk,
   DENSE_RANK() OVER (PARTITION BY region ORDER BY amount DESC) AS dense_rnk,
 
-  -- Laufende Summe
+  -- Running total
   SUM(amount) OVER (PARTITION BY region ORDER BY sale_date
                    ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS running_total,
 
-  -- Vorheriger / nächster Wert
+  -- Previous / next value
   LAG(amount,  1, 0) OVER (PARTITION BY rep ORDER BY sale_date) AS prev_sale,
   LEAD(amount, 1, 0) OVER (PARTITION BY rep ORDER BY sale_date) AS next_sale,
 
-  -- Prozentualer Anteil
+  -- Prozentualer Share
   ROUND(100.0 * amount / SUM(amount) OVER (PARTITION BY region), 2) AS pct_of_region
 FROM sales
 ORDER BY region, rnk;`},
@@ -990,10 +990,10 @@ function renderMfTabs(){
   if(!bar) return;
   bar.innerHTML = mfFiles.map((f,i)=>{
     const lc = LC[f.lang]||'#888';
-    const del = mfFiles.length>1 ? `<span class="mf-del" onclick="event.stopPropagation();delMfFile(${i})" title="Datei entfernen">✕</span>` : '';
+    const del = mfFiles.length>1 ? `<span class="mf-del" onclick="event.stopPropagation();delMfFile(${i})" title="Remove file">✕</span>` : '';
     return `<button class="mf-tab${i===mfActive?' on':''}" onclick="switchMfTab(${i})"><span style="color:${lc};font-size:.7rem">●</span> ${esc(f.name)}.${langExt(f.lang)}${del}</button>`;
   }).join('')
-  + `<button class="mf-add" onclick="addMfFile()" title="Neue Datei">＋</button>`;
+  + `<button class="mf-add" onclick="addMfFile()" title="New file">＋</button>`;
 }
 function addMfFile(){
   mfFiles[mfActive].code = document.getElementById('fc').value;
@@ -1017,51 +1017,71 @@ function langExt(lang){
   return m[lang]||'txt';
 }
 
-// ── Auto-split multi-file HTML ────────────────────────────
 function detectMultiFile(code){
-  return /<html[\s>]/i.test(code) && (/<style[\s>]/i.test(code) || /<script[\s>]/i.test(code));
+  const c=code.trim();
+  // Must look like a full HTML document
+  if(!/<html[\s>]/i.test(c)&&!/<html\s+lang/i.test(c)&&!/<!DOCTYPE\s+html/i.test(c)) return false;
+  // Must have at least one embedded CSS or JS block
+  return /<style[\s\S]*?>[\s\S]*?<\/style>/i.test(c) || /<script[\s\S]*?>[\s\S]{10,}<\/script>/i.test(c);
 }
 function doSplitMultiFile(){
   const raw = document.getElementById('fc').value;
   const parser = new DOMParser();
-  const doc    = parser.parseFromString(raw, 'text/html');
+  const doc = parser.parseFromString(raw, 'text/html');
 
-  // Extract CSS
+  // ── Extract all <style> blocks ───────────────────
   let css = '';
-  doc.querySelectorAll('style').forEach(s=>{css+=s.textContent.trim()+'\n';s.remove()});
+  doc.querySelectorAll('style').forEach(s=>{
+    css += (css?'\n\n':'')+s.textContent.trim();
+    s.remove();
+  });
 
-  // Extract JS
+  // ── Extract all inline <script> blocks ──────────
   let js = '';
-  doc.querySelectorAll('script:not([src])').forEach(s=>{js+=s.textContent.trim()+'\n';s.remove()});
+  doc.querySelectorAll('script:not([src])').forEach(s=>{
+    const content = s.textContent.trim();
+    if(content) js += (js?'\n\n':'')+content;
+    s.remove();
+  });
 
-  // Clean HTML
-  const htmlClean = '<!DOCTYPE html>\n'+doc.documentElement.outerHTML;
+  // ── Rebuild clean HTML (no external refs) ─────────────────
+  // mergeFiles() will inline CSS/JS at preview time — keep HTML clean
+  const doctype = '<!DOCTYPE html>\n';
+  const htmlClean = (doctype + doc.documentElement.outerHTML)
+    .replace(/(<\/head>)/i,'\n$1')
+    .replace(/(<body[^>]*>)/i,'$1\n');
 
-  mfFiles = [{name:'index',lang:'HTML',code:htmlClean.trim()}];
-  if(css.trim()) mfFiles.push({name:'style', lang:'CSS',        code:css.trim()});
-  if(js.trim())  mfFiles.push({name:'script',lang:'JavaScript', code:js.trim()});
+  // ── Build files array ─────────────────────────────
+  mfFiles = [{name:'index', lang:'HTML', code:htmlClean.trim()}];
+  if(css.trim()) mfFiles.push({name:'style',  lang:'CSS',         code:css.trim()});
+  if(js.trim())  mfFiles.push({name:'script', lang:'JavaScript',  code:js.trim()});
 
   mfActive = 0;
   document.getElementById('fc').value = mfFiles[0].code;
   document.getElementById('fl').value = 'HTML';
   document.getElementById('mf-split-hint').style.display='none';
   renderMfTabs();
-  toast(`⊟ ${mfFiles.length} Dateien extrahiert (HTML, CSS, JS)`, 'ok');
-  onCodeInput();
+  updatePreviewHint();
+
+  const names = mfFiles.map(f=>f.name+'.'+langExt(f.lang)).join(' · ');
+  toast(`⊟ Split into ${mfFiles.length} files: ${names}`, 'ok');
+  // Auto-fill language field
+  const lah=document.getElementById('lang-auto-hint');
+  if(lah) lah.textContent=`(${mfFiles.length} files detected)`;
 }
 
 // ── Template System functions ─────────────────────────────
-let tplCatFilter = 'Alle';
+let tplCatFilter = 'All';
 function openTplModal(){
-  tplCatFilter = 'Alle';
+  tplCatFilter = 'All';
   renderTplModal();
   showModal('tpl-modal');
 }
 function renderTplModal(){
-  const cats = ['Alle',...new Set(TEMPLATES.map(t=>t.cat))];
+  const cats = ['All',...new Set(TEMPLATES.map(t=>t.cat))];
   const catEl = document.getElementById('tpl-cats');
   catEl.innerHTML = cats.map(c=>`<button class="pill${tplCatFilter===c?' on':''}" onclick="tplCatFilter='${c}';renderTplModal()">${c}</button>`).join('');
-  const list = tplCatFilter==='Alle' ? TEMPLATES : TEMPLATES.filter(t=>t.cat===tplCatFilter);
+  const list = tplCatFilter==='All' ? TEMPLATES : TEMPLATES.filter(t=>t.cat===tplCatFilter);
   document.getElementById('tpl-grid').innerHTML = list.map((t,i)=>{
     const idx = TEMPLATES.indexOf(t);
     const lc  = LC[t.lang]||'#888';
@@ -1089,7 +1109,7 @@ function applyTemplate(idx){
   renderSwts(acIdx>=0 ? ACC[acIdx] : t.accent);
   hideModal('tpl-modal');
   onCodeInput();
-  toast(`Template „${t.name}" geladen ✦`, 'ok');
+  toast(`Template "${t.name}" loaded ✦`, 'ok');
 }
 
 function apiHeaders(){return{'Content-Type':'application/json'}}
@@ -1920,7 +1940,7 @@ function showQP(p){
   if(isLivable(p)){cv.style.display='none';qpBody.innerHTML='';const wrap=document.createElement('div');wrap.style.cssText='width:260px;height:96px;position:relative;overflow:hidden;background:#000';const ifr=document.createElement('iframe');ifr.sandbox='allow-scripts';ifr.style.cssText='width:100%;height:100%;border:none;pointer-events:none;opacity:0;transition:opacity .4s';ifr.onload=()=>ifr.style.opacity='1';ifr.srcdoc=buildSrcdoc(p);wrap.appendChild(ifr);qpBody.appendChild(wrap)}
   else{cv.style.display='block';qpBody.innerHTML='';cv.width=260;cv.height=96;drawThumb(cv,p)}
   document.getElementById('qp-name').textContent=p.name;
-  document.getElementById('qp-stats').innerHTML='<span style="color:'+(LC[p.language]||'#888')+'">'+p.language+'</span><span style="color:'+cc.c+'">CX '+cxs+'</span><span>'+s.tot+' Zeilen</span>';
+  document.getElementById('qp-stats').innerHTML='<span style="color:'+(LC[p.language]||'#888')+'">'+p.language+'</span><span style="color:'+cc.c+'">CX '+cxs+'</span><span>'+s.tot+' Lines</span>';
   tt.classList.add('show');
 }
 function positionQP(e){const tt=document.getElementById('qp-tooltip');if(!tt.classList.contains('show'))return;let x=e.clientX+16,y=e.clientY+16;if(x+270>innerWidth)x=e.clientX-278;if(y+160>innerHeight)y=e.clientY-168;tt.style.left=x+'px';tt.style.top=y+'px'}
@@ -1946,13 +1966,70 @@ function buildCharts(p){
   const cxs=cx(p.code),ac=p.accentColor,r2=parseInt(ac.slice(1,3),16),g2=parseInt(ac.slice(3,5),16),b2=parseInt(ac.slice(5,7),16);
   const w1=document.createElement('div');w1.className='chart-wrap';w1.innerHTML='<div class="chart-title">Code Structure by Line Segment</div>';const cv1=document.createElement('canvas');cv1.height=120;w1.appendChild(cv1);panel.appendChild(w1);
   requestAnimationFrame(()=>{cv1.width=w1.clientWidth-32;const ctx=cv1.getContext('2d'),W=cv1.width,H=120;ctx.clearRect(0,0,W,H);const lines=p.code.split('\n'),segs=20,segL=Math.ceil(lines.length/segs),vals=[];for(let i=0;i<segs;i++){const sl=lines.slice(i*segL,(i+1)*segL);vals.push(Math.min(sl.reduce((s,l)=>{const t=l.trim();if(/\b(function|def|class|fn)\b/.test(t))return s+10;if(/\b(const|let|return|if|for)\b/.test(t))return s+3;return s+(t.length>3?2:0)},0),100))}const mx=Math.max(...vals,1),bw=W/segs;vals.forEach((v,i)=>{ctx.fillStyle=`rgba(${r2},${g2},${b2},${0.3+0.7*(v/mx)})`;ctx.fillRect(i*bw+1,H-(v/mx)*(H-16),bw-2,(v/mx)*(H-16))})});
-  const w3=document.createElement('div');w3.className='chart-wrap';w3.innerHTML='<div class="chart-title">Komplexität · CX '+cxs+' · '+cxC(cxs).l+'</div>';const cv3=document.createElement('canvas');cv3.height=90;w3.appendChild(cv3);panel.appendChild(w3);
+  const w3=document.createElement('div');w3.className='chart-wrap';w3.innerHTML='<div class="chart-title">Complexity · CX '+cxs+' · '+cxC(cxs).l+'</div>';const cv3=document.createElement('canvas');cv3.height=90;w3.appendChild(cv3);panel.appendChild(w3);
   requestAnimationFrame(()=>{cv3.width=w3.clientWidth-32;const ctx=cv3.getContext('2d'),W=cv3.width,H=90;const zones=[{l:'Simple',c:'#4ade80',f:0,t:30},{l:'Medium',c:'#fbbf24',f:30,t:60},{l:'Complex',c:'#fb923c',f:60,t:80},{l:'High',c:'#fb7185',f:80,t:100}];const barH=20,y=(H-barH)/2;zones.forEach(z=>{const x1=(z.f/100)*W,x2=(z.t/100)*W;ctx.fillStyle=z.c+'30';ctx.fillRect(x1,y,x2-x1,barH)});const nx=(cxs/100)*W,cc2=cxC(cxs);ctx.shadowColor=cc2.c;ctx.shadowBlur=12;ctx.fillStyle=cc2.c;ctx.fillRect(nx-1.5,y-4,3,barH+8);ctx.shadowBlur=0;ctx.font='8px "JetBrains Mono",monospace';zones.forEach(z=>{const mid=((z.f+z.t)/2/100)*W;ctx.fillStyle=z.c;ctx.textAlign='center';ctx.fillText(z.l,mid,y+barH+14)});ctx.textAlign='left'});
 }
+// ══════════════════════════════════════════════════════════════
+// mergeFiles — inlines ALL CSS & JS from p.files[] into the
+// HTML so srcdoc iframes get one fully self-contained document.
+//
+// Strategy (order-independent, no attribute-order assumptions):
+//  1. Strip every <link ...css...> and <script src="..."> tag
+//  2. Inject all CSS as <style> blocks right before </head>
+//  3. Inject all JS  as <script> blocks right before </body>
+// ══════════════════════════════════════════════════════════════
+function mergeFiles(p){
+  if(!p.files||p.files.length<=1) return p.code;
+
+  // Find the HTML base
+  const htmlFile = p.files.find(f=>f.lang==='HTML') || p.files[0];
+  let html = htmlFile.code;
+
+  // ── 1. Remove all external resource references ────────────
+  // <link ...stylesheet...> or <link href="*.css"> — any attr order
+  html = html.replace(/<link\b[^>]*\bstylesheet\b[^>]*\/?>/gi, '');
+  html = html.replace(/<link\b[^>]*href=["'][^"']*\.css["'][^>]*\/?>/gi, '');
+  // external <script src="..."> tags (no inline body)
+  html = html.replace(/<script\b[^>]*\bsrc=["'][^"']+["'][^>]*>\s*<\/scr'+'ipt>/gi, '');
+
+  // ── 2. Collect files by type ──────────────────────────────
+  const cssFiles = p.files.filter(f => f.lang==='CSS' && f!==htmlFile);
+  const jsFiles  = p.files.filter(f => ['JavaScript','TypeScript'].includes(f.lang) && f!==htmlFile);
+
+  // ── 3. Inject CSS before </head> ─────────────────────────
+  if(cssFiles.length){
+    const styleBlock = cssFiles.map(f=>{
+      const safe = f.code.replace(/<\/style>/gi,'<\\/style>');
+      return `<style>\n${safe}\n</style>`;
+    }).join('\n');
+    if(html.includes('</head>')){
+      html = html.replace('</head>', styleBlock+'\n</head>');
+    } else {
+      html = styleBlock + '\n' + html;
+    }
+  }
+
+  // ── 4. Inject JS before </body> ──────────────────────────
+  if(jsFiles.length){
+    const scriptBlock = jsFiles.map(f=>{
+      const safe = f.code.replace(/<\/script>/gi,'<\\/script>');
+      return `<script>\n${safe}\n<\/script>`;
+    }).join('\n');
+    if(html.includes('</body>')){
+      html = html.replace('</body>', scriptBlock+'\n</body>');
+    } else {
+      html = html + '\n' + scriptBlock;
+    }
+  }
+
+  return html;
+}
+
 function isLivable(p){
   if(p.language==='HTML'||p.language==='CSS')return true;
   // Full HTML document saved under any language
-  if(/<!DOCTYPE|<html\b/i.test(p.code.slice(0,300)))return true;
+  const checkCode = p.files&&p.files.length>1 ? mergeFiles(p) : p.code;
+  if(/<!DOCTYPE|<html\b/i.test(checkCode.slice(0,300)))return true;
   if(p.language==='JavaScript'&&(
     p.code.includes('canvas')||p.code.includes('document')||
     p.code.includes('requestAnimationFrame')||p.code.includes('setInterval')
@@ -1960,55 +2037,51 @@ function isLivable(p){
   return false;
 }
 function buildSrcdoc(p){
-  const safe=p.code.replace(/<\/script>/gi,'<\\/script>');
-  if(p.language==='HTML'||/<!DOCTYPE|<html\b/i.test(p.code.slice(0,300))){
-  // Full HTML document → use directly, no double-wrapping
-  if(/<!DOCTYPE|<html\b/i.test(p.code.slice(0,300)))return p.code;
-  return '<!DOCTYPE html><html><head><meta charset="UTF-8">'
-    +'<style>*{box-sizing:border-box;margin:0;padding:0}'
-    +'html,body{width:100%;height:100%;overflow:hidden;font-family:system-ui,sans-serif}'
-    +'</style></head><body>'+p.code+'</body></html>';
-}
+  // Multi-file: merge all files into one self-contained HTML first
+  const code = p.files&&p.files.length>1 ? mergeFiles(p) : p.code;
+  const safe=code.replace(/<\/script>/gi,'<\\/script>');
+  if(p.language==='HTML'||/<!DOCTYPE|<html\b/i.test(code.slice(0,300))){
+    if(/<!DOCTYPE|<html\b/i.test(code.slice(0,300)))return code;
+    return '<!DOCTYPE html><html><head><meta charset="UTF-8">'
+      +'<style>*{box-sizing:border-box;margin:0;padding:0}'
+      +'html,body{width:100%;height:100%;overflow:hidden;font-family:system-ui,sans-serif}'
+      +'</style></head><body>'+code+'</body></html>';
+  }
   if(p.language==='CSS'){
-  const selectors=[...new Set((p.code.match(/\.([a-zA-Z][\w-]*)/g)||[]).map(c=>c.slice(1)))];
-  const demoHTML=selectors.length>0
-    ?selectors.slice(0,3).map(c=>'<div class="'+c+'"></div>').join('')
-    :'';
-  // Escape </style> so CSS code can never break out of the <style> block
-  const safeCss=p.code.replace(/<\/style>/gi,'<\\/style>');
-  return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'
-    +'*{box-sizing:border-box;margin:0;padding:0}'
-    +'html,body{width:100%;height:100%;overflow:hidden;'
-    +'display:flex;flex-wrap:wrap;align-items:center;justify-content:center;'
-    +'gap:1.5rem;padding:1.5rem}'
-    +safeCss
-    +'</style></head><body>'+demoHTML+'</body></html>';
-}
-
-  // If code is a full HTML document (even if saved as JS), pass through directly
-if(/<!DOCTYPE|<html\b/i.test(p.code.slice(0,300)))return p.code;
-if(p.code.includes('canvas')||p.code.includes('requestAnimationFrame'))return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>*{margin:0;padding:0;box-sizing:border-box}html,body{width:100%;height:100%;overflow:hidden;background:#000}canvas{display:block;width:100%!important;height:100%!important}</style></head><body><canvas></canvas><script>'+safe+'<\/script></body></html>';
+    const selectors=[...new Set((code.match(/\.([a-zA-Z][\w-]*)/g)||[]).map(c=>c.slice(1)))];
+    const demoHTML=selectors.length>0?selectors.slice(0,3).map(c=>'<div class="'+c+'"></div>').join(''):'';
+    const safeCss=code.replace(/<\/style>/gi,'<\\/style>');
+    return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'
+      +'*{box-sizing:border-box;margin:0;padding:0}'
+      +'html,body{width:100%;height:100%;overflow:hidden;'
+      +'display:flex;flex-wrap:wrap;align-items:center;justify-content:center;'
+      +'gap:1.5rem;padding:1.5rem}'
+      +safeCss+'</style></head><body>'+demoHTML+'</body></html>';
+  }
+  if(/<!DOCTYPE|<html\b/i.test(code.slice(0,300)))return code;
+  if(code.includes('canvas')||code.includes('requestAnimationFrame'))
+    return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>*{margin:0;padding:0;box-sizing:border-box}html,body{width:100%;height:100%;overflow:hidden;background:#000}canvas{display:block;width:100%!important;height:100%!important}</style></head><body><canvas></canvas><script>'+safe+'<\/script></body></html>';
   return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>*{box-sizing:border-box;margin:0}body{background:#020817;color:#cdd6f4;font-family:"JetBrains Mono",monospace;font-size:11px;padding:.75rem;overflow:hidden}#out{line-height:1.6}.l{margin-bottom:2px}.ok{color:#4ade80}.err{color:#f87171}.ret{color:#fbbf24}</style></head><body><div id="out"></div><script>var out=document.getElementById("out");function add(c,t){var d=document.createElement("div");d.className="l "+c;d.textContent=t;out.appendChild(d)}var ol=console.log,oe=console.error;console.log=function(){ol.apply(console,arguments);add("ok",Array.from(arguments).map(function(x){return typeof x==="object"?JSON.stringify(x):String(x)}).join(" "))};console.error=function(){oe.apply(console,arguments);add("err",Array.from(arguments).join(" "))};try{var r=(function(){'+safe+'})();if(r!==undefined)add("ret","→ "+JSON.stringify(r))}catch(e){add("err",e.name+": "+e.message)}<\/script></body></html>';
 }
 function buildSrcdocCard(p, vw, vh) {
-  // Smart card preview: override window.innerWidth/Height so particle
-  // scripts think they run at vw x vh, matching our iframe dimensions
   const PRELUDE = '<script>'+
     'try{Object.defineProperty(window,"innerWidth",{get:function(){return '+vw+'},configurable:true});'+
     'Object.defineProperty(window,"innerHeight",{get:function(){return '+vh+'},configurable:true});}catch(e){}'+
     '<\/script>';
-  const safe = p.code.replace(/<\/script>/gi,'<\/script>');
-  if(p.language==='HTML'||/<!DOCTYPE|<html\b/i.test(p.code.slice(0,300)))
-    return /<!DOCTYPE|<html\b/i.test(p.code.slice(0,300))
-      ? p.code
-      : '<!DOCTYPE html><html><head><meta charset="UTF-8">'+PRELUDE+'<style>*{box-sizing:border-box;margin:0;padding:0}html,body{width:100%;height:100%;overflow:hidden;font-family:system-ui}</style></head><body>'+p.code+'</body></html>';
+  // Multi-file: merge before building card preview
+  const code = p.files&&p.files.length>1 ? mergeFiles(p) : p.code;
+  const safe = code.replace(/<\/script>/gi,'<\\/script>');
+  if(p.language==='HTML'||/<!DOCTYPE|<html\b/i.test(code.slice(0,300)))
+    return /<!DOCTYPE|<html\b/i.test(code.slice(0,300))
+      ? code
+      : '<!DOCTYPE html><html><head><meta charset="UTF-8">'+PRELUDE+'<style>*{box-sizing:border-box;margin:0;padding:0}html,body{width:100%;height:100%;overflow:hidden;font-family:system-ui}</style></head><body>'+code+'</body></html>';
   if(p.language==='CSS'){
-    const sels=[...new Set((p.code.match(/\.([a-zA-Z][\w-]*)/g)||[]).map(c=>c.slice(1)))];
+    const sels=[...new Set((code.match(/\.([a-zA-Z][\w-]*)/g)||[]).map(c=>c.slice(1)))];
     const demo=sels.length>0?sels.slice(0,3).map(s=>'<div class="'+s+'"></div>').join(''):'<div></div>';
-    const safeCss=p.code.replace(/<\/style>/gi,'<\\/style>');
+    const safeCss=code.replace(/<\/style>/gi,'<\\/style>');
     return '<!DOCTYPE html><html><head><meta charset="UTF-8">'+PRELUDE+'<style>*{box-sizing:border-box;margin:0;padding:0}html,body{width:'+vw+'px;height:'+vh+'px;overflow:hidden;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:1rem;padding:1rem}'+safeCss+'</style></head><body>'+demo+'</body></html>';
   }
-  if(p.code.includes('canvas')||p.code.includes('requestAnimationFrame'))
+  if(code.includes('canvas')||code.includes('requestAnimationFrame'))
     return '<!DOCTYPE html><html><head><meta charset="UTF-8">'+PRELUDE
       +'<style>*{margin:0;padding:0;box-sizing:border-box}html,body{width:'+vw+'px;height:'+vh+'px;overflow:hidden;background:#000}canvas{display:block;width:100%!important;height:100%!important}</style>'
       +'</head><body><canvas></canvas><script>'+safe+'<\/script></body></html>';
@@ -2043,14 +2116,31 @@ function injectLiveIframe(card,p){
 }
 function buildPrev(p){
   const el=document.getElementById('pvc');const fsB=el.querySelector('.fs-btn');const fsBc=fsB?.cloneNode(true);el.innerHTML='';if(fsBc){fsBc.onclick=openFs;el.appendChild(fsBc)}if(!p)return;
-  if(p.language==='HTML'||p.language==='CSS'){document.getElementById('pvlbl').textContent=  (p.language==='HTML'||/<!DOCTYPE|<html\b/i.test(p.code.slice(0,300)))?'🔴 Live HTML':  p.language==='CSS'?'🔵 Live CSS':'🟢 Live Preview';const ifr=document.createElement('iframe');ifr.className='pv-iframe';ifr.srcdoc=buildSrcdoc(p);ifr.sandbox='allow-scripts';el.appendChild(ifr);return}
-  if(p.language==='JavaScript'&&p.code.includes('canvas')){document.getElementById('pvlbl').textContent='🟢 Live Canvas';const ifr=document.createElement('iframe');ifr.className='pv-iframe';ifr.style.background='#000';ifr.srcdoc=buildSrcdoc(p);ifr.sandbox='allow-scripts';el.appendChild(ifr);return}
+  // For multi-file projects, merge before preview
+  const mergedP = p.files&&p.files.length>1 ? {...p, code:mergeFiles(p)} : p;
+  if(mergedP.language==='HTML'||mergedP.language==='CSS'||/<!DOCTYPE|<html\b/i.test(mergedP.code.slice(0,300))){
+    document.getElementById('pvlbl').textContent=(mergedP.language==='HTML'||/<!DOCTYPE|<html\b/i.test(mergedP.code.slice(0,300)))?'🔴 Live HTML':mergedP.language==='CSS'?'🔵 Live CSS':'🟢 Live Preview';
+    const ifr=document.createElement('iframe');ifr.className='pv-iframe';ifr.srcdoc=buildSrcdoc(mergedP);ifr.sandbox='allow-scripts';el.appendChild(ifr);return;
+  }
+  if(mergedP.language==='JavaScript'&&mergedP.code.includes('canvas')){document.getElementById('pvlbl').textContent='🟢 Live Canvas';const ifr=document.createElement('iframe');ifr.className='pv-iframe';ifr.style.background='#000';ifr.srcdoc=buildSrcdoc(mergedP);ifr.sandbox='allow-scripts';el.appendChild(ifr);return}
   document.getElementById('pvlbl').textContent='◈ Pixelated Code View';
   const wrap=document.createElement('div');wrap.className='pv-cw';const cv=document.createElement('canvas');const W=Math.min(540,el.clientWidth-60||500),H=Math.round(W*.72);cv.width=W;cv.height=H;cv.style.cssText='max-width:92%;max-height:85%;border:1px solid rgba(255,255,255,.07);border-radius:10px;cursor:crosshair';
-  const s=cst(p.code),cxs=cx(p.code),a=ana(p.code,p.language);const m=document.createElement('div');m.className='pv-meta';m.textContent=s.tot+' Zeilen · CX '+cxs+' · '+a.fn.length+' fn · '+p.language;
+  const s=cst(p.code),cxs=cx(p.code),a=ana(p.code,p.language);const m=document.createElement('div');m.className='pv-meta';m.textContent=s.tot+' lines · CX '+cxs+' · '+a.fn.length+' fn · '+p.language;
   wrap.appendChild(cv);wrap.appendChild(m);el.appendChild(wrap);drawPixelArt(cv,p);
 }
-function openFs(){if(!curP)return;const body=document.getElementById('fs-body');body.innerHTML='';document.getElementById('fs-title').textContent=curP.name;if(isLivable(curP)){const ifr=document.createElement('iframe');ifr.style.cssText='width:100%;height:100%;border:none';ifr.srcdoc=buildSrcdoc(curP);ifr.sandbox='allow-scripts';body.appendChild(ifr)}else{const cv=document.createElement('canvas');cv.style.cssText='width:100%;height:100%;display:block';cv.width=body.clientWidth||1200;cv.height=body.clientHeight||720;body.appendChild(cv);drawPixelArt(cv,curP)}document.getElementById('fs-ov').classList.add('on')}
+function openFs(){
+  if(!curP)return;
+  const body=document.getElementById('fs-body');body.innerHTML='';
+  document.getElementById('fs-title').textContent=curP.name;
+  const mergedP = curP.files&&curP.files.length>1 ? {...curP, code:mergeFiles(curP)} : curP;
+  if(isLivable(mergedP)){
+    const ifr=document.createElement('iframe');ifr.style.cssText='width:100%;height:100%;border:none';
+    ifr.srcdoc=buildSrcdoc(mergedP);ifr.sandbox='allow-scripts';body.appendChild(ifr);
+  }else{
+    const cv=document.createElement('canvas');cv.style.cssText='width:100%;height:100%;display:block';cv.width=body.clientWidth||1200;cv.height=body.clientHeight||720;body.appendChild(cv);drawPixelArt(cv,curP);
+  }
+  document.getElementById('fs-ov').classList.add('on');
+}
 function closeFs(){document.getElementById('fs-ov').classList.remove('on')}
 function buildMinimap(code){
   const cv=document.getElementById('mm-cv'),wrap=document.getElementById('minimap'),scroll=document.getElementById('code-scroll');if(!cv||!wrap)return;
@@ -2065,7 +2155,7 @@ function toggleEdit(){
   if(editMode){ta.value=curP.code;pre.style.display='none';ta.style.display='block';btn.textContent='✓ Fertig';btn.style.color='var(--green)';btn.style.borderColor='rgba(74,222,128,.28)';ta.focus();toast('Edit mode active','info')}
   else{if(ta.value!==curP.code){curP.code=ta.value;const p=P.find(x=>x.id===curP.id);if(p)p.code=ta.value;save();toast('Saved ✓','ok')}pre.style.display='';ta.style.display='none';btn.textContent='✎ Edit';btn.style.color='';btn.style.borderColor='';renderCode(curP);editMode=false}
 }
-function editorLive(){document.getElementById('dlines').textContent=document.getElementById('editor-ta').value.split('\n').length+' Zeilen'}
+function editorLive(){document.getElementById('dlines').textContent=document.getElementById('editor-ta').value.split('\n').length+' lines'}
 let consLines=[];
 function runCode(){
   if(!curP)return;if(!['JavaScript','TypeScript'].includes(curP.language)){toast('Only JS/TS can be executed','info');return}
@@ -2092,7 +2182,7 @@ function renderDash(){
   if(!dashOn)return;
   const el=document.getElementById('dash');
   const tot=P.length;
-  if(!tot){el.innerHTML='<div style="width:100%;text-align:center;padding:1.5rem;font-size:.75rem;color:var(--mut)">Noch keine Projekte — füge deins hinzu ＋</div>';return}
+  if(!tot){el.innerHTML='<div style="width:100%;text-align:center;padding:1.5rem;font-size:.75rem;color:var(--mut)">No projects — add yours ＋</div>';return}
 
   // Base metrics
   const totL=P.reduce((s,p)=>s+p.code.split('\n').length,0);
@@ -2119,7 +2209,7 @@ function renderDash(){
   P.forEach(p=>{const code=p.code,s=cst(code),cxs=cx(code),a=ana(code,p.language);cxVals.push(cxs);let q=100;const cr=s.tot>0?s.cm/s.tot:0;if(cr<0.05&&s.tot>10)q-=12;if(s.al>120)q-=10;if(cxs>80)q-=25;else if(cxs>60)q-=12;if(s.uw/Math.max(s.wc,1)<0.3)q-=8;if(a.fn.length===0&&s.tot>15)q-=10;if(s.ne/Math.max(s.tot,1)<0.5)q-=5;const g=q>=90?'A':q>=75?'B':q>=60?'C':q>=45?'D':'F';grades[g]++});
   const gradeColors={A:'#4ade80',B:'#86efac',C:'#fbbf24',D:'#fb923c',F:'#f87171'};
   const gradeHTML=Object.entries(grades).map(([g,n])=>{const pct=Math.round(n/tot*100);return`<div class="dash-grade-row"><span class="dash-grade-badge" style="color:${gradeColors[g]}">${g}</span><div class="dash-grade-bar-bg"><div class="dash-grade-bar" style="width:${pct}%;background:${gradeColors[g]}80"></div></div><span class="dash-grade-cnt">${n}</span></div>`;}).join('');
-  const cxBuckets=[{l:'0–25 Simpel',r:[0,25],c:'#4ade80'},{l:'26–50 Leicht',r:[26,50],c:'#86efac'},{l:'51–75 Mittel',r:[51,75],c:'#fbbf24'},{l:'76–100 Komplex',r:[76,100],c:'#f87171'}];
+  const cxBuckets=[{l:'0–25 Simpel',r:[0,25],c:'#4ade80'},{l:'26–50 Leicht',r:[26,50],c:'#86efac'},{l:'51–75 Medium',r:[51,75],c:'#fbbf24'},{l:'76–100 Komplex',r:[76,100],c:'#f87171'}];
   const cxCounts=cxBuckets.map(b=>P.filter(p=>{const v=cx(p.code);return v>=b.r[0]&&v<=b.r[1]}).length);
   const maxCxB=Math.max(...cxCounts,1);
   const cxHistHTML=cxBuckets.map((b,i)=>{const pct=Math.round(cxCounts[i]/maxCxB*100);return`<div class="dash-cx-bucket"><span class="dash-cx-label">${b.l}</span><div class="dash-cx-bar-bg"><div class="dash-cx-bar" style="width:${pct}%;background:${b.c}80"></div></div><span class="dash-cx-cnt">${cxCounts[i]}</span></div>`;}).join('');
@@ -2132,12 +2222,12 @@ function renderDash(){
   const topHTML=top5Lines.map((p,i)=>{const lines=p.code.split('\n').length;const pct=Math.round(lines/topMax*100);const lc=LC[p.language]||'#888';return`<div class="dash-proj-row" onclick="openP('${p.id}')"><span class="dash-proj-rank">${i+1}</span><span class="dash-proj-dot" style="background:${lc}"></span><div style="flex:1;min-width:0"><div style="display:flex;align-items:center;justify-content:space-between;gap:.3rem"><span class="dash-proj-name">${esc(p.name)}</span><span class="dash-proj-val">${lines} Z</span></div><div style="height:3px;border-radius:2px;background:rgba(255,255,255,.05);overflow:hidden;margin-top:2px"><div style="height:100%;border-radius:2px;width:${pct}%;background:${lc}80"></div></div></div></div>`;}).join('');
   const topCxHTML=top5Cx.map((p,i)=>{const cxs=cx(p.code);const cc2=cxC(cxs);const pct=Math.round(cxs/topCxMax*100);return`<div class="dash-proj-row" onclick="openP('${p.id}')"><span class="dash-proj-rank">${i+1}</span><span class="dash-proj-dot" style="background:${cc2.c}"></span><div style="flex:1;min-width:0"><div style="display:flex;align-items:center;justify-content:space-between;gap:.3rem"><span class="dash-proj-name">${esc(p.name)}</span><span class="dash-proj-val" style="color:${cc2.c}">CX ${cxs}</span></div><div style="height:3px;border-radius:2px;background:rgba(255,255,255,.05);overflow:hidden;margin-top:2px"><div style="height:100%;border-radius:2px;width:${pct}%;background:${cc2.c}80"></div></div></div></div>`;}).join('');
 
-  // Tag cloud
+  // day cloud
   const tagMap={};P.forEach(p=>(p.tags||[]).forEach(t=>{if(t)tagMap[t]=(tagMap[t]||0)+1}));
-  const topTags=Object.entries(tagMap).sort((a,b)=>b[1]-a[1]).slice(0,22);
-  const maxTag=topTags[0]?.[1]||1;const lcVals=Object.values(LC);
-  const tagHTML=topTags.length?topTags.map(([t,n])=>{const op=(0.35+0.65*(n/maxTag)).toFixed(2);const sz=n>=3?'.72rem':n>=2?'.66rem':'.61rem';const lc=lcVals[Math.abs(t.split('').reduce((a,c)=>a+c.charCodeAt(0),0))%lcVals.length]||'#888';return`<span class="dash-tag" style="font-size:${sz};color:${lc};border-color:${lc}30;background:${lc}0d;opacity:${op}" onclick="filterTag('${esc(t)}')" title="${n}x">${esc(t)}</span>`;}).join(''):'<span style="font-size:.65rem;color:var(--mut)">Noch keine Tags</span>';
-  const allTags=new Set(P.flatMap(p=>p.tags||[]));
+  const topdays=Object.entries(tagMap).sort((a,b)=>b[1]-a[1]).slice(0,22);
+  const maxday=topdays[0]?.[1]||1;const lcVals=Object.values(LC);
+  const tagHTML=topdays.length?topdays.map(([t,n])=>{const op=(0.35+0.65*(n/maxday)).toFixed(2);const sz=n>=3?'.72rem':n>=2?'.66rem':'.61rem';const lc=lcVals[Math.abs(t.split('').reduce((a,c)=>a+c.charCodeAt(0),0))%lcVals.length]||'#888';return`<span class="dash-tag" style="font-size:${sz};color:${lc};border-color:${lc}30;background:${lc}0d;opacity:${op}" onclick="filterday('${esc(t)}')" title="${n}x">${esc(t)}</span>`;}).join(''):'<span style="font-size:.65rem;color:var(--mut)">No tags yet</span>';
+  const alldays=new Set(P.flatMap(p=>p.tags||[]));
 
   // Activity sparkline
   const now=Date.now(),DAY=864e5;
@@ -2148,14 +2238,14 @@ function renderDash(){
   const totalRecent=days30.reduce((a,d)=>a+d.count,0);
   const peakDay=days30.reduce((a,b)=>b.count>a.count?b:a,days30[0]);
   const peakIdx=days30.indexOf(peakDay);
-  const peakLabel=peakDay.count>0?`Spitze: ${peakDay.count}P vor ${29-peakIdx}T`:'Noch keine Aktivitaet';
-  const sparkBars=days30.map(d=>{const h=Math.max(Math.round((d.count/maxDay)*28),d.count>0?3:1);const op=(d.count>0?0.3+0.7*(d.count/maxDay):0.07).toFixed(2);return`<div style="flex:1;display:flex;align-items:flex-end;height:32px"><div title="${d.count} Projekt${d.count!==1?'e':''}" style="width:100%;height:${h}px;border-radius:2px 2px 0 0;background:var(--blue);opacity:${op}"></div></div>`;}).join('');
+  const peakLabel=peakDay.count>0?`Peak: ${peakDay.count}P ${29-peakIdx}T`:'No Aktivitaet';
+  const sparkBars=days30.map(d=>{const h=Math.max(Math.round((d.count/maxDay)*28),d.count>0?3:1);const op=(d.count>0?0.3+0.7*(d.count/maxDay):0.07).toFixed(2);return`<div style="flex:1;display:flex;align-items:flex-end;height:32px"><div title="${d.count} Project${d.count!==1?'e':''}" style="width:100%;height:${h}px;border-radius:2px 2px 0 0;background:var(--blue);opacity:${op}"></div></div>`;}).join('');
 
   // Collections
   const collStats=C.map(col=>{const ps=P.filter(p=>p.collId===col.id);return{...col,count:ps.length,cxAvg:ps.length?Math.round(ps.reduce((a,p)=>a+cx(p.code),0)/ps.length):0};}).sort((a,b)=>b.count-a.count);
   const maxColl=collStats[0]?.count||1;
   const noCollCount=P.filter(p=>!p.collId).length;
-  const collHTML=(collStats.length?collStats.map(col=>`<div class="dash-coll-row" onclick="setColl('${col.id}')"><span class="dash-coll-dot" style="background:${col.color}"></span><span class="dash-coll-name">${esc(col.name)}</span><div class="dash-coll-bar-bg"><div class="dash-coll-bar" style="width:${Math.round(col.count/maxColl*100)}%;background:${col.color}88"></div></div><span class="dash-coll-cnt">${col.count}</span></div>`).join(''):'')+(noCollCount?`<div class="dash-coll-row" style="cursor:default"><span class="dash-coll-dot" style="background:rgba(255,255,255,.15)"></span><span class="dash-coll-name" style="opacity:.5">Ohne Sammlung</span><div class="dash-coll-bar-bg"><div class="dash-coll-bar" style="width:${Math.round(noCollCount/Math.max(maxColl,noCollCount)*100)}%;background:rgba(255,255,255,.15)"></div></div><span class="dash-coll-cnt">${noCollCount}</span></div>`:'');
+  const collHTML=(collStats.length?collStats.map(col=>`<div class="dash-coll-row" onclick="setColl('${col.id}')"><span class="dash-coll-dot" style="background:${col.color}"></span><span class="dash-coll-name">${esc(col.name)}</span><div class="dash-coll-bar-bg"><div class="dash-coll-bar" style="width:${Math.round(col.count/maxColl*100)}%;background:${col.color}88"></div></div><span class="dash-coll-cnt">${col.count}</span></div>`).join(''):'')+(noCollCount?`<div class="dash-coll-row" style="cursor:default"><span class="dash-coll-dot" style="background:rgba(255,255,255,.15)"></span><span class="dash-coll-name" style="opacity:.5">Ohne Collection</span><div class="dash-coll-bar-bg"><div class="dash-coll-bar" style="width:${Math.round(noCollCount/Math.max(maxColl,noCollCount)*100)}%;background:rgba(255,255,255,.15)"></div></div><span class="dash-coll-cnt">${noCollCount}</span></div>`:'');
 
   // Code metrics
   const allStats=P.map(p=>cst(p.code));
@@ -2169,7 +2259,7 @@ function renderDash(){
   // Score values
   const scoreDocumentation=Math.min(avgCommentRatio*3,100);
   const scoreDensity=Math.min(avgNonEmpty,100);
-  const scoreTagging=Math.min(Math.round(taggedCount/tot*100),100);
+  const scoredayging=Math.min(Math.round(taggedCount/tot*100),100);
   const scoreDescribed=Math.min(Math.round(describedCount/tot*100),100);
 
   // Language intensity bars
@@ -2179,37 +2269,37 @@ function renderDash(){
 
   el.innerHTML=`
   <div class="dash-row1">
-    <div class="dc"><div class="dcl">Projekte</div><div class="dcv" style="color:var(--blue)">${tot}</div><div class="dcs">${favs} ★ · ${C.length} Sammlungen</div></div>
-    <div class="dc"><div class="dcl">Lines of Code</div><div class="dcv" style="color:var(--cyan)">${totL>=1000?(totL/1000).toFixed(1)+'k':totL}</div><div class="dcs">Ø ${avgLines}/Projekt</div></div>
-    <div class="dc"><div class="dcl">Zeichen</div><div class="dcv" style="color:var(--green)">${(totC/1000).toFixed(1)}k</div><div class="dcs">Ø ${Math.round(totC/tot)}/P</div></div>
-    <div class="dc"><div class="dcl">Ø Komplexitaet</div><div class="dcv" style="color:${cc.c}">${avgCx}</div><div class="dcs">${cc.l}</div></div>
-    <div class="dc"><div class="dcl">Sprachen</div><div class="dcv" style="color:var(--purple)">${sl.length}</div><div class="dcs">${sl.slice(0,2).map(([l])=>l).join(', ')}</div></div>
-    <div class="dc"><div class="dcl">Tags</div><div class="dcv" style="color:var(--amber)">${allTags.size}</div><div class="dcs">${taggedCount} Proj. getaggt</div></div>
+    <div class="dc"><div class="dcl">Projects</div><div class="dcv" style="color:var(--blue)">${tot}</div><div class="dcs">${favs} ★ · ${C.length} Collections</div></div>
+    <div class="dc"><div class="dcl">Lines of Code</div><div class="dcv" style="color:var(--cyan)">${totL>=1000?(totL/1000).toFixed(1)+'k':totL}</div><div class="dcs">Avg ${avgLines}/project</div></div>
+    <div class="dc"><div class="dcl">Characters</div><div class="dcv" style="color:var(--green)">${(totC/1000).toFixed(1)}k</div><div class="dcs">Avg ${Math.round(totC/tot)}/P</div></div>
+    <div class="dc"><div class="dcl">Avg Komplexitaet</div><div class="dcv" style="color:${cc.c}">${avgCx}</div><div class="dcs">${cc.l}</div></div>
+    <div class="dc"><div class="dcl">Languages</div><div class="dcv" style="color:var(--purple)">${sl.length}</div><div class="dcs">${sl.slice(0,2).map(([l])=>l).join(', ')}</div></div>
+    <div class="dc"><div class="dcl">days</div><div class="dcv" style="color:var(--amber)">${alldays.size}</div><div class="dcs">${taggedCount} Proj. getaggt</div></div>
     <div class="dc"><div class="dcl">Live Preview</div><div class="dcv" style="color:var(--green)">${liveCount}</div><div class="dcs">${Math.round(liveCount/tot*100)}% lauffahig</div></div>
-    <div class="dc"><div class="dcl">Funktionen</div><div class="dcv" style="color:#a78bfa">${totalFunctions}</div><div class="dcs">${totalClasses} Klassen</div></div>
-    ${multifileCount>0?`<div class="dc"><div class="dcl">Multi-Datei</div><div class="dcv" style="color:#67e8f9">${multifileCount}</div><div class="dcs">aufgeteilt</div></div>`:''}
+    <div class="dc"><div class="dcl">Functionen</div><div class="dcv" style="color:#a78bfa">${totalFunctions}</div><div class="dcs">${totalClasses} Classn</div></div>
+    ${multifileCount>0?`<div class="dc"><div class="dcl">Multi-File</div><div class="dcv" style="color:#67e8f9">${multifileCount}</div><div class="dcs">split</div></div>`:''}
   </div>
   <div class="dcp" style="padding:.55rem .9rem">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.42rem">
-      <span class="dcp-title" style="margin:0">Aktivitaet — letzte 30 Tage</span>
-      <span style="font-size:.58rem;color:var(--mut)">${totalRecent} Projekte · ${peakLabel}</span>
+      <span class="dcp-title" style="margin:0">Aktivitaet — last 30 days</span>
+      <span style="font-size:.58rem;color:var(--mut)">${totalRecent} projects · ${peakLabel}</span>
     </div>
     <div style="display:flex;gap:2px;align-items:flex-end;height:34px;border-bottom:1px solid rgba(255,255,255,.05);padding-bottom:2px">${sparkBars}</div>
-    <div style="display:flex;justify-content:space-between;font-size:.52rem;color:var(--mut);margin-top:.22rem"><span>vor 30 Tagen</span><span>heute</span></div>
+    <div style="display:flex;justify-content:space-between;font-size:.52rem;color:var(--mut);margin-top:.22rem"><span>30 days ago</span><span>today</span></div>
   </div>
   <div class="dash-row2">
     <div class="dcp">
-      <div class="dcp-title">Sprachen-Anteil &nbsp;<span style="opacity:.4">(${tot} Projekte)</span></div>
+      <div class="dcp-title">Language Share &nbsp;<span style="opacity:.4">(${tot} projects)</span></div>
       <div style="display:flex;align-items:center;gap:.9rem">
         <canvas id="lang-donut" width="76" height="76" style="flex-shrink:0"></canvas>
         <div class="dash-lang-table" style="flex:1">${sl.slice(0,7).map(([l,c])=>{const pct=Math.round(c/tot*100);const lc=LC[l]||'#888';return`<div class="dash-lang-row"><span class="dash-lang-dot" style="background:${lc}"></span><span class="dash-lang-name">${esc(l)}</span><div class="dash-lang-bar-bg"><div class="dash-lang-bar" style="width:${pct}%;background:${lc}"></div></div><span class="dash-lang-pct">${pct}%</span><span class="dash-lang-cnt">(${c})</span></div>`;}).join('')}</div>
       </div>
     </div>
     <div class="dcp">
-      <div class="dcp-title">Zeilen je Sprache</div>
+      <div class="dcp-title">Lines per Language</div>
       <div class="dash-lang-table">${langLinesHTML}</div>
       <div style="margin-top:.55rem;padding-top:.45rem;border-top:1px solid rgba(255,255,255,.04)">
-        <div class="dcp-title" style="margin-bottom:.4rem">Komplexitaets-Verteilung</div>
+        <div class="dcp-title" style="margin-bottom:.4rem">Komplexitaets-Distribution</div>
         ${cxHistHTML}
       </div>
     </div>
@@ -2221,20 +2311,20 @@ function renderDash(){
       </div>
     </div>
     <div class="dcp" style="display:flex;flex-direction:column;gap:.5rem">
-      <div><div class="dcp-title">Top 5 Projekte — Zeilen</div>${topHTML}</div>
+      <div><div class="dcp-title">Top 5 projects — Lines</div>${topHTML}</div>
       <div style="padding-top:.42rem;border-top:1px solid rgba(255,255,255,.04)">
-        <div class="dcp-title" style="margin-bottom:.28rem">Tag-Wolke</div>
+        <div class="dcp-title" style="margin-bottom:.28rem">day Cloud</div>
         <div style="line-height:1.85">${tagHTML}</div>
       </div>
     </div>
   </div>
   <div class="dash-row3">
     <div class="dcp">
-      <div class="dcp-title">Sammlungen &nbsp;<span style="opacity:.4">(${C.length})</span></div>
-      ${collHTML||'<div style="font-size:.65rem;color:var(--mut);padding:.3rem 0">Noch keine Sammlungen</div>'}
+      <div class="dcp-title">Collectionen &nbsp;<span style="opacity:.4">(${C.length})</span></div>
+      ${collHTML||'<div style="font-size:.65rem;color:var(--mut);padding:.3rem 0">No Collections</div>'}
       <div style="margin-top:.5rem;padding-top:.4rem;border-top:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:.5rem">
         <canvas id="coll-donut" width="44" height="44" style="flex-shrink:0"></canvas>
-        <div style="font-size:.58rem;color:var(--mut2);line-height:1.6">${C.length} Sammlung${C.length!==1?'en':''}<br>${noCollCount} ohne Zuordnung</div>
+        <div style="font-size:.58rem;color:var(--mut2);line-height:1.6">${C.length} Collection${C.length!==1?'en':''}<br>${noCollCount} ohne Zuordnung</div>
       </div>
     </div>
     <div class="dcp">
@@ -2242,23 +2332,23 @@ function renderDash(){
       ${topCxHTML}
     </div>
     <div class="dcp">
-      <div class="dcp-title">Code-Metriken im Detail</div>
-      <div class="dash-metric-row"><span class="dash-metric-key">Kommentar-Anteil</span><span class="dash-metric-val">${avgCommentRatio}%</span><span class="dash-metric-badge" style="color:${avgCommentRatio>15?'#4ade80':'#fbbf24'};border-color:${avgCommentRatio>15?'#4ade8030':'#fbbf2430'}">${avgCommentRatio>15?'gut':'gering'}</span></div>
-      <div class="dash-metric-row"><span class="dash-metric-key">Nicht-leere Zeilen</span><span class="dash-metric-val">${avgNonEmpty}%</span><span class="dash-metric-badge" style="color:${avgNonEmpty>70?'#4ade80':'#fbbf24'};border-color:${avgNonEmpty>70?'#4ade8030':'#fbbf2430'}">${avgNonEmpty>70?'dicht':'locker'}</span></div>
-      <div class="dash-metric-row"><span class="dash-metric-key">Max. Zeilenlaenge</span><span class="dash-metric-val">${maxLineLen} Z.</span><span class="dash-metric-badge" style="color:${maxLineLen<100?'#4ade80':'#f87171'};border-color:${maxLineLen<100?'#4ade8030':'#f8717130'}">${maxLineLen<100?'ok':'lang'}</span></div>
-      <div class="dash-metric-row"><span class="dash-metric-key">Ø Zeilenlaenge</span><span class="dash-metric-val">${avgLineLen} Z.</span><span class="dash-metric-badge" style="color:var(--mut2);border-color:var(--bdr)">neutral</span></div>
+      <div class="dcp-title">Code-Metrics im Detail</div>
+      <div class="dash-metric-row"><span class="dash-metric-key">Comment-Share</span><span class="dash-metric-val">${avgCommentRatio}%</span><span class="dash-metric-badge" style="color:${avgCommentRatio>15?'#4ade80':'#fbbf24'};border-color:${avgCommentRatio>15?'#4ade8030':'#fbbf2430'}">${avgCommentRatio>15?'gut':'gering'}</span></div>
+      <div class="dash-metric-row"><span class="dash-metric-key">Nicht-emptye Lines</span><span class="dash-metric-val">${avgNonEmpty}%</span><span class="dash-metric-badge" style="color:${avgNonEmpty>70?'#4ade80':'#fbbf24'};border-color:${avgNonEmpty>70?'#4ade8030':'#fbbf2430'}">${avgNonEmpty>70?'dicht':'locker'}</span></div>
+      <div class="dash-metric-row"><span class="dash-metric-key">Max. lineslaenge</span><span class="dash-metric-val">${maxLineLen} Z.</span><span class="dash-metric-badge" style="color:${maxLineLen<100?'#4ade80':'#f87171'};border-color:${maxLineLen<100?'#4ade8030':'#f8717130'}">${maxLineLen<100?'ok':'lang'}</span></div>
+      <div class="dash-metric-row"><span class="dash-metric-key">Avg lineslaenge</span><span class="dash-metric-val">${avgLineLen} Z.</span><span class="dash-metric-badge" style="color:var(--mut2);border-color:var(--bdr)">neutral</span></div>
       <div class="dash-metric-row"><span class="dash-metric-key">Beschrieben</span><span class="dash-metric-val">${describedCount}/${tot}</span><span class="dash-metric-badge" style="color:${scoreDescribed>60?'#4ade80':'#fbbf24'};border-color:${scoreDescribed>60?'#4ade8030':'#fbbf2430'}">${scoreDescribed}%</span></div>
-      <div class="dash-metric-row"><span class="dash-metric-key">Getaggte Projekte</span><span class="dash-metric-val">${taggedCount}/${tot}</span><span class="dash-metric-badge" style="color:${scoreTagging>60?'#4ade80':'#fbbf24'};border-color:${scoreTagging>60?'#4ade8030':'#fbbf2430'}">${scoreTagging}%</span></div>
+      <div class="dash-metric-row"><span class="dash-metric-key">Getaggte Projects</span><span class="dash-metric-val">${taggedCount}/${tot}</span><span class="dash-metric-badge" style="color:${scoredayging>60?'#4ade80':'#fbbf24'};border-color:${scoredayging>60?'#4ade8030':'#fbbf2430'}">${scoredayging}%</span></div>
     </div>
     <div class="dcp">
-      <div class="dcp-title">Sprachen-Intensitaet</div>
+      <div class="dcp-title">Languages-Intensitaet</div>
       <div style="display:flex;align-items:flex-end;gap:.5rem;justify-content:center;padding:.5rem 0">${hmHTML}</div>
       <div style="margin-top:.4rem;padding-top:.38rem;border-top:1px solid rgba(255,255,255,.04)">
-        <div class="dcp-title" style="margin-bottom:.38rem">Galerie-Gesundheit</div>
+        <div class="dcp-title" style="margin-bottom:.38rem">Gallery-Gesundheit</div>
         <div class="score-rings">
-          <div class="score-ring-wrap"><canvas id="sr-doc" width="46" height="46"></canvas><div class="score-ring-lbl">Kommentare</div><div class="score-ring-val" style="color:#22d3ee">${scoreDocumentation}%</div></div>
-          <div class="score-ring-wrap"><canvas id="sr-tag" width="46" height="46"></canvas><div class="score-ring-lbl">Tags</div><div class="score-ring-val" style="color:#a855f7">${scoreTagging}%</div></div>
-          <div class="score-ring-wrap"><canvas id="sr-desc" width="46" height="46"></canvas><div class="score-ring-lbl">Beschreibung</div><div class="score-ring-val" style="color:#fbbf24">${scoreDescribed}%</div></div>
+          <div class="score-ring-wrap"><canvas id="sr-doc" width="46" height="46"></canvas><div class="score-ring-lbl">Comments</div><div class="score-ring-val" style="color:#22d3ee">${scoreDocumentation}%</div></div>
+          <div class="score-ring-wrap"><canvas id="sr-tag" width="46" height="46"></canvas><div class="score-ring-lbl">days</div><div class="score-ring-val" style="color:#a855f7">${scoredayging}%</div></div>
+          <div class="score-ring-wrap"><canvas id="sr-desc" width="46" height="46"></canvas><div class="score-ring-lbl">Description</div><div class="score-ring-val" style="color:#fbbf24">${scoreDescribed}%</div></div>
           <div class="score-ring-wrap"><canvas id="sr-live" width="46" height="46"></canvas><div class="score-ring-lbl">Live Preview</div><div class="score-ring-val" style="color:#4ade80">${Math.round(liveCount/tot*100)}%</div></div>
         </div>
       </div>
@@ -2266,7 +2356,7 @@ function renderDash(){
   </div>
   <div class="dash-row4">
     <div class="dcp">
-      <div class="dcp-title">Groessen-Verteilung (Zeilen pro Projekt)</div>
+      <div class="dcp-title">Groessen-Distribution (lines pro Project)</div>
       <div id="size-dist-bars" style="display:flex;align-items:flex-end;gap:3px;height:52px;margin-top:.4rem;border-bottom:1px solid rgba(255,255,255,.05)"></div>
       <div style="display:flex;justify-content:space-between;font-size:.52rem;color:var(--mut);margin-top:.22rem"><span>1</span><span>kleinste bis groesste</span><span>${Math.max(...P.map(p=>p.code.split('\n').length),0)} Z</span></div>
       <div style="display:flex;gap:.7rem;flex-wrap:wrap;margin-top:.45rem;padding-top:.4rem;border-top:1px solid rgba(255,255,255,.04)">
@@ -2274,24 +2364,24 @@ function renderDash(){
       </div>
     </div>
     <div class="dcp">
-      <div class="dcp-title">Favoriten-Analyse</div>
+      <div class="dcp-title">Favoritees Analysis</div>
       <div style="display:flex;justify-content:center;margin:.4rem 0"><canvas id="fav-donut" width="72" height="72"></canvas></div>
-      <div class="dash-metric-row"><span class="dash-metric-key">Favoriten</span><span class="dash-metric-val" style="color:var(--amber)">${favs}</span></div>
+      <div class="dash-metric-row"><span class="dash-metric-key">Favoritees</span><span class="dash-metric-val" style="color:var(--amber)">${favs}</span></div>
       <div class="dash-metric-row"><span class="dash-metric-key">Normal</span><span class="dash-metric-val">${tot-favs}</span></div>
       <div class="dash-metric-row"><span class="dash-metric-key">Rate</span><span class="dash-metric-val">${Math.round(favs/tot*100)}%</span></div>
     </div>
     <div class="dcp">
-      <div class="dcp-title">Galerie-Score</div>
+      <div class="dcp-title">Gallery-Score</div>
       <div style="display:flex;align-items:center;gap:.7rem;margin-top:.35rem">
         <canvas id="gallery-score-ring" width="72" height="72" style="flex-shrink:0"></canvas>
         <div style="flex:1">
-          ${[['Qualitaet',Math.round((grades.A*100+grades.B*75+grades.C*50+grades.D*25)/tot||0),'#4ade80'],['Dokumentation',Math.min(scoreDocumentation,100),'#22d3ee'],['Tags',scoreTagging,'#a855f7'],['Beschreibung',scoreDescribed,'#fbbf24'],['Live-faehig',Math.round(liveCount/tot*100),'#fb7185']].map(([lbl,val,c])=>`<div style="display:flex;align-items:center;gap:.35rem;margin-bottom:.2rem"><span style="font-size:.58rem;color:var(--mut2);flex:1">${lbl}</span><div style="width:60px;height:3px;border-radius:2px;background:rgba(255,255,255,.06);overflow:hidden"><div style="width:${val}%;height:100%;background:${c};border-radius:2px"></div></div><span style="font-family:var(--fc);font-size:.57rem;color:${c};min-width:26px;text-align:right">${val}%</span></div>`).join('')}
+          ${[['Qualitaet',Math.round((grades.A*100+grades.B*75+grades.C*50+grades.D*25)/tot||0),'#4ade80'],['Dokumentation',Math.min(scoreDocumentation,100),'#22d3ee'],['days',scoredayging,'#a855f7'],['Description',scoreDescribed,'#fbbf24'],['Live-faehig',Math.round(liveCount/tot*100),'#fb7185']].map(([lbl,val,c])=>`<div style="display:flex;align-items:center;gap:.35rem;margin-bottom:.2rem"><span style="font-size:.58rem;color:var(--mut2);flex:1">${lbl}</span><div style="width:60px;height:3px;border-radius:2px;background:rgba(255,255,255,.06);overflow:hidden"><div style="width:${val}%;height:100%;background:${c};border-radius:2px"></div></div><span style="font-family:var(--fc);font-size:.57rem;color:${c};min-width:26px;text-align:right">${val}%</span></div>`).join('')}
         </div>
       </div>
       <div style="margin-top:.5rem;padding-top:.4rem;border-top:1px solid rgba(255,255,255,.04);display:flex;gap:.6rem;flex-wrap:wrap">
-        <div class="mini-kpi"><span class="mini-kpi-val" style="color:var(--green)">${totalFunctions}</span><span class="mini-kpi-lbl">Funktionen</span></div>
-        <div class="mini-kpi"><span class="mini-kpi-val" style="color:#fbbf24">${totalClasses}</span><span class="mini-kpi-lbl">Klassen</span></div>
-        <div class="mini-kpi"><span class="mini-kpi-val" style="color:var(--purple)">${allTags.size}</span><span class="mini-kpi-lbl">uniq. Tags</span></div>
+        <div class="mini-kpi"><span class="mini-kpi-val" style="color:var(--green)">${totalFunctions}</span><span class="mini-kpi-lbl">Functionen</span></div>
+        <div class="mini-kpi"><span class="mini-kpi-val" style="color:#fbbf24">${totalClasses}</span><span class="mini-kpi-lbl">Classn</span></div>
+        <div class="mini-kpi"><span class="mini-kpi-val" style="color:var(--purple)">${alldays.size}</span><span class="mini-kpi-lbl">unique days</span></div>
         <div class="mini-kpi"><span class="mini-kpi-val" style="color:var(--cyan)">${avgCommentRatio}%</span><span class="mini-kpi-lbl">kommentiert</span></div>
       </div>
     </div>
@@ -2318,8 +2408,8 @@ function renderDash(){
     const collData=[...collStats.map(c=>c.count),noCollCount].filter(Boolean);
     donut('coll-donut',collData,[...collStats.map(c=>c.color),'rgba(255,255,255,.2)'],19,10,String(C.length));
     donut('fav-donut',[favs,tot-favs],['#fbbf24','rgba(255,255,255,.1)'],31,18,favs+'*');
-    ring('sr-doc',scoreDocumentation,'#22d3ee');ring('sr-tag',scoreTagging,'#a855f7');ring('sr-desc',scoreDescribed,'#fbbf24');ring('sr-live',Math.round(liveCount/tot*100),'#4ade80');
-    const galScore=Math.round([[Math.round((grades.A*100+grades.B*75+grades.C*50+grades.D*25)/tot||0),scoreDocumentation,scoreTagging,scoreDescribed,Math.round(liveCount/tot*100)].reduce((a,v)=>a+v,0)/5]);
+    ring('sr-doc',scoreDocumentation,'#22d3ee');ring('sr-tag',scoredayging,'#a855f7');ring('sr-desc',scoreDescribed,'#fbbf24');ring('sr-live',Math.round(liveCount/tot*100),'#4ade80');
+    const galScore=Math.round([[Math.round((grades.A*100+grades.B*75+grades.C*50+grades.D*25)/tot||0),scoreDocumentation,scoredayging,scoreDescribed,Math.round(liveCount/tot*100)].reduce((a,v)=>a+v,0)/5]);
     const cv2=document.getElementById('gallery-score-ring');
     if(cv2){const ctx=cv2.getContext('2d'),W=cv2.width,H=cv2.height,R=30,cx2=W/2,cy2=H/2;ctx.clearRect(0,0,W,H);ctx.beginPath();ctx.arc(cx2,cy2,R,-Math.PI/2,Math.PI*3/2);ctx.strokeStyle='rgba(255,255,255,.07)';ctx.lineWidth=5;ctx.stroke();const sc=galScore<40?'#f87171':galScore<60?'#fbbf24':galScore<80?'#86efac':'#4ade80';ctx.beginPath();ctx.arc(cx2,cy2,R,-Math.PI/2,-Math.PI/2+Math.PI*2*(galScore/100));ctx.strokeStyle=sc;ctx.lineWidth=5;ctx.lineCap='round';ctx.shadowColor=sc;ctx.shadowBlur=8;ctx.stroke();ctx.shadowBlur=0;ctx.fillStyle=sc;ctx.font='bold 15px "Syne",sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(galScore,cx2,cy2-4);ctx.font='6px sans-serif';ctx.fillStyle='rgba(255,255,255,.35)';ctx.fillText('/100',cx2,cy2+9)}
     const sizeBar=document.getElementById('size-dist-bars');
@@ -2348,7 +2438,7 @@ function renderPills(){document.getElementById('pills').innerHTML=getLangs().map
 function renderGallery(){
   const list=getSorted(getFiltered()),gal=document.getElementById('gallery'),emp=document.getElementById('empty'),q=document.getElementById('search').value.trim();
   document.getElementById('pcount').textContent=P.length+' Work'+(P.length!==1?'e':'');
-  document.getElementById('stitle').textContent=curColl?C.find(c=>c.id===curColl)?.name||'Sammlung':favOnly?'Favorites':flt==='All'?'Alle Works':flt;
+  document.getElementById('stitle').textContent=curColl?C.find(c=>c.id===curColl)?.name||'Collection':favOnly?'Favoriteeees':flt==='All'?'All Works':flt;
   document.getElementById('scount').textContent=list.length!==P.length?list.length+' found':'';
   if(!list.length){gal.style.display='none';emp.style.display='block';return}
   gal.style.display='grid';emp.style.display='none';gal.className='gallery'+(vw==='list'?' lm':'');
@@ -2368,7 +2458,7 @@ function renderGallery(){
       +'<div class="card-overlay"><div class="card-overlay-name">'+(q?hlSearch(p.name,q):esc(p.name))+'</div>'
       +'<div class="card-overlay-desc">'+(q?hlSearch(p.description,q):esc(p.description))+'</div>'
       +(p.note?'<div style="font-size:.64rem;color:rgba(255,255,255,.5);font-style:italic;margin-bottom:.4rem">✏ '+esc(p.note)+'</div>':'')
-      +'<div class="card-overlay-meta"><div class="card-overlay-tags">'+(p.tags||[]).slice(0,3).map(t=>'<span class="tag" onclick="event.stopPropagation();filterTag(\''+esc(t)+'\')">'+esc(t)+'</span>').join('')+'</div>'
+      +'<div class="card-overlay-meta"><div class="card-overlay-tags">'+(p.tags||[]).slice(0,3).map(t=>'<span class="tag" onclick="event.stopPropagation();filterday(\''+esc(t)+'\')">'+esc(t)+'</span>').join('')+'</div>'
       +'<div class="card-acts"><button class="btn btn-sm btn-ghost btn-ico" onclick="event.stopPropagation();openDrw(\''+p.id+'\')">✎</button><button class="btn btn-sm btn-danger btn-ico" onclick="event.stopPropagation();confirmDel(\''+p.id+'\')">✕</button></div></div></div></div>';
   }).join('');
   if(galleryObserver){galleryObserver.disconnect();galleryObserver=null}
@@ -2392,7 +2482,7 @@ function renderGallery(){
   })},{rootMargin:'120px',threshold:0.01});
   requestAnimationFrame(()=>{list.forEach(p=>{const card=document.querySelector('.card[data-id="'+p.id+'"]');if(!card)return;attachSpot(card,p.accentColor);attachQP(card,p);setupDrag(card,p.id);galleryObserver.observe(card)})});
 }
-function filterTag(t){document.getElementById('search').value=t;focusIdx=-1;render();window.scrollTo({top:0,behavior:'smooth'})}
+function filterday(t){document.getElementById('search').value=t;focusIdx=-1;render();window.scrollTo({top:0,behavior:'smooth'})}
 function setFlt(l){flt=l;focusIdx=-1;render();window.scrollTo({top:0,behavior:'smooth'})}
 function setView(v){vw=v;document.getElementById('vg').classList.toggle('on',v==='grid');document.getElementById('vl').classList.toggle('on',v==='list');focusIdx=-1;render()}
 function toggleFavFilter(){favOnly=!favOnly;focusIdx=-1;render();window.scrollTo({top:0,behavior:'smooth'})}
@@ -2405,11 +2495,11 @@ function openP(id){
   document.getElementById('dcx').textContent='CX '+cxs+' · '+cc.l;document.getElementById('dcx').style.cssText='color:'+cc.c+';border-color:'+cc.b;
 
   // Multi-file stats label
-  const fileLabel = p.files&&p.files.length>1 ? `${p.files.length} Dateien · `:'';
+  const fileLabel = p.files&&p.files.length>1 ? `${p.files.length} files · `:'';
   const totalFileLines = p.files&&p.files.length>1
     ? p.files.reduce((s,f)=>s+f.code.split('\n').length,0)
     : p.code.split('\n').length;
-  document.getElementById('dlines').textContent=fileLabel+totalFileLines+' Zeilen';
+  document.getElementById('dlines').textContent=fileLabel+totalFileLines+' lines';
   document.getElementById('dname').textContent=p.name;document.getElementById('ddesc').textContent=p.description;
   document.getElementById('dfn').textContent=p.files&&p.files.length>1?p.files[0].name+'.'+langExt(p.files[0].lang):EXT[p.language]||'code.txt';
   document.getElementById('run-label').textContent=p.language+' Run';
@@ -2470,7 +2560,7 @@ function buildSidebar(p){
   if(coll)sb+='<div class="sbs"><div class="sbl">Collection</div><div class="sbi"><span class="sdot" style="background:'+coll.color+'"></span>'+esc(coll.name)+'</div></div>';
   sb+='<div class="sbs"><div class="sbl">Complexity</div><div style="display:flex;justify-content:space-between;font-size:.65rem;margin-bottom:.2rem"><span style="color:'+cc.c+';font-weight:600">'+cc.l+'</span><span style="font-family:var(--fc);color:'+cc.c+';font-size:.6rem">'+cxs+'/100</span></div><div class="cx-bar-bg"><div class="cx-bar" style="width:'+cxs+'%;background:'+cc.c+'"></div></div></div>';
   sb+='<div class="sbs"><div class="sbl">Statistics</div><div class="sbst"><span>Lines</span><span>'+s.tot+'</span></div><div class="sbst"><span>Non-empty</span><span>'+s.ne+'</span></div><div class="sbst"><span>Comments</span><span>'+s.cm+'</span></div><div class="sbst"><span>Functions</span><span>'+a.fn.length+'</span></div><div class="sbst"><span>Classes</span><span>'+a.cl.length+'</span></div></div>';
-  if(p.tags?.length)sb+='<div class="sbs"><div class="sbl">Tags</div><div style="display:flex;flex-wrap:wrap;gap:.2rem">'+p.tags.map(t=>'<span class="tag" onclick="filterTag(\''+esc(t)+'\')">'+esc(t)+'</span>').join('')+'</div></div>';
+  if(p.tags?.length)sb+='<div class="sbs"><div class="sbl">days</div><div style="display:flex;flex-wrap:wrap;gap:.2rem">'+p.tags.map(t=>'<span class="tag" onclick="filterday(\''+esc(t)+'\')">'+esc(t)+'</span>').join('')+'</div></div>';
   if(a.fn.length)sb+='<div class="sbs"><div class="sbl">Functions</div>'+a.fn.map(f=>'<span class="fc2 fcn">fn '+f.n+'<span class="fln">:'+f.l+'</span></span>').join('')+'</div>';
   if(a.cl.length)sb+='<div class="sbs"><div class="sbl">Classes</div>'+a.cl.map(c=>'<span class="fc2 fcc">class '+c.n+'<span class="fln">:'+c.l+'</span></span>').join('')+'</div>';
   if(a.co.length)sb+='<div class="sbs"><div class="sbl">Constants</div>'+a.co.map(c=>'<span class="fc2 fck">'+c.n+'</span>').join('')+'</div>';
@@ -2479,8 +2569,8 @@ function buildSidebar(p){
 }
 function buildStats(p){
   const a=ana(p.code,p.language),s=cst(p.code);
-  const all=[...a.fn.map(f=>({...f,k:'Funktion'})),...a.cl.map(c=>({...c,k:'Klasse'})),...a.co.map(c=>({...c,k:'Konstante'}))];
-  const kc={Funktion:['rgba(96,165,250,.07)','#60a5fa'],Klasse:['rgba(251,191,36,.07)','#fbbf24'],Konstante:['rgba(52,211,153,.07)','#34d399']};
+  const all=[...a.fn.map(f=>({...f,k:'Function'})),...a.cl.map(c=>({...c,k:'Class'})),...a.co.map(c=>({...c,k:'Constant'}))];
+  const kc={Function:['rgba(96,165,250,.07)','#60a5fa'],Class:['rgba(251,191,36,.07)','#fbbf24'],Constant:['rgba(52,211,153,.07)','#34d399']};
   document.getElementById('dstats').innerHTML='<div><div class="stl">Metrics</div><div class="sgrid">'
     +'<div class="sb2"><div class="sb2-l">Lines</div><div class="sb2-v" style="color:var(--blue)">'+s.tot+'</div><div class="sb2-u">total</div></div>'
     +'<div class="sb2"><div class="sb2-l">Non-empty</div><div class="sb2-v" style="color:var(--cyan)">'+s.ne+'</div><div class="sb2-u">code</div></div>'
@@ -2502,7 +2592,7 @@ function closeOv(){if(editMode)toggleEdit();document.getElementById('ov').style.
 function handleOvClick(e){if(e.target===document.getElementById('ov'))closeOv()}
 function editCur(){if(curP)openDrw(curP.id)}
 function delCur(){if(curP)confirmDel(curP.id)}
-function toggleFav(id){const p=P.find(x=>x.id===id);if(!p)return;p.starred=!p.starred;save();render();if(curP?.id===id)updateFavBtn(p);toast(p.starred?'★ Favorit':'Aus Favorites entfernt','info')}
+function toggleFav(id){const p=P.find(x=>x.id===id);if(!p)return;p.starred=!p.starred;save();render();if(curP?.id===id)updateFavBtn(p);toast(p.starred?'★ Favoriteesee':'Removed from favorites','info')}
 function updateFavBtn(p){const b=document.getElementById('dfav-btn');if(!b)return;b.textContent=p.starred?'★':'☆';b.style.color=p.starred?'var(--amber)':'';b.style.borderColor=p.starred?'rgba(251,191,36,.28)':'';b.style.background=p.starred?'rgba(251,191,36,.08)':''}
 async function copyCode(){const code=editMode?document.getElementById('editor-ta').value:curP?.code;if(!code)return;try{await navigator.clipboard.writeText(code);const b=document.getElementById('cpybtn');b.textContent='✓';b.style.color='var(--green)';setTimeout(()=>{b.textContent='⎘';b.style.color=''},1800);toast('Code copied','ok')}catch{toast('Copy failed','err')}}
 function dlCode(){
@@ -2519,7 +2609,7 @@ function dlAllFiles(){
   curP.files.forEach((f,i)=>setTimeout(()=>{
     const blob=new Blob([f.code],{type:'text/plain'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=f.name+'.'+langExt(f.lang);a.click();URL.revokeObjectURL(url);
   },i*300));
-  toast(`⊟ ${curP.files.length} Dateien werden heruntergeladen…`,'ok');
+  toast(`⊟ ${curP.files.length} files downloading…`,'ok');
 }
 function exportAll(){const blob=new Blob([JSON.stringify({P,C},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='codex-'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(url);toast(P.length+' projects exported','ok')}
 
@@ -2668,13 +2758,19 @@ function onCodeInput(){
   if(mfFiles[mfActive]) mfFiles[mfActive].lang = document.getElementById('fl').value;
   const code=document.getElementById('fc').value;
   const hint=document.getElementById('code-lines-hint');
-  if(hint)hint.textContent=code.split('\n').length>1?'('+code.split('\n').length+' Zeilen)':'';
+  if(hint)hint.textContent=code.split('\n').length>1?'('+code.split('\n').length+' lines)':'';
   updatePreviewHint();
 
   // ── Auto-split: trigger after 600ms debounce ──────────────
   clearTimeout(_aiSplitTimer);
   if(code.length > 30 && mfFiles.length===1){
     _aiSplitTimer = setTimeout(()=>aiAutoSplit(code), 600);
+  }
+  // ── Always show split hint immediately for full HTML ──────
+  const splitHint=document.getElementById('mf-split-hint');
+  if(splitHint){
+    const isMulti = mfFiles.length===1 && detectMultiFile(code);
+    splitHint.style.display = isMulti ? 'flex' : 'none';
   }
 }
 
@@ -2689,7 +2785,7 @@ function aiAutoSplit(code){
     return;
   }
 
-  // ② Mehrere Sprach-Blöcke per Muster erkennen
+  // ② Moreere Sprach-Blöcke per Muster erkennen
   const blocks = detectCodeBlocks(code);
   if(blocks.length > 1){
     mfFiles = blocks;
@@ -2748,7 +2844,7 @@ function detectCodeBlocks(code){
 
 function capitalize(s){return s?s[0].toUpperCase()+s.slice(1):''}
 
-// ── Sprache erkennen (lokal, kein API) ────────────────────
+// ── Language erkennen (lokal, no API) ────────────────────
 function detectLang(code){
   const tests=[
     {lang:'HTML',    re:/<!DOCTYPE\s+html|<html[\s>]|<head[\s>]|<body[\s>]/i,       score:5},
@@ -2777,10 +2873,10 @@ function detectLang(code){
 // ── Visual badge after auto-split ─────────────────────────
 function showSplitBadge(langs){
   const unique=[...new Set(langs)];
-  toast(`⊟ Auto-getrennt: ${unique.join(' · ')}`, 'ok');
+  toast(`⊟ Auto-split: ${unique.join(' · ')}`, 'ok');
   // update lang-auto-hint
   const lah=document.getElementById('lang-auto-hint');
-  if(lah) lah.textContent = unique.length>1 ? `(${unique.length} Dateien erkannt)` : `(auto: ${unique[0]})`;
+  if(lah) lah.textContent = unique.length>1 ? `(${unique.length} files detected)` : `(auto: ${unique[0]})`;
 }
 
 function updatePreviewHint(){const code=document.getElementById('fc').value,lang=document.getElementById('fl').value,hint=document.getElementById('preview-type-hint');if(!hint)return;const p={language:lang,code};if(isLivable(p)){hint.style.cssText='display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;border-radius:8px;border:1px solid rgba(74,222,128,.3);background:rgba(74,222,128,.06);color:#4ade80;font-size:.73rem';hint.innerHTML='<span>▶</span><span><strong>Live Preview</strong> — dieser Code runs animated in the gallery</span>'}else if(lang&&lang!=='Other'){hint.style.cssText='display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;border-radius:8px;border:1px solid rgba(59,130,246,.2);background:rgba(59,130,246,.04);color:#93c5fd;font-size:.73rem';hint.innerHTML='<span>◈</span><span><strong>Pixelated Art</strong> — structural code visualization</span>'}else hint.style.display='none'}
@@ -2905,23 +3001,23 @@ function runAIReview(){
         else autoDesc=`A ${lang} code snippet (${s.tot} lines, complexity ${cxs}).`;
       }
 
-      const autoTags=[];
-      if(/(sort|quicksort|mergesort|heapsort)/i.test(code))autoTags.push('sorting');
-      if(/(recursion|recursive|fibonacci)/i.test(code))autoTags.push('recursion');
-      if(/(canvas|animation|requestAnimationFrame)/i.test(code))autoTags.push('animation');
-      if(/(class|extends|prototype)/i.test(code))autoTags.push('oop');
-      if(/(async|await|promise|fetch)/i.test(code))autoTags.push('async');
-      if(/(map|filter|reduce)/i.test(code))autoTags.push('functional');
-      if(/(neural|layer|backprop|gradient)/i.test(code))autoTags.push('ml');
-      if(/(graph|node|edge|tree)/i.test(code))autoTags.push('data-structures');
-      autoTags.push(lang.toLowerCase());
-      const uniqueTags=[...new Set(autoTags)].slice(0,4);
+      const autodays=[];
+      if(/(sort|quicksort|mergesort|heapsort)/i.test(code))autodays.push('sorting');
+      if(/(recursion|recursive|fibonacci)/i.test(code))autodays.push('recursion');
+      if(/(canvas|animation|requestAnimationFrame)/i.test(code))autodays.push('animation');
+      if(/(class|extends|prototype)/i.test(code))autodays.push('oop');
+      if(/(async|await|promise|fetch)/i.test(code))autodays.push('async');
+      if(/(map|filter|reduce)/i.test(code))autodays.push('functional');
+      if(/(neural|layer|backprop|gradient)/i.test(code))autodays.push('ml');
+      if(/(graph|node|edge|tree)/i.test(code))autodays.push('data-structures');
+      autodays.push(lang.toLowerCase());
+      const uniquedays=[...new Set(autodays)].slice(0,4);
 
       // ── Build result object (same shape as API response) ──
       const result={
         quality,bugs:bugLevel,style,verdict,verdict_text:verdictText,
         suggested_description:autoDesc,
-        suggested_tags:uniqueTags,
+        suggested_tags:uniquedays,
         strengths:strengths.slice(0,3),
         issues:bugIssues.slice(0,3),
         improvements:improvements.slice(0,3),
@@ -2948,14 +3044,14 @@ function showReviewResult(r){
   const bugEl=document.getElementById('sc-bug-val');if(bugEl){bugEl.textContent=bm[r.bugs]||'?';bugEl.style.color=bc[r.bugs]||'#fbbf24'}
   const stEl=document.getElementById('sc-st-val');if(stEl){stEl.textContent=r.style||'?';stEl.style.color=gc[r.style]||'#fbbf24'}
   if(vd){vd.style.display='block';const vm={publish:{border:'rgba(74,222,128,.28)',bg:'rgba(74,222,128,.06)',light:'#4ade80',title:'✓ Ready to Publish'},review:{border:'rgba(251,191,36,.28)',bg:'rgba(251,191,36,.06)',light:'#fbbf24',title:'⚠ Review Before Publishing'},fix:{border:'rgba(251,113,133,.28)',bg:'rgba(251,113,133,.06)',light:'#f87171',title:'✗ Fix Issues Before Publishing'}};const v=vm[r.verdict]||vm.review;vd.style.cssText='display:block;padding:.85rem 1rem;border-radius:10px;border:1px solid '+v.border+';background:'+v.bg;const vl=document.getElementById('verdict-light'),vt=document.getElementById('verdict-title'),vtxt=document.getElementById('verdict-text');if(vl){vl.style.background=v.light;vl.style.boxShadow='0 0 10px '+v.light}if(vt)vt.textContent=v.title;if(vtxt)vtxt.textContent=r.verdict_text||''}
-  if(ct){ct.style.display='block';let html='';if(r.strengths?.length){html+='<h4>✓ Stärken</h4><ul>';r.strengths.forEach(s=>{html+='<li style="color:#4ade80">'+esc(s)+'</li>'});html+='</ul>'}if(r.issues?.length){html+='<h4>⚠ Probleme</h4><ul>';r.issues.forEach(s=>{html+='<li style="color:#fbbf24">'+esc(s)+'</li>'});html+='</ul>'}if(r.improvements?.length){html+='<h4>💡 Verbesserungen</h4><ul>';r.improvements.forEach(s=>{html+='<li>'+esc(s)+'</li>'});html+='</ul>'}ct.innerHTML=html}
+  if(ct){ct.style.display='block';let html='';if(r.strengths?.length){html+='<h4>✓ Strengths</h4><ul>';r.strengths.forEach(s=>{html+='<li style="color:#4ade80">'+esc(s)+'</li>'});html+='</ul>'}if(r.issues?.length){html+='<h4>⚠ Issues</h4><ul>';r.issues.forEach(s=>{html+='<li style="color:#fbbf24">'+esc(s)+'</li>'});html+='</ul>'}if(r.improvements?.length){html+='<h4>💡 Improvements</h4><ul>';r.improvements.forEach(s=>{html+='<li>'+esc(s)+'</li>'});html+='</ul>'}ct.innerHTML=html}
 
   // ── Auto-fill empty fields ─────────────────────────────
   const items=[];
   const curDesc=document.getElementById('fd').value.trim();
-  const curTags=document.getElementById('ft').value.trim();
-  if(!curDesc&&r.suggested_description){document.getElementById('fd').value=r.suggested_description;items.push('Beschreibung: "'+r.suggested_description.slice(0,55)+(r.suggested_description.length>55?'…':'')+'"')}
-  if(!curTags&&r.suggested_tags?.length){document.getElementById('ft').value=r.suggested_tags.join(', ');items.push('Tags: '+r.suggested_tags.join(', '))}
+  const curdays=document.getElementById('ft').value.trim();
+  if(!curDesc&&r.suggested_description){document.getElementById('fd').value=r.suggested_description;items.push('Description: "'+r.suggested_description.slice(0,55)+(r.suggested_description.length>55?'…':'')+'"')}
+  if(!curdays&&r.suggested_tags?.length){document.getElementById('ft').value=r.suggested_tags.join(', ');items.push('Tags: '+r.suggested_tags.join(', '))}
 
   // ── Auto-fill accent color based on language ──────────
   const lang=document.getElementById('fl').value;
@@ -2963,26 +3059,26 @@ function showReviewResult(r){
   const suggestAcc = langAccent[lang];
   if(suggestAcc && ACC.includes(suggestAcc) && selC===ACC[0]){
     renderSwts(suggestAcc);
-    items.push('Akzentfarbe: '+lang+'-Farbe ('+suggestAcc+')');
+    items.push('Accent Color: '+lang+' color ('+suggestAcc+')');
   }
 
   // ── Auto-suggest collection based on language / tags ──
   const curColl2=document.getElementById('fcoll').value;
   if(!curColl2 && C.length>0){
     const codeLow=(document.getElementById('fc').value||'').toLowerCase();
-    const autoTags=(r.suggested_tags||[]).map(t=>t.toLowerCase());
+    const autodays=(r.suggested_tags||[]).map(t=>t.toLowerCase());
     let bestColl=null,bestScore=0;
     C.forEach(col=>{
       const cname=col.name.toLowerCase();
       let score=0;
       if(cname===lang.toLowerCase())score+=5;
-      if(autoTags.some(t=>cname.includes(t)||t.includes(cname)))score+=3;
+      if(autodays.some(t=>cname.includes(t)||t.includes(cname)))score+=3;
       if(codeLow.includes(cname))score+=2;
       if(score>bestScore){bestScore=score;bestColl=col}
     });
     if(bestColl&&bestScore>=2){
       document.getElementById('fcoll').value=bestColl.id;
-      items.push('Sammlung: "'+bestColl.name+'" (Auto-Match)');
+      items.push('Collection: "'+bestColl.name+'" (Auto-Match)');
     }
   }
 
@@ -3002,18 +3098,21 @@ function buildDrwPreview(){
       mfFilesList.innerHTML=mfFiles.map(f=>{
         const lc=LC[f.lang]||'#888';
         const lines=f.code.split('\n').length;
-        return `<div style="display:flex;align-items:center;gap:.4rem;font-size:.67rem"><span style="color:${lc};font-family:var(--fc)">●</span><span style="color:var(--txt)">${esc(f.name)}.${langExt(f.lang)}</span><span style="color:${lc};margin-left:.2rem">${f.lang}</span><span style="color:var(--mut);margin-left:auto">${lines} Zeilen</span></div>`;
+        return `<div style="display:flex;align-items:center;gap:.4rem;font-size:.67rem"><span style="color:${lc};font-family:var(--fc)">●</span><span style="color:var(--txt)">${esc(f.name)}.${langExt(f.lang)}</span><span style="color:${lc};margin-left:.2rem">${f.lang}</span><span style="color:var(--mut);margin-left:auto">${lines} Lines</span></div>`;
       }).join('');
     }
   } else if(mfBreak) mfBreak.style.display='none';
   // Language labels
   const fileLangs = mfFiles.length>1 ? [...new Set(mfFiles.map(f=>f.lang))] : [lang];
   const langLabel = fileLangs.map(l=>`<span style="color:${LC[l]||'#888'}">${l}</span>`).join('<span style="opacity:.3;margin:0 .2rem">·</span>');
-  if(pLang)pLang.innerHTML=langLabel+' &nbsp;·&nbsp; <span style="color:'+cc.c+'">CX '+cxs+'</span>'+(mfFiles.length>1?` <span style="color:#67e8f9;margin-left:.3rem">⊟ ${mfFiles.length} Dateien</span>`:'');
+  if(pLang)pLang.innerHTML=langLabel+' &nbsp;·&nbsp; <span style="color:'+cc.c+'">CX '+cxs+'</span>'+(mfFiles.length>1?` <span style="color:#67e8f9;margin-left:.3rem">⊟ ${mfFiles.length} files</span>`:'');
   const inner=document.getElementById('drw-preview-inner');if(!inner)return;inner.innerHTML='';
-  const tmpP={id:'preview',name:'',language:lang,code:document.getElementById('fc').value,accentColor:selC||ACC[0],tags:[],starred:false,collId:null,note:''};
-  if(isLivable(tmpP)){const ifr=document.createElement('iframe');ifr.sandbox='allow-scripts';ifr.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:none;pointer-events:none;opacity:0;transition:opacity .6s';ifr.srcdoc=buildSrcdoc(tmpP);ifr.onload=()=>ifr.style.opacity='1';inner.appendChild(ifr)}
-  else{const cv=document.createElement('canvas');cv.style.cssText='position:absolute;inset:0;width:100%;height:100%;display:block';cv.width=480;cv.height=360;inner.appendChild(cv);requestAnimationFrame(()=>drawThumb(cv,tmpP))}
+  const tmpP={id:'preview',name:'',language:lang,code:document.getElementById('fc').value,accentColor:selC||ACC[0],tags:[],starred:false,collId:null,note:'',files:mfFiles.length>1?mfFiles.map(f=>({...f})):null};
+  // Merge files for preview so CSS+JS are inlined
+  const previewCode = tmpP.files&&tmpP.files.length>1 ? mergeFiles(tmpP) : tmpP.code;
+  const previewP = {...tmpP, code:previewCode, files:null};
+  if(isLivable(previewP)){const ifr=document.createElement('iframe');ifr.sandbox='allow-scripts';ifr.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:none;pointer-events:none;opacity:0;transition:opacity .6s';ifr.srcdoc=buildSrcdoc(previewP);ifr.onload=()=>ifr.style.opacity='1';inner.appendChild(ifr)}
+  else{const cv=document.createElement('canvas');cv.style.cssText='position:absolute;inset:0;width:100%;height:100%;display:block';cv.width=480;cv.height=360;inner.appendChild(cv);requestAnimationFrame(()=>drawThumb(cv,previewP))}
 }
 function openDrw(id){
   drwEditId=id||null;drwStep=1;aiReviewData=null;document.getElementById('drwtitle').textContent=id?'Edit Project':'New Project';updCollSel();
@@ -3026,7 +3125,25 @@ function openDrw(id){
     mfFiles=[{name:'main',lang:'JavaScript',code:''}];mfActive=0;
   }
   renderMfTabs();
-  const lah=document.getElementById('lang-auto-hint');if(lah)lah.textContent='';const clh=document.getElementById('code-lines-hint');if(clh)clh.textContent='';const pth=document.getElementById('preview-type-hint');if(pth)pth.style.display='none';const sph=document.getElementById('mf-split-hint');if(sph)sph.style.display='none';
+  const lah=document.getElementById('lang-auto-hint');if(lah)lah.textContent='';
+  const clh=document.getElementById('code-lines-hint');if(clh)clh.textContent='';
+  const pth=document.getElementById('preview-type-hint');if(pth)pth.style.display='none';
+  // ── Trigger analysis after drawer is visible ──────────────
+  // setTimeout lets the DOM render first, then analyze loaded code
+  // This fixes: old/existing projects never triggering aiAutoSplit
+  setTimeout(()=>{
+    const code=document.getElementById('fc').value;
+    if(code.trim().length>30){
+      const clh2=document.getElementById('code-lines-hint');
+      if(clh2)clh2.textContent='('+code.split('\n').length+' lines)';
+      updatePreviewHint();
+      // Only auto-split if single file (don't re-split already-split projects)
+      if(mfFiles.length===1){
+        clearTimeout(_aiSplitTimer);
+        _aiSplitTimer=setTimeout(()=>aiAutoSplit(code),400);
+      }
+    }
+  },250);
   goDrwStep(1);document.getElementById('drwbg').style.display='flex';setTimeout(()=>document.getElementById('fn').focus(),150);
 }
 function saveP(){
@@ -3049,7 +3166,7 @@ function saveP(){
   // Re-attach code accessor
   Object.defineProperty(p,'code',{get(){return getCode(p.id)},set(v){setCode(p.id,v)},configurable:true,enumerable:false});
   if(drwEditId){const i=P.findIndex(x=>x.id===drwEditId);if(i>=0)P[i]=p}else P.unshift(p);
-  save();closeDrw();if(curP?.id===drwEditId)closeOv();render();toast(drwEditId?'Aktualisiert ✓':'🚀 In deiner Galerie veröffentlicht!','ok');drwEditId=null;
+  save();closeDrw();if(curP?.id===drwEditId)closeOv();render();toast(drwEditId?'Updated ✓':'🚀 Published to your gallery!','ok');drwEditId=null;
 }
 function closeDrw(){document.getElementById('drwbg').style.display='none'}
 function confirmDel(id){const p=P.find(x=>x.id===id);if(!p)return;pDel=id;document.getElementById('cfmsg').textContent='„'+p.name+'" wird dauerhaft gelöscht.';showModal('confirm-modal');document.getElementById('cfok').onclick=doDel}
@@ -3293,11 +3410,11 @@ function exportHTML(){
   const expTop5=sorted.slice().sort((a,b)=>b.code.split('\n').length-a.code.split('\n').length).slice(0,5);
   const expTopMax=expTop5[0]?.code.split('\n').length||1;
 
-  // Tags
-  const expTagMap={};sorted.forEach(p=>(p.tags||[]).forEach(t=>{if(t)expTagMap[t]=(expTagMap[t]||0)+1}));
-  const expTopTags=Object.entries(expTagMap).sort((a,b)=>b[1]-a[1]).slice(0,16);
-  const expMaxTag=expTopTags[0]?.[1]||1;
-  const expAllTags=new Set(sorted.flatMap(p=>p.tags||[]));
+  // days
+  const expdayMap={};sorted.forEach(p=>(p.tags||[]).forEach(t=>{if(t)expdayMap[t]=(expdayMap[t]||0)+1}));
+  const expTopdays=Object.entries(expdayMap).sort((a,b)=>b[1]-a[1]).slice(0,16);
+  const expMaxday=expTopdays[0]?.[1]||1;
+  const expAlldays=new Set(sorted.flatMap(p=>p.tags||[]));
 
   // Complexity histogram
   const expCxBuckets=[{l:'0–25',r:[0,25],c:'#4ade80'},{l:'26–50',r:[26,50],c:'#86efac'},{l:'51–75',r:[51,75],c:'#fbbf24'},{l:'76–100',r:[76,100],c:'#f87171'}];
@@ -3384,8 +3501,8 @@ function exportHTML(){
   }).join('');
 
   const lcVals2=Object.values(LC);
-  const dashTags = expTopTags.map(([t,n])=>{
-    const op=(0.35+0.65*(n/expMaxTag)).toFixed(2);
+  const dashdays = expTopdays.map(([t,n])=>{
+    const op=(0.35+0.65*(n/expMaxday)).toFixed(2);
     const sz=n>=3?'.68rem':n>=2?'.63rem':'.6rem';
     const lc2=lcVals2[Math.abs(t.split('').reduce((a,c2)=>a+c2.charCodeAt(0),0))%lcVals2.length]||'#888';
     return `<span class="ro-dtag" style="font-size:${sz};color:${lc2};border-color:${lc2}30;background:${lc2}0d;opacity:${op}">${esc(t)}</span>`;
@@ -3394,7 +3511,7 @@ function exportHTML(){
   const dashSpark = expDays30.map(d=>{
     const h=Math.max(Math.round((d.count/expMaxDay)*28),d.count>0?3:1);
     const op=(d.count>0?0.3+0.7*(d.count/expMaxDay):0.07).toFixed(2);
-    return `<div class="ro-spark-bar" style="height:${h}px;opacity:${op}" title="${d.count} Projekt${d.count!==1?'e':''}"></div>`;
+    return `<div class="ro-spark-bar" style="height:${h}px;opacity:${op}" title="${d.count} Project${d.count!==1?'e':''}"></div>`;
   }).join('');
 
   const htmlDash = [
@@ -3403,7 +3520,7 @@ function exportHTML(){
     '  <div class="ro-dash-toggle-left">',
     '    <span class="ro-dash-toggle-dot"></span>',
     '    <span>◈ Code Statistics &amp; Charts</span>',
-    '    <span style="opacity:.45;font-size:.55rem">'+expTot+' Projekte · '+expSl.length+' Sprachen · '+expAllTags.size+' Tags</span>',
+    '    <span style="opacity:.45;font-size:.55rem">'+expTot+' projects · '+expSl.length+' Languages · '+expAlldays.size+' days</span>',
     '  </div>',
     '  <span class="ro-dash-toggle-arrow">▾</span>',
     '</div>',
@@ -3412,53 +3529,53 @@ function exportHTML(){
     '  <div class="ro-dash-inner">',
     '  <!-- ROW 1: Pills -->',
     '  <div class="ro-dash-row1">',
-    '    <div class="ro-dc"><div class="ro-dcl">Projekte</div><div class="ro-dcv" style="color:#3b82f6">'+expTot+'</div><div class="ro-dcs">'+expFavs+' ★ · '+C.length+' Sammlungen</div></div>',
-    '    <div class="ro-dc"><div class="ro-dcl">Lines of Code</div><div class="ro-dcv" style="color:#22d3ee">'+(expTotL>=1000?(expTotL/1000).toFixed(1)+'k':expTotL)+'</div><div class="ro-dcs">Ø '+expAvgL+'/Projekt</div></div>',
-    '    <div class="ro-dc"><div class="ro-dcl">Zeichen</div><div class="ro-dcv" style="color:#4ade80">'+(expTotC/1000).toFixed(1)+'k</div><div class="ro-dcs">Ø '+Math.round(expTotC/Math.max(expTot,1))+'/P</div></div>',
-    '    <div class="ro-dc"><div class="ro-dcl">Ø Komplexität</div><div class="ro-dcv" style="color:'+expCc.c+'">'+expAvgCx+'</div><div class="ro-dcs">'+expCc.l+'</div></div>',
-    '    <div class="ro-dc"><div class="ro-dcl">Sprachen</div><div class="ro-dcv" style="color:#a855f7">'+expSl.length+'</div><div class="ro-dcs">'+expSl.slice(0,2).map(([l])=>l).join(', ')+'</div></div>',
-    '    <div class="ro-dc"><div class="ro-dcl">Tags</div><div class="ro-dcv" style="color:#fbbf24">'+expAllTags.size+'</div><div class="ro-dcs">'+expTopTags.length+' uniq.</div></div>',
-    '    <div class="ro-dc"><div class="ro-dcl">Live Preview</div><div class="ro-dcv" style="color:#4ade80">'+expLive+'</div><div class="ro-dcs">'+Math.round(expLive/Math.max(expTot,1)*100)+'% lauffähig</div></div>',
-    (expMf>0?'    <div class="ro-dc"><div class="ro-dcl">Multi-Datei</div><div class="ro-dcv" style="color:#67e8f9">'+expMf+'</div><div class="ro-dcs">⊟ aufgeteilt</div></div>':''),
+    '    <div class="ro-dc"><div class="ro-dcl">Projects</div><div class="ro-dcv" style="color:#3b82f6">'+expTot+'</div><div class="ro-dcs">'+expFavs+' ★ · '+C.length+' Collections</div></div>',
+    '    <div class="ro-dc"><div class="ro-dcl">Lines of Code</div><div class="ro-dcv" style="color:#22d3ee">'+(expTotL>=1000?(expTotL/1000).toFixed(1)+'k':expTotL)+'</div><div class="ro-dcs">Avg '+expAvgL+'/project</div></div>',
+    '    <div class="ro-dc"><div class="ro-dcl">Characters</div><div class="ro-dcv" style="color:#4ade80">'+(expTotC/1000).toFixed(1)+'k</div><div class="ro-dcs">Avg '+Math.round(expTotC/Math.max(expTot,1))+'/P</div></div>',
+    '    <div class="ro-dc"><div class="ro-dcl">Avg Complexity</div><div class="ro-dcv" style="color:'+expCc.c+'">'+expAvgCx+'</div><div class="ro-dcs">'+expCc.l+'</div></div>',
+    '    <div class="ro-dc"><div class="ro-dcl">Languages</div><div class="ro-dcv" style="color:#a855f7">'+expSl.length+'</div><div class="ro-dcs">'+expSl.slice(0,2).map(([l])=>l).join(', ')+'</div></div>',
+    '    <div class="ro-dc"><div class="ro-dcl">days</div><div class="ro-dcv" style="color:#fbbf24">'+expAlldays.size+'</div><div class="ro-dcs">'+expTopdays.length+' unique</div></div>',
+    '    <div class="ro-dc"><div class="ro-dcl">Live Preview</div><div class="ro-dcv" style="color:#4ade80">'+expLive+'</div><div class="ro-dcs">'+Math.round(expLive/Math.max(expTot,1)*100)+'% runnable</div></div>',
+    (expMf>0?'    <div class="ro-dc"><div class="ro-dcl">Multi-File</div><div class="ro-dcv" style="color:#67e8f9">'+expMf+'</div><div class="ro-dcs">⊟ split</div></div>':''),
     '  </div>',
     '  <!-- Sparkline -->',
     '  <div class="ro-dcp" style="padding:.55rem .9rem">',
     '    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem">',
-    '      <span class="ro-dcp-t" style="margin:0">Aktivität — letzte 30 Tage</span>',
-    '      <span style="font-size:.57rem;color:#475569">'+expTotalRecent+' Projekte hinzugefügt</span>',
+    '      <span class="ro-dcp-t" style="margin:0">Activity — Last 30 Days</span>',
+    '      <span style="font-size:.57rem;color:#475569">'+expTotalRecent+' projects added</span>',
     '    </div>',
     '    <div class="ro-spark">'+dashSpark+'</div>',
-    '    <div style="display:flex;justify-content:space-between;font-size:.52rem;color:#475569;margin-top:.2rem"><span>vor 30 Tagen</span><span>heute</span></div>',
+    '    <div style="display:flex;justify-content:space-between;font-size:.52rem;color:#475569;margin-top:.2rem"><span>30 days ago</span><span>today</span></div>',
     '  </div>',
     '  <!-- ROW 2: Chart panels -->',
     '  <div class="ro-dash-row2">',
     '    <div class="ro-dcp">',
-    '      <div class="ro-dcp-t">Sprachen-Anteil ('+expTot+' Projekte)</div>',
+    '      <div class="ro-dcp-t">Language Share ('+expTot+' projects)</div>',
     '      <div style="display:flex;align-items:center;gap:.9rem">',
     '        <div style="flex-shrink:0">'+expDonutSVG+'</div>',
     '        <div style="flex:1">'+dashLangTable+'</div>',
     '      </div>',
     '    </div>',
     '    <div class="ro-dcp">',
-    '      <div class="ro-dcp-t">Zeilen je Sprache</div>',
+    '      <div class="ro-dcp-t">Lines per Language</div>',
     '      '+dashLinesTable,
     '      <div style="margin-top:.55rem;padding-top:.45rem;border-top:1px solid rgba(255,255,255,.04)">',
-    '        <div class="ro-dcp-t" style="margin-bottom:.38rem">Komplexitäts-Verteilung</div>',
+    '        <div class="ro-dcp-t" style="margin-bottom:.38rem">Complexity Distribution</div>',
     '        '+dashCxHist,
     '      </div>',
     '    </div>',
     '    <div class="ro-dcp">',
-    '      <div class="ro-dcp-t">Code-Qualität</div>',
+    '      <div class="ro-dcp-t">Code Quality</div>',
     '      '+dashGrades,
     '      <div style="display:flex;justify-content:center;margin-top:.5rem;padding-top:.45rem;border-top:1px solid rgba(255,255,255,.04)">',
     '        '+expQualSVG,
     '      </div>',
     '    </div>',
     '    <div class="ro-dcp" style="display:flex;flex-direction:column;gap:.5rem">',
-    '      <div><div class="ro-dcp-t">Top 5 Projekte (Zeilen)</div>'+dashTop5+'</div>',
+    '      <div><div class="ro-dcp-t">Top 5 projects (lines)</div>'+dashTop5+'</div>',
     '      <div style="padding-top:.42rem;border-top:1px solid rgba(255,255,255,.04)">',
-    '        <div class="ro-dcp-t" style="margin-bottom:.25rem">Tag-Wolke</div>',
-    '        <div style="line-height:1.85">'+dashTags+'</div>',
+    '        <div class="ro-dcp-t" style="margin-bottom:.25rem">day Cloud</div>',
+    '        <div style="line-height:1.85">'+dashdays+'</div>',
     '      </div>',
     '    </div>',
     '  </div>',
@@ -3566,7 +3683,7 @@ let sb='<div class="ro-sbl">Language</div><div class="ro-sbi"><span>'+p.language
 if(coll)sb+='<div class="ro-sbl">Collection</div><div class="ro-sbi"><span style="display:flex;align-items:center;gap:.3rem"><span style="width:7px;height:7px;border-radius:50%;background:'+coll.color+'"></span>'+esc(coll.name)+'</span></div>';
 sb+='<div class="ro-sbl">Complexity</div><div style="display:flex;justify-content:space-between;font-size:.63rem;color:var(--txt2);margin-bottom:.14rem"><span style="color:'+cc.c+'">'+cc.l+'</span><span style="font-family:var(--fc);font-size:.58rem;color:'+cc.c+'">'+cxs+'/100</span></div><div class="ro-cxb"><div class="ro-cxf" style="width:'+cxs+'%;background:'+cc.c+'"></div></div>';
 sb+='<div class="ro-sbl">Statistics</div><div class="ro-sbi"><span>Lines</span><span>'+s.tot+'</span></div><div class="ro-sbi"><span>Code</span><span>'+s.ne+'</span></div><div class="ro-sbi"><span>Comments</span><span>'+s.cm+'</span></div>';
-if(p.tags&&p.tags.length)sb+='<div class="ro-sbl">Tags</div><div style="display:flex;flex-wrap:wrap;gap:.18rem">'+p.tags.map(t=>'<span class="ro-tag">'+esc(t)+'</span>').join('')+'</div>';
+if(p.tags&&p.tags.length)sb+='<div class="ro-sbl">days</div><div style="display:flex;flex-wrap:wrap;gap:.18rem">'+p.tags.map(t=>'<span class="ro-tag">'+esc(t)+'</span>').join('')+'</div>';
 document.getElementById('roSb').innerHTML=sb;
 document.getElementById('roCode').innerHTML='<table class="ro-ct">'+p.code.split('\\n').map((l,i)=>'<tr class="ro-cl"><td class="ro-ln">'+(i+1)+'</td><td class="ro-lc">'+hlCode(l,p.language)+'</td></tr>').join('')+'</table>';
 setROTab('prev');document.getElementById('roOv').style.display='block';document.body.style.overflow='hidden';}
